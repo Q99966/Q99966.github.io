@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="动态库的动态加载背景 对于长时间运行的一个进程，在这段运行时间中这个库可能就调用了一两次，这样就造成了内存浪费。如何解决这个问题，这就需要我们在编译阶段前做点措施。于是就产生了几个操作动态库载入与释放的函数。  目的 在程序执行的过程中，开发人员可以动态加载共享库（什么时候用什么时候加载）  需求 在程序中动态加载共享库需要调用一组特殊的函数，它们被声明于一个专门的头文件中，并在一个独立的库中予以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="动态库的动态加载背景 对于长时间运行的一个进程，在这段运行时间中这个库可能就调用了一两次，这样就造成了内存浪费。如何解决这个问题，这就需要我们在编译阶段前做点措施。于是就产生了几个操作动态库载入与释放的函数。  目的 在程序执行的过程中，开发人员可以动态加载共享库（什么时候用什么时候加载）  需求 在程序中动态加载共享库需要调用一组特殊的函数，它们被声明于一个专门的头文件中，并在一个独立的库中予以">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/.%5Cimages%5Cdlopen.png">
+<meta property="og:image" content="http://example.com/.%5Cimages%5Cdlsym.png">
+<meta property="og:image" content="http://example.com/.%5Cimages%5Cdlclose.png">
+<meta property="og:image" content="http://example.com/.%5Cimages%5Cdlerror.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.952Z">
+<meta property="article:modified_time" content="2025-02-17T06:30:29.192Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.%5Cimages%5Cdlopen.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day3/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.952Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="动态库的动态加载"><a href="#动态库的动态加载" class="headerlink" title="动态库的动态加载"></a>动态库的动态加载</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>对于长时间运行的一个进程，在这段运行时间中这个库可能就调用了一两次，这样就造成了内存浪费。如何解决这个问题，这就需要我们在编译阶段前做点措施。于是就产生了几个操作动态库载入与释放的函数。</li>
+</ul>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul>
+<li>在程序执行的过程中，开发人员可以动态加载共享库（什么时候用什么时候加载）</li>
+</ul>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>在程序中动态加载共享库需要调用一组特殊的函数，它们被声明于一个专门的头文件中，并在一个独立的库中予以实现。</li>
+<li>使用这组函数需要包含此头文件，并链接该库<ul>
+<li>#include&lt;dlfcn.h&gt;</li>
+<li>-ldl</li>
+</ul>
+</li>
+</ul>
+<p>例如编译main.c</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c -ldl -o main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="中的几个重要的函数"><a href="#中的几个重要的函数" class="headerlink" title="&lt;dlfcn.h&gt;中的几个重要的函数"></a>&lt;dlfcn.h&gt;中的几个重要的函数</h2><h3 id="dlopen"><a href="#dlopen" class="headerlink" title="dlopen"></a>dlopen</h3><p><img src="/.%5Cimages%5Cdlopen.png" alt="dlopen"></p>
+<h3 id="dlsym"><a href="#dlsym" class="headerlink" title="dlsym"></a>dlsym</h3><p><img src="/.%5Cimages%5Cdlsym.png" alt="dlsym"></p>
+<p>例如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下是一个函数指针，void* 能转换为任意指针</span></span><br><span class="line"><span class="type">int</span> (*add)(<span class="type">int</span>,<span class="type">int</span>) = dlsym(handle,<span class="string">&quot;add&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="dlclose"><a href="#dlclose" class="headerlink" title="dlclose"></a>dlclose</h3><p><img src="/.%5Cimages%5Cdlclose.png" alt="dlclose"></p>
+<h3 id="dlerror"><a href="#dlerror" class="headerlink" title="dlerror"></a><a target="_blank" rel="noopener" href="https://www.bing.com/">dlerror</a></h3><p><img src="/.%5Cimages%5Cdlerror.png" alt="dlerror"></p>
+<h2 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h2><h3 id="查看符号表：nm"><a href="#查看符号表：nm" class="headerlink" title="查看符号表：nm"></a>查看符号表：nm</h3><p>​	列出目标文件，可执行程序，静态库，或动态库中的符号</p>
+<p>例如：nm libmath.a</p>
+<h3 id="查看依赖：ldd"><a href="#查看依赖：ldd" class="headerlink" title="查看依赖：ldd"></a>查看依赖：ldd</h3><p>​		查看可执行文件或者动态库所依赖的动态库</p>
+<p>例如：ldd a.out</p>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><h2 id="需要提前了解的几个概念"><a href="#需要提前了解的几个概念" class="headerlink" title="需要提前了解的几个概念"></a>需要提前了解的几个概念</h2><h3 id="输出缓冲区"><a href="#输出缓冲区" class="headerlink" title="输出缓冲区"></a>输出缓冲区</h3><p>从缓冲区到显示屏上满足三个条件里面其中一个就行</p>
+<ul>
+<li>有\n</li>
+<li>缓冲区满了</li>
+<li>程序正常结束</li>
+</ul>
+<h3 id="三个特殊的文件"><a href="#三个特殊的文件" class="headerlink" title="三个特殊的文件"></a>三个特殊的文件</h3><table>
+<thead>
+<tr>
+<th align="center">文件名</th>
+<th align="center">类型</th>
+<th align="center">默认形式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">stdin</td>
+<td align="center">标准输入</td>
+<td align="center">默认键盘输入</td>
+</tr>
+<tr>
+<td align="center">stdout</td>
+<td align="center">标准输出</td>
+<td align="center">默认显示器输出</td>
+</tr>
+<tr>
+<td align="center">stderr</td>
+<td align="center">标准错误</td>
+<td align="center">默认显示器输出</td>
+</tr>
+</tbody></table>
+<p>标准输出有缓冲区，而标准错误没有</p>
+<h2 id="fprintf"><a href="#fprintf" class="headerlink" title="fprintf"></a>fprintf</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>向一个文件中输入一串文字</li>
+</ul>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><ul>
+<li>fprintf(fp,”需要输入的串”);</li>
+<li>例如 fprintf(stderr,”dlopen:%s\n”,dlerror());</li>
+</ul>
+<h3 id="为什么有时候用fprintf而不用printf-原因如下。"><a href="#为什么有时候用fprintf而不用printf-原因如下。" class="headerlink" title="为什么有时候用fprintf而不用printf?原因如下。"></a>为什么有时候用fprintf而不用printf?原因如下。</h3><ul>
+<li>printf 需要经过缓冲区才能输出到屏幕上，因此有时候并不能立马把错误显示在屏幕上</li>
+<li>但是fprintf它能出现错误，立马显示在屏幕上，只需要让它写入stderr文件中，即fprintf(stderr,”dlopen:%s\n”,dlerror());</li>
+</ul>
+<h2 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h2><h3 id="通过错误号了解具体的错误原因"><a href="#通过错误号了解具体的错误原因" class="headerlink" title="通过错误号了解具体的错误原因"></a>通过错误号了解具体的错误原因</h3><ul>
+<li><p>系统定义的整数类型全局变量errno中储存了最近一次系统调用的错误编号</p>
+</li>
+<li><p>头文件errno.h中包含了对errno全局变量的外部声明和各种错误号的宏定义</p>
+</li>
+<li><p>&#x2F;usr&#x2F;include&#x2F;errno.h</p>
+</li>
+<li><p>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h   &#x2F;&#x2F; 包含35-132错误定义</p>
+</li>
+<li><p>&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno-base.h   &#x2F;&#x2F; 包含1-34错误定义</p>
+</li>
+</ul>
+<h3 id="注意错误号非零不能当作错出现的标志"><a href="#注意错误号非零不能当作错出现的标志" class="headerlink" title="注意错误号非零不能当作错出现的标志"></a>注意错误号非零不能当作错出现的标志</h3><p>因为当发生第一次错误后errno就不在等于零了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误处理</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span><span class="comment">// strerror();</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;errno.h&gt;</span> <span class="comment">// 全局变量 errno</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">void</span>* p = <span class="built_in">malloc</span>(<span class="number">0xffffffffffffffff</span>);</span><br><span class="line">    <span class="comment">/*if(p == NULL)&#123;//malloc 失败--&gt;原因--&gt;编号--&gt;errno</span></span><br><span class="line"><span class="comment">        fprintf(stderr,&quot;errno = %d\n&quot;,errno);</span></span><br><span class="line"><span class="comment">        fprintf(stderr,&quot;malloc:%s\n&quot;,strerror(errno));</span></span><br><span class="line"><span class="comment">        perror(&quot;malloc&quot;);</span></span><br><span class="line"><span class="comment">        return -1;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    free(p);*/</span></span><br><span class="line">    FILE*fp = fopen(<span class="string">&quot;test.c&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="comment">//if(errno)&#123;</span></span><br><span class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>比如该上述代码中，malloc发生的错误，在fopen处也会提示出错，这样就会出现错误误判。</p>
+<h3 id="解决记不住错误编号对应错误名的问题"><a href="#解决记不住错误编号对应错误名的问题" class="headerlink" title="解决记不住错误编号对应错误名的问题"></a>解决记不住错误编号对应错误名的问题</h3><p>​	在&lt;string.h&gt;头文件当中有一个可以将整数形式的错误号转换为有意义的字符串</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">char</span>* <span class="title function_">strerror</span><span class="params">(<span class="type">int</span> errnum)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数：errnum 错误号</li>
+<li>返回值：返回与参数错误号对应的描述字符串</li>
+</ul>
+<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><p>​	使用perror输出错误</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">perror</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* tag)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>功能：在标准出错设备上打印最近一次函数调用的错误信息</li>
+<li>参数：tag 为用户自己制定的提示内容，输出时，会自动在该提示内容和错误信息之间添加冒号进行分隔</li>
+</ul>
+<h2 id="为什么要用以上的方法来显示错误？"><a href="#为什么要用以上的方法来显示错误？" class="headerlink" title="为什么要用以上的方法来显示错误？"></a>为什么要用以上的方法来显示错误？</h2><p>​	因为只有少部分函数出现错误才会才会导致程序的中断，并返回错误。而大部分函数只会返回一个参数，并不会中断程序，因此需要自己手动来添加错误提示。</p>
+<h1 id="玩指针十二字真言"><a href="#玩指针十二字真言" class="headerlink" title="玩指针十二字真言"></a>玩指针十二字真言</h1><p><strong>由近及远</strong></p>
+<p><strong>从右向左</strong> </p>
+<p><strong>括号优先</strong>        </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> *p[N]; <span class="comment">// 一个数组存放指针</span></span><br><span class="line"><span class="type">int</span> (*p)[N]; <span class="comment">// 一个指针，指向一个数组</span></span><br><span class="line"><span class="type">int</span> (*add)(<span class="type">int</span>,<span class="type">int</span>) <span class="comment">// 一个函数指针</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day3/" data-id="cmaqqzjq5000fj0vf7io38c1o" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

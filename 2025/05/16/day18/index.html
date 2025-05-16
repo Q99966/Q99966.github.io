@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="IPC对象IPC对象的标识符和键 共享内存、消息队列和信号量,这三种IPC一般被合称为XSI IPC,它们之间有很多相似之处  为了实现进程之间的数据交换,系统内核会为参与通信的诸方维护一个内核对象(类似一个结构体变量),记录和通信有关的各种配置参数和运行时信息,谓之IPC对象  系统中的每个IPC对象都有唯一的,非负整数形式的标识符,所有与IPC相关的操作,都需要提供IPC对象标识符  与文件描">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day18/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IPC对象IPC对象的标识符和键 共享内存、消息队列和信号量,这三种IPC一般被合称为XSI IPC,它们之间有很多相似之处  为了实现进程之间的数据交换,系统内核会为参与通信的诸方维护一个内核对象(类似一个结构体变量),记录和通信有关的各种配置参数和运行时信息,谓之IPC对象  系统中的每个IPC对象都有唯一的,非负整数形式的标识符,所有与IPC相关的操作,都需要提供IPC对象标识符  与文件描">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6.png">
+<meta property="og:image" content="http://example.com/images/%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.976Z">
+<meta property="article:modified_time" content="2025-05-09T10:11:22.354Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day18/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.976Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="IPC对象"><a href="#IPC对象" class="headerlink" title="IPC对象"></a>IPC对象</h1><h2 id="IPC对象的标识符和键"><a href="#IPC对象的标识符和键" class="headerlink" title="IPC对象的标识符和键"></a>IPC对象的标识符和键</h2><ul>
+<li><p>共享内存、消息队列和信号量,这三种IPC一般被合称为XSI IPC,它们之间<br>有很多相似之处</p>
+</li>
+<li><p>为了实现进程之间的数据交换,系统内核会为参与通信的诸方维护一个内核对象(类似一个结构体变量),记录和通信有关的各种配置参数和运行时信息,谓之IPC对象</p>
+</li>
+<li><p>系统中的每个IPC对象都有唯一的,非负整数形式的标识符,所有与IPC相关<br>的操作,都需要提供IPC对象标识符</p>
+</li>
+<li><p>与文件描述符不同,IPC对象标识符不是最小整数。当一个IPC对象被创建,<br>以后又被销毁时,与该类型对象相关的标识符会持续加1,直至达到一个整型<br>数的最大正值,然后又回转到0</p>
+</li>
+<li><p>标识符是IPC对象的内部名。为了使多个合作进程能够在同一个IPC对象上会合,需要提供一个外部名方案。为此使用了键,每个IPC对象都与一个键相关联,于是键就被作为该对象的外部名</p>
+</li>
+<li><p>无论何时,创建或者获取一个IPC对象都必须指定一个键。键的数据类型为<br>key_t,在&lt;sys&#x2F;types.h&gt;头文件中被定义为int。系统内核负责维护键与标识<br>符的对应关系</p>
+</li>
+</ul>
+<h3 id="ftok"><a href="#ftok" class="headerlink" title="ftok"></a>ftok</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">key_t</span> <span class="title function_">ftok</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* pathname, <span class="type">int</span> proj_id)</span>;</span><br><span class="line"><span class="comment">// 功能:用于合成一个键</span></span><br><span class="line"><span class="comment">// 参数:pathname 一个真实存在的路径名</span></span><br><span class="line"><span class="comment">// 		proj_id:项目ID,仅低8位有效,取0到255之间的数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回可用于创建或获取IPC对象的键,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ftok函数用pathname参数调用stat函数,将其输出的stat结构体中的<br>st_dev(设备ID)和st_ino(i节点号)成员与proj_id参数组合来生成键。</p>
+<p>​    参与生成键的是设备ID和i节点号，而不是pathname参数字符串本身。假设当前路径为&#x2F;home&#x2F;tarena&#x2F;unixc,则ftok(“&#x2F;home&#x2F;tarena&#x2F;unixc”,123);与 ftok(“.”,123);所返回的键是完全一样的。</p>
+</li>
+<li><p>设备ID和i节点号都至少是整型字长的数据,而键也是整型字长,再加上一令<br>字节项目ID,在合成键的过程中难免会丢失一部分信息。因此有时候明明提供的是不同的路径,该函数返回的键却是一样的。</p>
+</li>
+</ul>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><ul>
+<li>两个或者更多进程,共享同一块由系统内核负责维护的内存区域,其地址空<br>间通常被映射到堆和栈之间</li>
+<li>多个进程通过共享内存通信,所传输的数据通过各个进程的虚拟内存被直接反映到同一块物理内存中,这就避免了在不同进程和系统内核之间来回复制数据的开销。因此基于共享内存的进程间通信,是速度最快的进程间通信方式。</li>
+<li>共享内存本身缺乏足够的同步机制,这就需要程序员编写额外的代码来实现<br><img src="/./images/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6.png" alt="共享内存机制"></li>
+</ul>
+<h3 id="shmget"><a href="#shmget" class="headerlink" title="shmget"></a>shmget</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">size_t</span> size, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"><span class="comment">// 功能:创建新的或获取已有的共享内存</span></span><br><span class="line"><span class="comment">// 参数:key:键。</span></span><br><span class="line"><span class="comment">// 	size:字节数,自动按页取整。</span></span><br><span class="line"><span class="comment">// 	shmflg:创建标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 	-获取,不存在即失败手v:kunlun991</span></span><br><span class="line"><span class="comment">// 		IPC_CREAT-创建,不存在即创建,已存在即获取。</span></span><br><span class="line"><span class="comment">//		IPC_EXCL-排它,不存在即创建,已存在即失败。 需要与上一个同时使用，即 IPC_CREAT | IPC_EXCL | 0664 ， 最后别忘了加权限</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">//		通过位或组合读写权限。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回共享内存的ID,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="shmat"><a href="#shmat" class="headerlink" title="shmat"></a>shmat</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">shmat</span><span class="params">(<span class="type">int</span> shmid, <span class="type">void</span> <span class="type">const</span>* shmaddr, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"><span class="comment">// 功能:加载共享内存,将物理内存中的共享区域映射到进程用户空间的虚拟内存中。</span></span><br><span class="line"><span class="comment">// 参数:shmid:共享内存的ID。</span></span><br><span class="line"><span class="comment">// 	shmadder:映射到共享内存的虚拟内存起始地址,取NULL,由系统自动选择。</span></span><br><span class="line"><span class="comment">// 	shmflg:加载标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 			-以读写方式使用共享。</span></span><br><span class="line"><span class="comment">// 		SHM_RDONLY 	-以只读方式使用共享内存。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回共享内存的起始地址,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>shmat函数负责将给定共享内存映射到调用进程的虚拟内存空间,返回映射<br>区的起始地址,同时将系统内核中共享内存对象的加载计数加一。</li>
+<li>调用进程在获得shmat函数返回的共享内存起始地址以后,就可以象访问普<br>通内存一样访问共享内存中数据。</li>
+</ul>
+<h3 id="shmctl"><a href="#shmctl" class="headerlink" title="shmctl"></a>shmctl</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmctl</span><span class="params">(<span class="type">int</span> shmid, IPC_RMID, <span class="literal">NULL</span>)</span>;</span><br><span class="line"><span class="comment">// 功能:销毁共享内存</span></span><br><span class="line"><span class="comment">// 参数:shmid:共享内存对象ID</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁共享内存。其实并非真的销毁,而只是做一个销毁标记,禁止任何进程对该共享内存形成新的加载,但已有的加载依然保留。只有当其使用者们纷纷卸载,直至其加载计数降为0时,共享内存才会真的被销毁</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进程结束时，如果不调用shmctl来销毁该进程占用该共享内存的标记，则它就在进程结束后仍然存在。</li>
+</ul>
+<h3 id="基于共享内存实现进程间通信的编程模型"><a href="#基于共享内存实现进程间通信的编程模型" class="headerlink" title="基于共享内存实现进程间通信的编程模型"></a>基于共享内存实现进程间通信的编程模型</h3><p><img src="/./images/%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="基于共享内存实现进程间通信的编程模型"></p>
+<h2 id="ipcs"><a href="#ipcs" class="headerlink" title="ipcs"></a>ipcs</h2><p>​	通过ipcs命令来查看共享内存信息，消息队列，信号量数组</p>
+<h1 id="vim打开文件技巧"><a href="#vim打开文件技巧" class="headerlink" title="vim打开文件技巧"></a>vim打开文件技巧</h1><p>使用 vim filename +num</p>
+<p>表示打开文件并且光标定位到num行</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day18/" data-id="cmaqqzjq4000aj0vf9xoifx08" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day19/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day17/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -71,46 +71,843 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-day22" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/05/16/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-05-16T11:47:34.756Z" itemprop="datePublished">2025-05-16</time>
+    <a href="/2025/05/16/day22/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.984Z" itemprop="datePublished">2025-05-16</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/05/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><ul>
+<li><p>IP地址是网络上标识站点的数字地址,为了方便记忆,采用域名来代替P地址标识站点地址</p>
+</li>
+<li><p>域名解析就是域名到IP地址的转换过程。域名的解析工作由DNS服务器完成</p>
+</li>
+<li><p>当应用过程需要将一个主机域名映射为IP地址时,就调用域名解析函数,解析函数将待转换的域名放在DNS请求中,以UDP报文方式发给本地域名服务器。本地的域名服务器查到域名后,将对应的IP地址放在应答报文中返回。</p>
+</li>
+</ul>
+<h3 id="gethostbyname"><a href="#gethostbyname" class="headerlink" title="gethostbyname"></a>gethostbyname</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#incluce <span class="string">&lt;netdb.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> hostent* <span class="title function_">gethostbyname</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* host_name)</span>;</span><br><span class="line"><span class="comment">// 功能:通过参数所传的主机域名,获取主机信息</span></span><br><span class="line"><span class="comment">// 参数:host_name 主机域名</span></span><br><span class="line"><span class="comment">// 返回值:函数执行成功返回表示主机信息的结构体指针,失败返回NULL</span></span><br><span class="line"><span class="comment">// 注意,该函数需要再联网情况下使用</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="hostent"><a href="#hostent" class="headerlink" title="hostent"></a>hostent</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hostent</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> *h name;  <span class="comment">//主机官方名</span></span><br><span class="line">    <span class="type">char</span> ** h_aliases;<span class="comment">//主机别名表</span></span><br><span class="line">    <span class="type">int</span> h_addrtype;<span class="comment">//地址类型</span></span><br><span class="line">    <span class="type">int</span> h_length; <span class="comment">//地址长度</span></span><br><span class="line">    <span class="type">char</span> ** h_addr_list; <span class="comment">//IP地址表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h1 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>我们在通过浏览器获取网络资源的过程中,一直在遵循HTTP协议。客户端终端和服务器终端请求和应答的标准,客户端发起一个HTTP请求到服务器上指定端口,默认80,应答服务器上存储着一些资源,比如HTML文件和图像等。</li>
+</ul>
+<h3 id="浏览器地址栏中输入URL-按下回车后会经历的流程"><a href="#浏览器地址栏中输入URL-按下回车后会经历的流程" class="headerlink" title="浏览器地址栏中输入URL,按下回车后会经历的流程:"></a>浏览器地址栏中输入URL,按下回车后会经历的流程:</h3><p>​	1、浏览器向DNS服务器请求解析该URL中的域名所对应的IP地址。<br>​	2、根据解析后的IP地址和默认端口80和服务器建立TCP连接。<br>​	3、浏览器发出HTTP请求<br>​	4、服务器对浏览器的请求作出响应。</p>
+<h3 id="HTTP的请求和响应"><a href="#HTTP的请求和响应" class="headerlink" title="HTTP的请求和响应"></a>HTTP的请求和响应</h3><p><img src="/./images/HTTP%E8%AF%B7%E6%B1%82%E8%A7%84%E5%88%99.png" alt="HTTP请求规则"></p>
+<ul>
+<li>请求行由请求方法字段、URL字段和HTTP协议版本字段3个字段组成,它们用空格分隔。例如,GET&#x2F;index.html HTTP&#x2F;1.1。</li>
+<li>HTTP1.0定义了三种请求方法:GET,POST和HEAD方法。</li>
+<li>HTTP1.1新增了五种请求方法:OPTIONS,PUT,DELETE,TRACE和CONNECT方法。</li>
+<li>其中GET是最常用的请求方法,用来获取服务器的数据。</li>
+</ul>
+<h4 id="对应字段的作用"><a href="#对应字段的作用" class="headerlink" title="对应字段的作用"></a>对应字段的作用</h4><p>​	请求头部由关键字&#x2F;值对组成,每行一对,关键字和值用英文冒号“:”分隔。请求头部通知服务器有关于客户端请求的信息,典型的请求头有:</p>
+<ul>
+<li><p>Accept:告诉服务器自己接受什么类型的介质,*&#x2F;*表示任何类型,type&#x2F;*表示该类型下的所有子类型</p>
+</li>
+<li><p>Host:客户端指定自己想访问的web服务器的域名</p>
+</li>
+<li><p>User_Agent:浏览器表名自己的身份,是那种浏览器</p>
+</li>
+<li><p>Referer:浏览器web服务器表名自己是从哪个网页URL获得点击当前请求中的网址</p>
+</li>
+<li><p>Connection:表示是否需要持久连接</p>
+</li>
+</ul>
+<h4 id="HTTP响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h4><ul>
+<li><p>HTTP响应也由三个部分组成,分别是:状态行、响应头、空行、响应正文。</p>
+<p><img src="/./images/HTTP%E5%93%8D%E5%BA%94%E8%A7%84%E5%88%99.png" alt="HTTP响应规则"></p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/05/16/hello-world/" data-id="cmaqqjxbc0000x0vf04do8eee" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/05/16/day22/" data-id="cmaqqzjq5000ej0vf63eea4iu" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day21" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day21/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.982Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h1><h2 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h2><h3 id="TCP提供客户机与服务器的连接"><a href="#TCP提供客户机与服务器的连接" class="headerlink" title="TCP提供客户机与服务器的连接"></a>TCP提供客户机与服务器的连接</h3><ul>
+<li><p>首先,客户机必须建立与服务器的连接,所谓虚电路</p>
+</li>
+<li><p>然后,凭借已建立好的连接,通信双方相互交换数据</p>
+</li>
+<li><p>最后,客户机与服务器双双终止连接,结束通信过程</p>
+</li>
+</ul>
+<h3 id="TCP保证数据传输的可靠性"><a href="#TCP保证数据传输的可靠性" class="headerlink" title="TCP保证数据传输的可靠性"></a>TCP保证数据传输的可靠性</h3><ul>
+<li>TCP的协议栈底层在向另一端发送数据时,会要求对方在一个给定的时间窗口内返回确认。如果超过了这个时间窗口仍没有收到确认,则TCP会重传数据并等待更长的时间。只有在数次重传均告失败以后,TCP才会最终放弃。TCP含有用于动态估算数据往返时间(Round-Trip Time,RTT)的算法,因此它知道等待一个确认需要多长时间。</li>
+</ul>
+<h3 id="TCP保证数据传输的有序性"><a href="#TCP保证数据传输的有序性" class="headerlink" title="TCP保证数据传输的有序性"></a>TCP保证数据传输的有序性</h3><ul>
+<li>TCP的协议栈底层在向另一端发送数据时,会为所发送数据的每个字节指定一个序列号。即使这些数据字节没有能够按照发送时的顺序到达接收方,接收方的TCP也可以根据它们的序列号重新排序,再把最后的结果交给应用程序。</li>
+</ul>
+<h3 id="TCP是全双工的"><a href="#TCP是全双工的" class="headerlink" title="TCP是全双工的"></a>TCP是全双工的</h3><ul>
+<li>在给定的连接上,应用程序在任何时候都既可以发送数据也可以接收数据。因此,TCP必须跟踪每个方向上数据流的状态信息,如序列号和通告窗口的大小。</li>
+</ul>
+<h2 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h2><h3 id="三路握手"><a href="#三路握手" class="headerlink" title="三路握手"></a>三路握手</h3><ul>
+<li>客户机的TCP协议栈向服务器发送一个SYN分节,告知对方自己将在连接中发送数据的初始序列号,谓之主动打开</li>
+<li>服务器的TCP协议栈向客户机发送一个单个分节,其中不仅包括对客户机SYN分节的ACK应答,还包含服务器自己的SYN分节,以告知对方自己在同一连接中发送数据的初始序列号</li>
+<li>客户机的TCP协议栈向服务返回ACK应答,以表示对服务器所发SYN的确认</li>
+</ul>
+<p><img src="/./images/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="三次握手"></p>
+<ul>
+<li>DDOS攻击就是利用三次握手的漏洞（接到消息耍流氓，不回消息）</li>
+</ul>
+<h2 id="交换数据"><a href="#交换数据" class="headerlink" title="交换数据"></a>交换数据</h2><ul>
+<li>一旦连接建立,客户机即可构造请求包并发往服务器 服务器接收并处理来自客户机的请求包,构造响应包</li>
+<li>服务器向客户机发送响应包,同时捎带对客户机请求包的ACK应答。</li>
+<li>客户机接收来自服务器的响应包,同时向对方发送ACK应答。</li>
+</ul>
+<img src="./images/客户机与服务器交换数据.png" alt="客户机与服务器交换数据" style="zoom:67%;" />
+
+<h3 id="终止连接"><a href="#终止连接" class="headerlink" title="终止连接"></a>终止连接</h3><ul>
+<li>客户机或者服务器主动关闭连接,TCP协议栈向对方发送FIN分节,表示数据通信结束。如果此时尚有数据滞留于发送缓冲区中,则FIN分节跟在所有未发送数据之后。</li>
+<li>接收到FIN分节的另一端执行被动关闭,一方面通过TCP协议栈向对方发送ACK应答,另一方面向应用程序传递文件结束符。</li>
+<li>一段时间以后,方才接收到FIN分节的进程关闭自己的连接,同时通过TCP协议栈向对方发送FIN分节。</li>
+<li>对方在收到FIN分节后发送ACK应答</li>
+</ul>
+<p>​	具体图查看TCP&#x2F;IP协议</p>
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="listen"><a href="#listen" class="headerlink" title="listen"></a>listen</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">listen</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">int</span> backlog)</span></span><br><span class="line"><span class="comment">// 功能:启动侦听:在指定套接字上启动对连接请求的侦听功能</span></span><br><span class="line"><span class="comment">// 参数:sockfd:套接字描述符,在调用此函数之前是一个主动套接字,是不能感知连接请求的,在调用此函数并成功返回之后,是一个被动套接字,具有感知连接请求的能力。</span></span><br><span class="line"><span class="comment">//		backlog:未决连接请求队列的最大长度,一般取不小于1024的值。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="accept"><a href="#accept" class="headerlink" title="accept"></a>accept</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">accept</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr* addr, <span class="type">socklen_t</span>* addrlen)</span>;</span><br><span class="line"><span class="comment">// 功能:等待并接受连接请求,在指定套接字上阻塞,直到连接建立完成。</span></span><br><span class="line"><span class="comment">// 参数:sockfd:侦听套接字描述符。</span></span><br><span class="line"><span class="comment">// 		addr:输出连接请求发起方的地址信息。</span></span><br><span class="line"><span class="comment">// 		addrlen:输出连接请求发起方的地址信息字节数。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回可用于后续通信的连接套接字描述符,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// struct sockaddr是一个泛化类型，使用时可以强转</span></span><br><span class="line"><span class="type">int</span> conn = accept(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;cli,&amp;len);</span><br><span class="line"><span class="comment">// conn 称为通信套接字</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="recv"><a href="#recv" class="headerlink" title="recv"></a>recv</h3><p>​	万物皆文件，可以由read代替</p>
+<h3 id="send"><a href="#send" class="headerlink" title="send"></a>send</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">ssize t <span class="title function_">send</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> <span class="type">const</span>* buf, <span class="type">size_t</span> count, <span class="type">int</span> flags)</span>;</span><br><span class="line"><span class="comment">// 功能:发送数据</span></span><br><span class="line"><span class="comment">// 参数:若flags取0则与write函数完全等价,另外也可取以下值:</span></span><br><span class="line"><span class="comment">// 		MSG_DONTWAIT 	- 以非阻塞方式接收数据。</span></span><br><span class="line"><span class="comment">// 		MSG_OOB		 	- 接收带外数据。</span></span><br><span class="line"><span class="comment">//		MSG_DONTROUTE	-不查路由表,直接在本地网络中寻找目的主机</span></span><br><span class="line"><span class="comment">// 返回值:成功返回实际发送的字节数,失败返回-1。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><p><img src="/./images/TCP%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="TCP编程模型"></p>
+<h2 id="通信终止"><a href="#通信终止" class="headerlink" title="通信终止"></a>通信终止</h2><h3 id="客户机主动终止通信过程"><a href="#客户机主动终止通信过程" class="headerlink" title="客户机主动终止通信过程"></a>客户机主动终止通信过程</h3><p>​	在某个特定的时刻,客户机认为已经不再需要服务器继续为其提供服务器了。于是它在接收完最后一个响应包以后,通过close函数关闭与服务器通信的套接字。客户机的TCP协议栈向服务器发送FIN分节并得到对方的ACK应答。服务器专门负责与该客户机通信的子进程,此刻正试图通过recv函数接收下一个请求包,结果却因为收到来自客户机的FIN分节而返回0。于是该子进程退出收发循环,同时通过close函数关闭连接套接字,导致服务器的TCP协议栈向客户机发送FIN分节,使对方进入TIME_WAIT状态,并在收到对方的ACK应答以后,自己进入CLOSED状态。随之收发循环的退出,服务器子进程终止,并在服务器主进程的SIGCHLD(17)信号处理函数中被回收。通信过程宣告结束。</p>
+<h3 id="服务器主动终止通信"><a href="#服务器主动终止通信" class="headerlink" title="服务器主动终止通信"></a>服务器主动终止通信</h3><p>​	服务器专门负责和某个特定客户机通信的子进程,在运行过程中出现错误,不得不调用close函数关闭连接套接字,或者直接退出,甚至被信号杀死。于是服务器的TCP协议栈向客户机发送FIN分节并得到对方的ACK应答。</p>
+<p>1.如果客户机这时正试图通过recv函数接收响应包,那么该函数会返回0。客户机可<br>据此判断服务器已宕机,直接通过close库函数关闭与服务器通信的套接字,终止通信过程。</p>
+<p>2.如果客户机这时正试图通过send函数发送请求包,那么该函数并不会失败,但会导<br>致对方以RST分节做出响应,该响应分节甚至会先于FIN分节被紧随其后的recv函数收到并返回-1,同时置errno为ECONNRESET。这也是终止通信的条件之一。</p>
+<h3 id="服务器主机不可达-主机崩溃、网络中断、路由失效等"><a href="#服务器主机不可达-主机崩溃、网络中断、路由失效等" class="headerlink" title="服务器主机不可达(主机崩溃、网络中断、路由失效等)"></a>服务器主机不可达(主机崩溃、网络中断、路由失效等)</h3><p>在服务器主机不可达的情况下,无论是客户机还是服务器,它们的TCP协议栈都不可能再有任何数据分节的交换。因此,客户机通过send函数发送完请求包以后,会阻塞在recv函数上等待来自服务器的响应包。这时客户机的TCP协议栈会持续地重传数据分节,试图得到对方的ACK应答。源自伯克利的实现最多重传12次,最长等待9分钟。当TCP最终决定放弃时,会通过recv函数向用户进程返回失败,并置errno为ETIMEOUT或EHOSTUNREACH或ENETUNREACH。在重传过程中会放弃以后,即使服务器主机被重启,或者通信线路被恢复,由于TCP协议栈依然丢失了先前与连接有关的信息,通信依然无法继续,对所接收到的一切数据一律响应RST分节,只有在重新建立TCP连接之后,才能继续通信。</p>
+<h1 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h1><h2 id="UDP特征协议的基本"><a href="#UDP特征协议的基本" class="headerlink" title="UDP特征协议的基本"></a>UDP特征协议的基本</h2><h3 id="UDP不提供客户机与服务器的连接"><a href="#UDP不提供客户机与服务器的连接" class="headerlink" title="UDP不提供客户机与服务器的连接"></a>UDP不提供客户机与服务器的连接</h3><p>​	UDP的客户机与服务器不必存在长期关系。一个UDP的客户机在通过一个套接字向一个UDP服务器发送了一个数据报之后,马上可以通过同一个套接字向另一个UDP服务器发送另一个数据报。同样,一个UDP服务器也可以通过同一个套接字接收来自不同客户机的数据报。</p>
+<h3 id="UDP不保证数据传输的可靠性和有序性"><a href="#UDP不保证数据传输的可靠性和有序性" class="headerlink" title="UDP不保证数据传输的可靠性和有序性"></a>UDP不保证数据传输的可靠性和有序性</h3><p>​	UDP的协议栈底层不提供诸如确认、超时重传、RTT估算以及序列号等机制。因此UDP数据报在网络传输的过程中,可能丢失,也可能重复,甚至重新排序。应用程序必须自己处理这些情况。</p>
+<h3 id="UDP不提供流量控制"><a href="#UDP不提供流量控制" class="headerlink" title="UDP不提供流量控制"></a>UDP不提供流量控制</h3><p>​	UDP的协议栈底层只是一味地按照发送方的速率发送数据,全然不顾接收方的缓冲区是否装得下。</p>
+<h3 id="UDP是全双工的"><a href="#UDP是全双工的" class="headerlink" title="UDP是全双工的"></a>UDP是全双工的</h3><p>​	在一个UDP套接字上,应用程序在任何时候都既可以发送数据也可以接收数据。</p>
+<h2 id="编程模型-1"><a href="#编程模型-1" class="headerlink" title="编程模型"></a>编程模型</h2><p><img src="/./images/UDP%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="UDP编程模型"></p>
+<h2 id="常用函数-1"><a href="#常用函数-1" class="headerlink" title="常用函数"></a>常用函数</h2><h3 id="recvfrom"><a href="#recvfrom" class="headerlink" title="recvfrom"></a>recvfrom</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">ssize t <span class="title function_">recvfrom</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span>* buf, <span class="type">size_t</span> count, <span class="type">int</span> flags,<span class="keyword">struct</span> sockaddr* src_addr, <span class="type">socklen_t</span>* addrlen)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 功能:从哪里接收数据</span></span><br><span class="line"><span class="comment">// 参数:前四个参数和函数recv相同</span></span><br><span class="line"><span class="comment">// 		src_addr:输出源主机的地址信息</span></span><br><span class="line"><span class="comment">// 		addrlen:输入输出源主机的地址信息的字节数。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回实际接收的字节数,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sendto"><a href="#sendto" class="headerlink" title="sendto"></a>sendto</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">sendto</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> <span class="type">const</span>* buf, <span class="type">size_t</span> count, <span class="type">int</span> flags,<span class="keyword">struct</span> sockaddr <span class="type">const</span>* dest_addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br><span class="line"><span class="comment">// 功能:发送数据到哪里</span></span><br><span class="line"><span class="comment">// 参数:前四个参数和函数send相同</span></span><br><span class="line"><span class="comment">// 		dest_addr:目的主机的地址信息。</span></span><br><span class="line"><span class="comment">// 		addrlen:目的主机的地址信息的字节数。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回实际发送的字节数,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day21/" data-id="cmaqqzjq5000dj0vf72kxax9b" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day20" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day20/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.979Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h1><h3 id="什么是计算机网络"><a href="#什么是计算机网络" class="headerlink" title="什么是计算机网络"></a>什么是计算机网络</h3><p>​		计算机网络,是指将地理位置不同的具有独立功能的多台计算机及其外部设备,通过通信线路连接起来,在网络操作系统、网络管理软件及网络通信协议的管理和协调下,实现资源共享和信息传递的计算机系统。</p>
+<h3 id="什么是网络协议"><a href="#什么是网络协议" class="headerlink" title="什么是网络协议"></a>什么是网络协议</h3><p>​		网络协议是一种特殊的软件,是计算机网络实现其功能的最基本的机制。网络协议的本质就是规则,即各种硬件和软件必须遵循的共同守则。网络协议并不是一套单独的软件,它融合于其它所有的软件甚至硬件系统中,因此可以说协议在网络中无所不在。</p>
+<h3 id="什么是协议栈"><a href="#什么是协议栈" class="headerlink" title="什么是协议栈"></a>什么是协议栈</h3><p>​		为了减少网络设计的复杂性,绝大多数网络采用分层设计的方法。所谓分层设计,就是按照信息的流动过程将网络的整体功能分解为一个个的功能层,不同机器上的同等功能层之间采用相同的协议,同一机器上的相邻功能层之间通过接口进行信息传递。各层的协议和接口统称为协议栈。</p>
+<p>​		描述计算机网络各协议层的一般方法是采用国际标准化组(International Standardization Organization,ISO)的计算机通信开放系统互连(Open System Interconnection,OSI)模型,简称ISO&#x2F;OSI网络协议模型。</p>
+<p><img src="/./images/%E5%8D%8F%E8%AE%AE%E6%A0%88.png" alt="协议栈"></p>
+<ul>
+<li>TCP&#x2F;IP不是个单一的网络协议，而是由一组具有层次关系的网络协议组成的协议家族,简称TCP&#x2F;IP协议族。</li>
+</ul>
+<blockquote>
+<p>TCP:传输控制协议,面向连接,可靠的全双工的字节流<br>UDP:用户数据报协议,无连接,不如TCP可靠但速度快<br>ICMP:网际控制消息协议,处理路由器和主机间的错误和控制消息<br>IGMP:网际组管理协议,用于多播<br>IPv4:网际协议版本4,使用32位地址,为TCP、UDP、ICMP和IGMP提供递送分组服务<br>IPv6:网际协议版本6,使用128位地址,为TCP、UDP和ICMPv6提供递送分组服务<br>ARP:地址解析协议,把IPv4地址映射到硬件地址<br>RARP:逆地址解析协议,把硬件地址映射到IPv4地址<br>ICMPv6:网际控制消息协议版本6,综合了ICMP、IGMP和ARP的功能<br>BPF:BSD分组过滤器,为应用程序提供访问数据链路层的接口,由源自BSD的系统内核提供<br>DLPI:数据链路提供者接口,为应用程序提供访问数据链路层的接口,由源自SVR4的系统内核提供</p>
+</blockquote>
+<h3 id="TCP-IP与ISO-OSI模型"><a href="#TCP-IP与ISO-OSI模型" class="headerlink" title="TCP&#x2F;IP与ISO&#x2F;OSI模型"></a>TCP&#x2F;IP与ISO&#x2F;OSI模型</h3><img src="./images/TCP_IP与ISO_OSI模型.png" alt="TCP/IP与ISO/OSI模型" style="zoom: 67%;" />
+
+<p>​		在ISO&#x2F;OSI网络协议模型的基础上,TCP&#x2F;IP协议做了部分合并和简化,同时将网络编程的接口设定在传输层与会话层之间,这样做的理由有二。</p>
+<ul>
+<li>上三层与应用程序的业务逻辑(如数据包的组织与解析、收发的时机与次序等)密切相关,而与具体的通信细节<br>(如收发分组、等待确认、分组排序、计算验证校验和、丢包重传等)关系不大;下四层主要处理通信细节而与具体应用的业务逻辑无关</li>
+<li>上三层通常构成用户进程,而下四层通常是系统内核的一部分</li>
+</ul>
+<h3 id="消息包与消息流"><a href="#消息包与消息流" class="headerlink" title="消息包与消息流"></a>消息包与消息流</h3><p>​		应用程序负责组织的通常都是与业务相关的数据内容,而要想把这些数据内容通过网络发送出去,就要将其自上向下地压入协议栈,每经历一个协议层,就会对数据做一层封包,每一层输出的封包都是下一层输入的内容,消息包沿着协议栈的运动形成了消息流。</p>
+<p>​		当从网络上接收数据时,过程刚好相反,消息包自下向上地流经协议栈,每经历一个协议层,就会对输入的数据解一层封包,经过层层解包以后,应用程序最终得到的将只是与业务相关的数据内容。</p>
+<p><img src="/./images/TCP_IP%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B.png" alt="TCP&#x2F;IP传输过程"></p>
+<h4 id="TCP包首部"><a href="#TCP包首部" class="headerlink" title="TCP包首部"></a>TCP包首部</h4><p><img src="/./images/TCP%E5%8C%85%E9%A6%96%E9%83%A8.png" alt="TCP包首部"></p>
+<h4 id="IP包文格式"><a href="#IP包文格式" class="headerlink" title="IP包文格式"></a>IP包文格式</h4><p><img src="/./images/IP%E5%8C%85%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt="IP包文格式"></p>
+<h4 id="RFC894以太网帧"><a href="#RFC894以太网帧" class="headerlink" title="RFC894以太网帧"></a>RFC894以太网帧</h4><p>​	包格式可以从TCP&#x2F;IP详解上面看</p>
+<h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><h3 id="什么是IP地址"><a href="#什么是IP地址" class="headerlink" title="什么是IP地址?"></a>什么是IP地址?</h3><p>​		IP地址,全称网际协议地址(Internet Protocol Address),是IP协议提供的一种统一的地址格式,为互联网上的每个网络和每台主机分配一个逻辑地址,借以消除物理地址差异性所带来的影响。</p>
+<h3 id="IP地址如何表示"><a href="#IP地址如何表示" class="headerlink" title="IP地址如何表示?"></a>IP地址如何表示?</h3><ul>
+<li>在计算机内部,IP地址用一个32位无符号整数表示,如:0x01020304。</li>
+<li>人们更习惯使用点分十进制字符串表示,如:1.2.3.4。字符串形式的从左到右,对应整数形式的从高字节到低字节。注意这里所说的高低指的是数位高低而非地址高低</li>
+</ul>
+<h3 id="什么是IP地址分级"><a href="#什么是IP地址分级" class="headerlink" title="什么是IP地址分级?"></a>什么是IP地址分级?</h3><ul>
+<li>A级地址:以0为首的8位网络地址+24位本地地址</li>
+<li>B级地址:以10为首的16位网络地址+16位本地地址</li>
+<li>C级地址:以110为首的24位网络地址+8为本地地址</li>
+<li>D级地址:以1110为首的32位多播地址</li>
+<li>例如:某台计算机的IP地址:192.168.182.48,写成整数形式:11000000 10101000 10110110 00110000,C级地址,网络地址:192.168.182.0,本地地址:48</li>
+</ul>
+<h3 id="借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址"><a href="#借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址" class="headerlink" title="借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址"></a>借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址</h3><ul>
+<li><p>以IP地址:192.168.182.48,子网掩码:255.255.255.0为例</p>
+</li>
+<li><p>网络地址&#x3D;IP地址&amp;子网掩码</p>
+<p>​                    192.168.182.48 &amp; 255.255.255.0 &#x3D; 192.168.182.0</p>
+</li>
+<li><p>本地地址&#x3D;IP地址&amp;~子网掩码</p>
+</li>
+</ul>
+<p>  ​					192.168.182.48 &amp; 0.0.0.255 &#x3D; 0.0.0.48</p>
+<ul>
+<li>有些大佬习惯用192.168.188.48&#x2F;24 来表示，斜杠后面的24代表子网掩码前面有24个1，即c级地址的子网掩码</li>
+</ul>
+<h3 id="关于ipv4不够用的问题"><a href="#关于ipv4不够用的问题" class="headerlink" title="关于ipv4不够用的问题"></a>关于ipv4不够用的问题</h3><p>​		由于现在全球使用网络设备的人太多，不够给每个设备配一个ipv4地址，所以就出现了多个私网IP公用一个公网IP，现在也推出了ipv6。</p>
+<h1 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h1><h3 id="什么是套接字"><a href="#什么是套接字" class="headerlink" title="什么是套接字?"></a>什么是套接字?</h3><ul>
+<li>套接字(socket)的本意是指电源插座,这里将其引申为一个基于TCP&#x2F;IP协议可实现基本网络通信功能的逻辑对象.</li>
+<li>机器与机器的通信,或者进程与进程的通信,在这里都可以被抽象地看作是套接字与套接字的通信。</li>
+<li>应用程序编写者无需了解网络协议的任何细节,更无需知晓系统内核和网络设备的运作机制,只要把想发送的数据写入套接字,或从套接字中读取想接收的数据即可。</li>
+</ul>
+<p>​	<img src="/./images/%E5%A5%97%E6%8E%A5%E5%AD%97.png" alt="套接字"></p>
+<ul>
+<li>从这个意义上讲,套接字就相当于一个<strong>文件描述符</strong>,而网络就是一种<strong>特殊的文件</strong>,面向网络的编程与面向文件的编程已没有分别,而这恰恰是Unix系统一切皆文件思想的又一例证</li>
+<li>套接字是对ISO&#x2F;OSI网络协议模型中传输层及其以下诸层的逻辑抽象,是对TCP&#x2F;IP网络通信协议的高级封装,因此无论所依赖的是什么硬件,所运行的什么操作系统,所使用的是什么编程语言,只要是基于套接字构建的应用程序,只要是在互联网环境中通信,就不会存在任何障碍。</li>
+</ul>
+<h2 id="套接字的绑定和连接"><a href="#套接字的绑定和连接" class="headerlink" title="套接字的绑定和连接"></a>套接字的绑定和连接</h2><p>​		如前所述,套接字是一个提供给程序员使用的逻辑对象,它表示对ISO&#x2F;OSI<br>网络协议模型中传输层及其以下诸层的抽象。但真正发送和接收数据的毕竟<br>是那些实实在在的物理设备。这就需要在<strong>物理设备和逻辑对象</strong>之间建立一种<br>关联,使后续所有针对这个逻辑对象的操作,最终都能够反映到实际的物理设备上。建立这种关联关系的过程就叫做<strong>绑定</strong>。</p>
+<h2 id="套接字相关函数"><a href="#套接字相关函数" class="headerlink" title="套接字相关函数"></a>套接字相关函数</h2><h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br><span class="line"><span class="comment">// 功能:创建套接字</span></span><br><span class="line"><span class="comment">// 参数:domain:通信域,协议族,可取以下值:</span></span><br><span class="line"><span class="comment">// 		PF_LOCAL/PF_UNIX	- 本地套接字,进程间通信</span></span><br><span class="line"><span class="comment">// 		PF_INET				- 基于IPv4的网络通信</span></span><br><span class="line"><span class="comment">// 		PF_INET6			- 基于IPv6的网络通信</span></span><br><span class="line"><span class="comment">// 		PF_PACKET			- 基于底层包的网络通信</span></span><br><span class="line"><span class="comment">// 参数:type:套接字类型,可取以下值:</span></span><br><span class="line"><span class="comment">// 		SOCK_STREAM 		- 流式套接字,基于TCP协议</span></span><br><span class="line"><span class="comment">//		SOCK_DGRAM 			- 数据报套接字,基于UDP协议</span></span><br><span class="line"><span class="comment">//		SOCK_RAW 			- 原始套接字,工作在传输层以下(即所有的都能接，但是需要完成传输层的操作)</span></span><br><span class="line"><span class="comment">// 		protocol:特殊协议,对于流式和数据报套接字而言,只能取0</span></span><br><span class="line"><span class="comment">// 返回值:成功返回表示套接字对象的文件描述符,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如前所述,通过IP地址可以定位网络上的一台主机,但一台主机上可能同时有多个网络应用在运行,究竟想跟哪个网络应用通信呢?这就需要靠所谓的端口号来区分,因为不同的网络应用会使用不同的端口号。用IP地址定位主机,再用端口号定位运行在这台主机上一个具体的网络应用,这样一种对通信主体的描述才是唯一确定的。</li>
+<li>套接字接口库中的端口号被定义为一个16位的无符号整数,其值介于0到65535,其中0到1024已被系统和一些网络服务占据,比如21端口用于ftp服务、23端口用于telnet服务、80端口用于www服务等,因此一般应用程序最好选择1024以上的端口号,以避免和这些服务冲突。</li>
+</ul>
+<h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">connect</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr <span class="type">const</span>* addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br><span class="line"><span class="comment">// 功能:将套接字和对方的地址结构连接在一起</span></span><br><span class="line"><span class="comment">// 参数:sockfd:套接字描述符。</span></span><br><span class="line"><span class="comment">// 		addr:对方的地址结构。</span></span><br><span class="line"><span class="comment">// 		addrlen:地址结构的字节数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bind</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr <span class="type">const</span>* addr, <span class="type">socklen_t</span> addrlen)</span>; </span><br><span class="line"><span class="comment">// 功能:将套接字和本机的地址结构绑定在一起</span></span><br><span class="line"><span class="comment">// 参数:sockfd:套接字描述符。</span></span><br><span class="line"><span class="comment">// 		addr:自己的地址结构。</span></span><br><span class="line"><span class="comment">//		addrlen:地址结构的字节数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="网络地址结构"><a href="#网络地址结构" class="headerlink" title="网络地址结构"></a>网络地址结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地地址结构,用于AF_LOCAL/AF_UNIX域的本地通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> &#123;</span></span><br><span class="line">	<span class="type">sa_family_t</span> sun_family; <span class="comment">// 地址族(AF_LOCAL/AF_UNIX)</span></span><br><span class="line">	<span class="type">char</span> sun_path[];<span class="comment">//本地套接字文件的路径</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网络地址结构,用于AF_INET域的IPv4网络通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> &#123;</span></span><br><span class="line">    <span class="type">sa_family_t</span> sin_family;<span class="comment">//地址族(AF_INET)</span></span><br><span class="line">    <span class="type">in_port_t</span> sin_port; <span class="comment">//端口号(0~65535)-unsigned short</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addrt</span> // <span class="title">IP</span>地址</span></span><br><span class="line"><span class="class">&#125;;</span></span><br><span class="line"><span class="comment">// 网络地址结构,用于AF_INET域的IPv4网络通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> &#123;</span></span><br><span class="line">	<span class="type">in_addr_t</span> s_addr;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    s_addr = INADDR_ANY; // 接受任意IP地址到来的数据</span></span><br><span class="line"><span class="comment">    s_addr = inet_addr(&quot;192.168.222.128&quot;);</span></span><br><span class="line"><span class="comment">    表示接收对应的IP,并且需要inet_addr转字节序</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint16_t</span> <span class="type">in_port_t</span>;<span class="comment">//无符号16位整数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint32_t</span> <span class="type">in_addr_t</span>;<span class="comment">//无符号32位整数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="字节序转换"><a href="#字节序转换" class="headerlink" title="字节序转换"></a>字节序转换</h1><p>​		网络应用与单机应用不同,经常需要在具有不同硬件架构和操作系统的计算机之间交换数据,因此编程语言里一些多字节数据类型的字节序问题就需要特别予以关注。</p>
+<p>​		套接字接口库规定在网络传输过程中采用网络字节序,也就是大端字节序,<br>而本机数据可能是小短字节序。</p>
+<ul>
+<li><p>小端字节序:数据的低位存放在低地址</p>
+</li>
+<li><p>大端字节序:数据的低位存放在高地址</p>
+</li>
+<li><p>以字节为单位存</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如</span></span><br><span class="line"><span class="comment">	0x12345678</span></span><br><span class="line"><span class="comment">存成   78563412</span></span><br><span class="line"><span class="comment">而不是  87654321</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint32_t</span> <span class="title function_">htonl</span><span class="params">(<span class="type">uint32_t</span> hostlong)</span>;<span class="comment">//长整形主机字节序到网络字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">ntohl</span><span class="params">(<span class="type">uint32_t</span> netllong)</span>;<span class="comment">//长整形网络字节序到主机字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">htons</span><span class="params">(<span class="type">uint16_t</span> hostshort)</span>;<span class="comment">//短整形主机字节序到网络字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">ntohs</span><span class="params">(<span class="type">uint16_t</span> netshort)</span>;<span class="comment">//短整形网络字节序到主机字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">in_addr_t</span> <span class="title function_">inet_addr</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* ip)</span>;</span><br><span class="line"><span class="comment">// 		点分十进制字符串地址 -- 》网络字节序形式整数地址</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">inet_aton</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* ip, <span class="keyword">struct</span> in_addr* nip)</span>;</span><br><span class="line"><span class="comment">//		点分十进制字符串地址 -- 》网络字节序形式整数地址</span></span><br><span class="line"><span class="type">char</span>* <span class="title function_">inet_ntoa</span><span class="params">(<span class="keyword">struct</span> in_addr nip)</span>;</span><br><span class="line"><span class="comment">//		网络字节序形式整数地址 -- 》点分十进制字符串地址</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day20/" data-id="cmaqqzjq4000cj0vf8sr45q86" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day19" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day19/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.978Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ul>
+<li><p>消息队列是一个由系统内核负责存储和管理,并通过消息队列标识符引用的消息链表队列</p>
+<p><img src="/./images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.png" alt="消息队列"></p>
+</li>
+<li><p>可以通过msgget函数创建一个新的消息队列或获取一个已有的消息队列。</p>
+</li>
+<li><p>可以通过msgsnd函数向消息队列的尾端追加消息,所追加的消息除了包含<br>消息数据以外,还包含消息类型和数据长度(以字节为单位)。</p>
+</li>
+<li><p>可以通过msgrcv函数从消息队列中提取消息,但不一定非按先进先出的顺序提取,也可以按消息的类型提取</p>
+</li>
+</ul>
+<h3 id="相较于其它几种IPC机制-消息队列具有明显的优势"><a href="#相较于其它几种IPC机制-消息队列具有明显的优势" class="headerlink" title="相较于其它几种IPC机制,消息队列具有明显的优势"></a>相较于其它几种IPC机制,消息队列具有明显的优势</h3><ul>
+<li>流量控制:如果系统资源(内存)短缺或者接收消息的进程来不及处理更多的消息,则发送消息的进程会在系统内核的控制下进入睡眠状态,待条件满足后再被内核唤醒,继续之前的发送过程</li>
+<li>面向记录:每个消息都是完整的信息单元,发送端是一个消息一个消息地发,接收端也是。一个消息一个消息地收,而不象管道那样收发两端所面对的都是字节流,彼此间没有结构上的一致性</li>
+</ul>
+<h3 id="系统限制"><a href="#系统限制" class="headerlink" title="系统限制"></a>系统限制</h3><ul>
+<li>可发送消息字节数上限:8192</li>
+<li>单条队列消息总字节数上限:16384(16K)</li>
+<li>全系统总消息队列数上限:16</li>
+<li>全系统消息总字节数上限:262144(256K&#x3D;16x16K)</li>
+</ul>
+<h3 id="msgget"><a href="#msgget" class="headerlink" title="msgget"></a>msgget</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:创建新的或获取已有的消息队列</span></span><br><span class="line"><span class="comment">// 参数:key:键。</span></span><br><span class="line"><span class="comment">// 		msgflg:创建标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 	- 获取,不存在即失败。</span></span><br><span class="line"><span class="comment">// 		IPC_CREAT -创建,不存在即创建,已存在即获取。</span></span><br><span class="line"><span class="comment">//		IPC_EXCL - 排它,不存在即创建,已存在即失败。</span></span><br><span class="line"><span class="comment">// 		通过位或组合读写权限。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回消息队列的ID,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="msgsnd"><a href="#msgsnd" class="headerlink" title="msgsnd"></a>msgsnd</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgsnd</span><span class="params">(<span class="type">int</span> msgid, <span class="type">void</span> <span class="type">const</span>* msgp, <span class="type">size_t</span> msgsz, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:发送消息</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID。</span></span><br><span class="line"><span class="comment">// 		msgp:指向一个包含消息类型和消息数据的内存块。该内存块的前4个字节必须是一个大于0的整数,代表消息类型,其后紧跟消息数据</span></span><br><span class="line"><span class="comment">// 		msgsz:期望发详消息数据(不含消息类型)的字节数</span></span><br><span class="line"><span class="comment">// 		msgflg:发送标志,一般取0即可</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> type;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">128</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意msgsnd函数的msgp参数所指向的内存块中包含消息类型,其值必须大<br>于0,但该函数的msgsz参数所表示的期望发送字节数中却不包含消息类型所占的4个字节消息</li>
+</ul>
+<p>​	<img src="/./images/msgsnd.png" alt="msgsnd"></p>
+<ul>
+<li><p>对于消息类型在32位系统上是4字节，64位系统上是8字节</p>
+</li>
+<li><p>消息队列缺省为阻塞模式,如果调用msgsnd函数发送消息时,超过了系统内<br>核有关消息的上限,该函数会阻塞,直到系统内核允许加入新消息为止。比如有消息因被接收而离开消息队列</p>
+</li>
+<li><p>如果msgflg参数中包含IPC_NOWAIT,则msgsnd函数在系统内核中的消息<br>已达上限的情况下不会阻塞,而是返回-1,同时置errno为EAGAIN。</p>
+</li>
+</ul>
+<h3 id="msgrcv"><a href="#msgrcv" class="headerlink" title="msgrcv"></a>msgrcv</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgrcv</span><span class="params">(<span class="type">int</span> msgid, <span class="type">void</span>* msgp, <span class="type">size_t</span> msgsz, <span class="type">long</span> msgtyp, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:接收消息</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID。</span></span><br><span class="line"><span class="comment">// 		msgp:指向一块包含消息类型(4字节)和消息数据的内存</span></span><br><span class="line"><span class="comment">// 		msgsz: 期望接收消息数据(不含消息类型)的字节数</span></span><br><span class="line"><span class="comment">// 		msgflg:接收标志,一般取0即可	</span></span><br><span class="line"><span class="comment">// 	参数:msgtyp:消息类型,可取以下值</span></span><br><span class="line"><span class="comment">//        0 -提取消息队列的第一条消息</span></span><br><span class="line"><span class="comment">//        0 -若msgflg参数不包含MSG_EXCEPT位,则提取消息队列的第一条类型为msgtyp的消息;若msgflg参数包含MSG_EXCEPT位,则提取消息队列的第一条类型不为msgtyp的消息</span></span><br><span class="line"><span class="comment">//        0 -提取消息队列中类型小于等于msgtyp的绝对值的消息,类型越小的消息越被优先提取</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意msgrcv函数的msgp参数所指向的内存块中包含消息类型,其值由该函<br>数输出,但该函数的msgsz参数所表示的期望接收字节数以及该函数所返回的实际接收字节数中都不包含消息类型所占的4个字节</p>
+<p><img src="/./images/msgrcv.png" alt="msgrcv"></p>
+</li>
+<li><p>若存在与msgtyp参数匹配的消息,但其数据长度大于msgsz参数,且msgflg<br>参数包含MSG_NOERROR位,则只截取该消息数据的前msgsz字节返回,剩<br>余部分直接丢弃;但如果msgflg参数不包含MSG_NOERROR位,则不处理该<br>消息,直接返回-1,并置errno为E2BIG</p>
+</li>
+<li><p>若消息队列中有可接收消息,则msgrcv函数会将消息移出消息队列,并立即返回所接收到的消息数据的字节数,表示接收成功,否则此函数会阻塞,直到<br>消息队列中有可接收消息为止。若msgflg参数中包含IPC_NOWAIT位,则<br>msgrcv函数在消息队列中没有可接收消息的情况下不会阻塞,而是返回-1,同时置errno为ENOMSG。</p>
+</li>
+</ul>
+<h3 id="msgctl"><a href="#msgctl" class="headerlink" title="msgctl"></a>msgctl</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgctl</span><span class="params">(<span class="type">int</span> msgid, IPC_RMID, <span class="literal">NULL</span>)</span>;</span><br><span class="line"><span class="comment">// 功能:销毁消息队列</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于消息队列实现进程间通信的编程模型"><a href="#基于消息队列实现进程间通信的编程模型" class="headerlink" title="基于消息队列实现进程间通信的编程模型"></a>基于消息队列实现进程间通信的编程模型</h3><p><img src="/./images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="消息队列编程模型"></p>
+<h2 id="ipc命令"><a href="#ipc命令" class="headerlink" title="ipc命令"></a>ipc命令</h2><h3 id="查看系统中的IPC对象"><a href="#查看系统中的IPC对象" class="headerlink" title="查看系统中的IPC对象"></a>查看系统中的IPC对象</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ipcs -m <span class="comment"># (memory,共享内存)</span></span><br><span class="line">ipcs -q <span class="comment"># (message queue,消息队列)</span></span><br><span class="line">ipcs -s <span class="comment"># (semphore,信号量集)</span></span><br><span class="line">ipcs -a <span class="comment"># (all,所有的)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除系统中的IPC对象"><a href="#删除系统中的IPC对象" class="headerlink" title="删除系统中的IPC对象"></a>删除系统中的IPC对象</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ipcrm -m <span class="comment"># 删除共享内存</span></span><br><span class="line">ipcrm -q <span class="comment"># 删除消息对列</span></span><br><span class="line">ipcrm -s <span class="comment"># 删除信号量集</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day19/" data-id="cmaqqzjq30008j0vfhkllhix1" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day18/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.976Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="IPC对象"><a href="#IPC对象" class="headerlink" title="IPC对象"></a>IPC对象</h1><h2 id="IPC对象的标识符和键"><a href="#IPC对象的标识符和键" class="headerlink" title="IPC对象的标识符和键"></a>IPC对象的标识符和键</h2><ul>
+<li><p>共享内存、消息队列和信号量,这三种IPC一般被合称为XSI IPC,它们之间<br>有很多相似之处</p>
+</li>
+<li><p>为了实现进程之间的数据交换,系统内核会为参与通信的诸方维护一个内核对象(类似一个结构体变量),记录和通信有关的各种配置参数和运行时信息,谓之IPC对象</p>
+</li>
+<li><p>系统中的每个IPC对象都有唯一的,非负整数形式的标识符,所有与IPC相关<br>的操作,都需要提供IPC对象标识符</p>
+</li>
+<li><p>与文件描述符不同,IPC对象标识符不是最小整数。当一个IPC对象被创建,<br>以后又被销毁时,与该类型对象相关的标识符会持续加1,直至达到一个整型<br>数的最大正值,然后又回转到0</p>
+</li>
+<li><p>标识符是IPC对象的内部名。为了使多个合作进程能够在同一个IPC对象上会合,需要提供一个外部名方案。为此使用了键,每个IPC对象都与一个键相关联,于是键就被作为该对象的外部名</p>
+</li>
+<li><p>无论何时,创建或者获取一个IPC对象都必须指定一个键。键的数据类型为<br>key_t,在&lt;sys&#x2F;types.h&gt;头文件中被定义为int。系统内核负责维护键与标识<br>符的对应关系</p>
+</li>
+</ul>
+<h3 id="ftok"><a href="#ftok" class="headerlink" title="ftok"></a>ftok</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">key_t</span> <span class="title function_">ftok</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* pathname, <span class="type">int</span> proj_id)</span>;</span><br><span class="line"><span class="comment">// 功能:用于合成一个键</span></span><br><span class="line"><span class="comment">// 参数:pathname 一个真实存在的路径名</span></span><br><span class="line"><span class="comment">// 		proj_id:项目ID,仅低8位有效,取0到255之间的数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回可用于创建或获取IPC对象的键,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ftok函数用pathname参数调用stat函数,将其输出的stat结构体中的<br>st_dev(设备ID)和st_ino(i节点号)成员与proj_id参数组合来生成键。</p>
+<p>​    参与生成键的是设备ID和i节点号，而不是pathname参数字符串本身。假设当前路径为&#x2F;home&#x2F;tarena&#x2F;unixc,则ftok(“&#x2F;home&#x2F;tarena&#x2F;unixc”,123);与 ftok(“.”,123);所返回的键是完全一样的。</p>
+</li>
+<li><p>设备ID和i节点号都至少是整型字长的数据,而键也是整型字长,再加上一令<br>字节项目ID,在合成键的过程中难免会丢失一部分信息。因此有时候明明提供的是不同的路径,该函数返回的键却是一样的。</p>
+</li>
+</ul>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><ul>
+<li>两个或者更多进程,共享同一块由系统内核负责维护的内存区域,其地址空<br>间通常被映射到堆和栈之间</li>
+<li>多个进程通过共享内存通信,所传输的数据通过各个进程的虚拟内存被直接反映到同一块物理内存中,这就避免了在不同进程和系统内核之间来回复制数据的开销。因此基于共享内存的进程间通信,是速度最快的进程间通信方式。</li>
+<li>共享内存本身缺乏足够的同步机制,这就需要程序员编写额外的代码来实现<br><img src="/./images/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6.png" alt="共享内存机制"></li>
+</ul>
+<h3 id="shmget"><a href="#shmget" class="headerlink" title="shmget"></a>shmget</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">size_t</span> size, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"><span class="comment">// 功能:创建新的或获取已有的共享内存</span></span><br><span class="line"><span class="comment">// 参数:key:键。</span></span><br><span class="line"><span class="comment">// 	size:字节数,自动按页取整。</span></span><br><span class="line"><span class="comment">// 	shmflg:创建标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 	-获取,不存在即失败手v:kunlun991</span></span><br><span class="line"><span class="comment">// 		IPC_CREAT-创建,不存在即创建,已存在即获取。</span></span><br><span class="line"><span class="comment">//		IPC_EXCL-排它,不存在即创建,已存在即失败。 需要与上一个同时使用，即 IPC_CREAT | IPC_EXCL | 0664 ， 最后别忘了加权限</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">//		通过位或组合读写权限。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回共享内存的ID,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="shmat"><a href="#shmat" class="headerlink" title="shmat"></a>shmat</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">shmat</span><span class="params">(<span class="type">int</span> shmid, <span class="type">void</span> <span class="type">const</span>* shmaddr, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"><span class="comment">// 功能:加载共享内存,将物理内存中的共享区域映射到进程用户空间的虚拟内存中。</span></span><br><span class="line"><span class="comment">// 参数:shmid:共享内存的ID。</span></span><br><span class="line"><span class="comment">// 	shmadder:映射到共享内存的虚拟内存起始地址,取NULL,由系统自动选择。</span></span><br><span class="line"><span class="comment">// 	shmflg:加载标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 			-以读写方式使用共享。</span></span><br><span class="line"><span class="comment">// 		SHM_RDONLY 	-以只读方式使用共享内存。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回共享内存的起始地址,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>shmat函数负责将给定共享内存映射到调用进程的虚拟内存空间,返回映射<br>区的起始地址,同时将系统内核中共享内存对象的加载计数加一。</li>
+<li>调用进程在获得shmat函数返回的共享内存起始地址以后,就可以象访问普<br>通内存一样访问共享内存中数据。</li>
+</ul>
+<h3 id="shmctl"><a href="#shmctl" class="headerlink" title="shmctl"></a>shmctl</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmctl</span><span class="params">(<span class="type">int</span> shmid, IPC_RMID, <span class="literal">NULL</span>)</span>;</span><br><span class="line"><span class="comment">// 功能:销毁共享内存</span></span><br><span class="line"><span class="comment">// 参数:shmid:共享内存对象ID</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁共享内存。其实并非真的销毁,而只是做一个销毁标记,禁止任何进程对该共享内存形成新的加载,但已有的加载依然保留。只有当其使用者们纷纷卸载,直至其加载计数降为0时,共享内存才会真的被销毁</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进程结束时，如果不调用shmctl来销毁该进程占用该共享内存的标记，则它就在进程结束后仍然存在。</li>
+</ul>
+<h3 id="基于共享内存实现进程间通信的编程模型"><a href="#基于共享内存实现进程间通信的编程模型" class="headerlink" title="基于共享内存实现进程间通信的编程模型"></a>基于共享内存实现进程间通信的编程模型</h3><p><img src="/./images/%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="基于共享内存实现进程间通信的编程模型"></p>
+<h2 id="ipcs"><a href="#ipcs" class="headerlink" title="ipcs"></a>ipcs</h2><p>​	通过ipcs命令来查看共享内存信息，消息队列，信号量数组</p>
+<h1 id="vim打开文件技巧"><a href="#vim打开文件技巧" class="headerlink" title="vim打开文件技巧"></a>vim打开文件技巧</h1><p>使用 vim filename +num</p>
+<p>表示打开文件并且光标定位到num行</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day18/" data-id="cmaqqzjq4000aj0vf9xoifx08" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day17" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day17/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.975Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><ul>
+<li>正如前文所述,Unix&#x2F;Linux系统中的每个进程都拥有4G字节大小专属于自己的虚拟内存空间,除去内核空间的1G以外,每个进程都有一张独立的内存映射表(又名内存分页表)记录着虚拟内存页和物理内存页之间的映射关系</li>
+<li>同一个虚拟内存地址,在不同的进程中,会被映射到完全不同的物理内存区<br>  域,因此在多个进程之间以交换虚拟内存地址的方式交换数据是不可能的</li>
+<li>鉴于进程之间天然存在的内存壁垒,要想实现多个进程间的数据交换,就必<br>须提供一种专门的机制,这就是所谓的进程间通信(InterProcess<br>Communication, IPC)</li>
+</ul>
+<h2 id="进程通信的种类"><a href="#进程通信的种类" class="headerlink" title="进程通信的种类"></a>进程通信的种类</h2><h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><ul>
+<li>在通过exec函数创建新进程时,可以为其指定命令行参数,借助命令行参数可以将创建者进程的某些数据传入新进程</li>
+<li>execl (“login”, “login”, “username”, “password”, NULL);</li>
+</ul>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><ul>
+<li><p>类似地,也可以在调用exec函数时为新进程提供环境变量</p>
+</li>
+<li><p>sprintf (envp[0], “USERNAME&#x3D;%s”, username);</p>
+</li>
+<li><p>sprintf (envp[1], “PASSWORD&#x3D;%s”, password);</p>
+</li>
+<li><p>execle (“login”, “login”, NULL, envp);</p>
+</li>
+</ul>
+<h3 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h3><ul>
+<li>通信双方分别将自己的一段虚拟内存映射到同一个文件中</li>
+</ul>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><ul>
+<li>管道是Unix系统中最古老的进程间通信方式,并且所有的Unix系统和包括Linux系统在内的各种类Unix系统也都提供这种进程间通信机制。管道有两种限制<ul>
+<li>管道都是半双工的,数据只能沿着一个方向流动</li>
+<li>管道只能在具有公共祖先的进程之间使用。通常一个管道由一个进程创建,然后该进程通过fork函数创建子进程,父子进程之间通过管道交换数据</li>
+</ul>
+</li>
+<li>大多数Unix&#x2F;Linux系统除了提供传统意义上的无名管道以外,还提供有名管道,对后者而言第二种限制已不复存在</li>
+</ul>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><ul>
+<li>共享内存允许两个或两个以上的进程共享同一块给定的内存区域。因为数据不需要在通信诸方之间来回复制,所以这是速度最快的一种进程间通信方式</li>
+</ul>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><ul>
+<li>消息队列是由系统内核负责维护并可在多个进程之间共享存取的消息链表。它的优点是传输可靠、流量受控、面向有结构的记录、支持按类型过滤</li>
+</ul>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><ul>
+<li>与共享内存和消息队列不同,信号量并不是为了解决进程间的数据交换问题。它所关注的是有限的资源如何在无限的用户间合理分配,即资源竞争问题</li>
+</ul>
+<h3 id="本地套接字"><a href="#本地套接字" class="headerlink" title="本地套接字"></a>本地套接字</h3><ul>
+<li>BSD版本的有名管道。编程模型和网络通信统一。</li>
+</ul>
+<h2 id="有名管道"><a href="#有名管道" class="headerlink" title="有名管道"></a>有名管道</h2><ul>
+<li><p>有名管道亦称FIFO,是一种特殊的文件,它的路径名存在于文件系统中。通<br>过mkfifo命令可以创建管道文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkfifo</span> myfifo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即使是毫无亲缘关系的进程,也可以通过管道文件通信</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;Hello, FIFO !&#x27;</span> &gt; myfifo</span><br><span class="line"><span class="built_in">cat</span> myfifo</span><br><span class="line"><span class="comment"># Hello, FIFO !</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>管道文件在磁盘上只有i节点没有数据块,也不保存数据</p>
+</li>
+<li><p>基于有名管道实现进程间通信的逻辑模型</p>
+<p> <img src="/./images/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93.png" alt="有名管道"></p>
+</li>
+<li><p>有名管道不仅可以用于Shell命令,也可以在代码中使用基于有名管道实现进程间通信的编程模型</p>
+<p><img src="/./images/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93Shell%E5%91%BD%E4%BB%A4.png" alt="有名管道Shell通信"></p>
+</li>
+</ul>
+<h3 id="创建有名管道"><a href="#创建有名管道" class="headerlink" title="创建有名管道"></a>创建有名管道</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">mkfifo</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* pathname, <span class="type">mode_t</span> mode)</span>;</span><br><span class="line"><span class="comment">// 功能:创建有名管道</span></span><br><span class="line"><span class="comment">// 参数:pathname:有名管道名,即管道文件的路径。</span></span><br><span class="line"><span class="comment">// 		mode:权限模式。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="无名管道"><a href="#无名管道" class="headerlink" title="无名管道"></a>无名管道</h2><ul>
+<li>无名管道是一个与文件系统无关的内核对象,主要用于<strong>父子进程</strong>之间的通信,需要用专门的系统调用函数创建</li>
+<li>也是内核维护的一块存储区，有两个文件描述符构成，一个读端，一个写端</li>
+</ul>
+<h3 id="pipe"><a href="#pipe" class="headerlink" title="pipe"></a>pipe</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> pipefd[<span class="number">2</span>])</span>;</span><br><span class="line"><span class="comment">// 功能:创建无名管道</span></span><br><span class="line"><span class="comment">// 参数:pipefd 输出两个文件描述符:</span></span><br><span class="line"><span class="comment">// 		pipefd[0] - 用于从无名管道中读取数据;</span></span><br><span class="line"><span class="comment">// 		pipefd[1] - 用于向无名管道中写入数据。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于无名管道实现进程间通信的编程模型"><a href="#基于无名管道实现进程间通信的编程模型" class="headerlink" title="基于无名管道实现进程间通信的编程模型"></a>基于无名管道实现进程间通信的编程模型</h3><ul>
+<li>2.父进程调用fork函数,创建子进程。子进程复制父进程的文件描述符表,因此子进程同样持有分别用于读写该管道的两个文件描述符pipefd[0]和pipefd[1]</li>
+</ul>
+<img src="./images/无名管道父子进程间通信.png" alt="无名管道父子进程间通信" style="zoom: 80%;" />
+
+<ul>
+<li>3.负责写数据的进程关闭无名管道对象的读端文件描述符pipefd[0],而负责读数据的进程则关闭该管道的写端文件描述符pipefd[1]</li>
+</ul>
+<img src="./images/无名管道父子进程间通信3.png" alt="无名管道父子进程间通信3" style="zoom:80%;" />
+
+<ul>
+<li>4.父子进程通过无名管道对象以半双工的方式传输数据。如果需要在父子进程间实现双向通信,较一般化的做法是创建两个管道,一个从父流向子,一个从子流向父</li>
+</ul>
+<img src="./images/无名管道父子进程间通信4.png" alt="无名管道父子进程间通信4" style="zoom:80%;" />
+
+<ul>
+<li>5.父子进程分别关闭自己所持有的写端或读端文件描述符。在与一个无名管道对象相关联的所有文件描述符都被关闭以后,该无名管道对象即从系统内核中被销毁</li>
+</ul>
+<img src="./images/无名管道父子进程间通信5.png" alt="无名管道父子进程间通信5" style="zoom:80%;" />
+
+<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><p>​	1、从写端已被关闭的管道读取,只要管道中还有数据,依然可以被正常读<br>取,一直到管道中没有数据了,这时read函数会返回0(既不是返回-1,也不<br>是阻塞),指示读到文件尾。</p>
+<p>​	2、向读端已被关闭的管道写入会直接触发SIGPIPE(13)信号。该信号的默认<br>操作时终止执行写入动作的进程。但如果执行写入动作的进程事先已将对<br>SIGPIPE(13)信号的处理设置为忽略或捕获,则write函数会返回-1,并置<br>errno为EPIPE。</p>
+<p>​	3、系统内核通常为每个管道维护一个大小为4096字节的内存缓冲区。如果<br>写管道时发现缓冲区的空闲空间不足以容纳此次write所要写入的字节,则<br>write会阻塞,直到缓冲区的空闲空间变得足够大为止。</p>
+<p>​	4、读取一个写端处于开放状态的空管道,将直接导致read函数阻塞。</p>
+<h2 id="管道符号"><a href="#管道符号" class="headerlink" title="管道符号"></a>管道符号</h2><ul>
+<li><p>Unix&#x2F;Linux系统中的多数Shell环境都支持通过管道符号“|”将前一个命令<br>的输出作为后一个命令的输入的用法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /etc | more</span><br><span class="line">ifconfig | grep inet</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>系统管理员经常使用这种方法,把多个简单的命令连接成一条工具链,去解<br>决一些通常看来可能很复杂的问题</p>
+<p>命令1|命令2|命令3</p>
+</li>
+</ul>
+<h3 id="管道符号底层原理"><a href="#管道符号底层原理" class="headerlink" title="管道符号底层原理"></a>管道符号底层原理</h3><p>exec 进程变身是会继承原进程的文件表项，以及变量</p>
+<img src="./images/管道符号底层原理.png" alt="管道符号底层原理" style="zoom:67%;" />
+
+<h1 id="打开终端的快捷键"><a href="#打开终端的快捷键" class="headerlink" title="打开终端的快捷键"></a>打开终端的快捷键</h1><p>Ctrl + Shift + t &#x2F;&#x2F; 在同一个窗口中打开</p>
+<p>Ctrl + Alt + t &#x2F;&#x2F; 在新的窗口中打开(Linux)</p>
+<p>Ctrl + Shift + n &#x2F;&#x2F; 在新的窗口中打开(Windows)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day17/" data-id="cmaqqzjq30007j0vf4ul2c5b7" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day16" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day16/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.973Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="信号集"><a href="#信号集" class="headerlink" title="信号集"></a>信号集</h1><p>​	多个信号组成的信号集合谓之信号集</p>
+<h2 id="系统内核用sigset-t类型表示信号集"><a href="#系统内核用sigset-t类型表示信号集" class="headerlink" title="系统内核用sigset_t类型表示信号集"></a>系统内核用sigset_t类型表示信号集</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在&lt;signal.h&gt;中又被定义为typedef</span></span><br><span class="line"><span class="comment">// 在&lt;sigset.h&gt;中有如下类型定义</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SIGSET_NWORDS (1024 / (8 * sizeof (unsigned long int)))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> int_val[_SIGSET_NWORDS];</span><br><span class="line">&#125;<span class="type">__sigset_t</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>sigset_t类型是一个结构体,但该结构体中只有一个成员,是一个包含32个<br>元素的整数数组(针对32位系统而言)</p>
+</li>
+<li><p>可以把sigset_t类型看成一个由1024个二进制位组成的大整数</p>
+<blockquote>
+<p>其中的每一位对应一个信号,其实目前远没有那么多信号<br>某位为1就表示信号集中有此信号,反之为0就是无此信号<br>当需要同时操作多个信号时,常以sigset_t作为函数的参数或返回值的类型</p>
+</blockquote>
+<p><img src="/./images/sigset_t.png" alt="sigset_t"></p>
+</li>
+</ul>
+<h2 id="sigfillset"><a href="#sigfillset" class="headerlink" title="sigfillset"></a>sigfillset</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigfillset</span> <span class="params">(<span class="type">sigset_t</span>* sigset)</span>;</span><br><span class="line"><span class="comment">//  功能:填满信号集,即将信号集的全部信号位置1</span></span><br><span class="line"><span class="comment">//  参数:sigset 信号集</span></span><br><span class="line"><span class="comment">// 		返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sigemptyset"><a href="#sigemptyset" class="headerlink" title="sigemptyset"></a>sigemptyset</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigemptyset</span> <span class="params">(<span class="type">sigset_t</span>* sigset)</span>;</span><br><span class="line"><span class="comment">// 功能:清空信号集,即将信号集的全部信号位清0</span></span><br><span class="line"><span class="comment">// 参数:sigset 信号集</span></span><br><span class="line"><span class="comment">// 		返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sigaddset"><a href="#sigaddset" class="headerlink" title="sigaddset"></a>sigaddset</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigaddset</span> <span class="params">(<span class="type">sigset_t</span>* sigset, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">// 功能:加入信号,即将信号集中与指定信号编号对应的信号位置1</span></span><br><span class="line"><span class="comment">// 参数:sigset 信号集</span></span><br><span class="line"><span class="comment">// 		signum:信号编号</span></span><br><span class="line"><span class="comment">// 		返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sigdelset"><a href="#sigdelset" class="headerlink" title="sigdelset"></a>sigdelset</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigdelset</span> <span class="params">(<span class="type">sigset_t</span>* sigset, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">// 功能:删除信号,即将信号集中与指定信号编号对应的信号位清0</span></span><br><span class="line"><span class="comment">// 参数:sigset 信号集</span></span><br><span class="line"><span class="comment">// 		signum:信号编号</span></span><br><span class="line"><span class="comment">// 		返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sigismember"><a href="#sigismember" class="headerlink" title="sigismember"></a>sigismember</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigismember</span> <span class="params">(<span class="type">const</span> <span class="type">sigset_t</span>* sigset, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">// 功能:判断信号集中是否有某信号,即检查信号集中与指定信号编号对应的信号位是否为1</span></span><br><span class="line"><span class="comment">// 参数:sigset 信号集</span></span><br><span class="line"><span class="comment">// 		signum:信号编号</span></span><br><span class="line"><span class="comment">// 		返回值:有则返回1,没有返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="信号屏蔽"><a href="#信号屏蔽" class="headerlink" title="信号屏蔽"></a>信号屏蔽</h1><ul>
+<li><p>当信号产生时,系统内核会在其所维护的进程表中,为特定的进程设置一个<br>  与该信号相对应的标志位,这个过程就叫做递送(delivery)</p>
+</li>
+<li><p>信号从产生到完成递送之间存在一定的时间间隔,处于这段时间间隔中的信号状态称为未决(pending)</p>
+</li>
+<li><p>每个进程都有一个信号掩码(signal mask),它实际上是一个信号集,位于该<br>  信号集中的信号一旦产生,并不会被递送给相应的进程,而是会被阻塞(block)在未决状态</p>
+</li>
+<li><p>在信号处理函数执行期间,这个正在被处理的信号总是处于信号掩码中,如<br>果又有该信号产生,则会被阻塞,直到上一个针对该信号的处理过程结束以后才会被递送</p>
+</li>
+<li><p>当进程正在执行类似更新数据库这样的敏感任务时,可能不希望被某些信号中断。这时可以通过信号掩码暂时屏蔽而非忽略掉这些信号,使其一旦产生即被阻塞于未决状态,待特定任务完成后,再回过头来处理这些信号</p>
+</li>
+</ul>
+<h2 id="sigprocmask"><a href="#sigprocmask" class="headerlink" title="sigprocmask"></a>sigprocmask</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sigprocmask</span> <span class="params">(<span class="type">int</span> how, <span class="type">const</span> <span class="type">sigset_t</span>* sigset,<span class="type">sigset_t</span>*  oldset)</span>;</span><br><span class="line"><span class="comment">// 功能:设置调用进程的信号掩码</span></span><br><span class="line"><span class="comment">// 参数:how:修改信号掩码的方式,可取以下值</span></span><br><span class="line"><span class="comment">// 			SIG_BLOCK - 将sigset中的信号加入当前信号掩码</span></span><br><span class="line"><span class="comment">// 			SIG UNBLOCK - 从当前信号掩码中删除sigset中的信号</span></span><br><span class="line"><span class="comment">// 			SIG_SETMASK - 把sigset设置成当前信号掩码</span></span><br><span class="line"><span class="comment">// 		sigset:信号集,取NULL则忽略此参数</span></span><br><span class="line"><span class="comment">// 		oldset:输出原信号掩码,取NULL则忽略此参数</span></span><br><span class="line"><span class="comment">// 	返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sigpending"><a href="#sigpending" class="headerlink" title="sigpending"></a>sigpending</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigpending</span> <span class="params">(<span class="type">sigset_t</span>* sigset)</span>;</span><br><span class="line"><span class="comment">// 	功能:获取调用进程的未决信号集（正在屏蔽的一些信号）</span></span><br><span class="line"><span class="comment">// 	参数:sigset:输出未决信号集</span></span><br><span class="line"><span class="comment">// 	返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="可靠信号和不可靠信号的屏蔽"><a href="#可靠信号和不可靠信号的屏蔽" class="headerlink" title="可靠信号和不可靠信号的屏蔽"></a>可靠信号和不可靠信号的屏蔽</h1><h3 id="对不可靠信号的屏蔽"><a href="#对不可靠信号的屏蔽" class="headerlink" title="对不可靠信号的屏蔽"></a>对不可靠信号的屏蔽</h3><ul>
+<li>对于不可靠信号,通过sigprocmask函数设置信号掩码以后,每种被屏蔽信号中只有第一个会被阻塞,并在解除屏蔽后被递送,其余的则全部丢失</li>
+</ul>
+<p><img src="/./images/%E4%BF%A1%E5%8F%B7%E9%9B%86%E5%AF%B9%E4%B8%8D%E5%8F%AF%E9%9D%A0%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%B1%8F%E8%94%BD.png" alt="信号集对不可靠信号的屏蔽"></p>
+<h3 id="对可靠信号的屏蔽"><a href="#对可靠信号的屏蔽" class="headerlink" title="对可靠信号的屏蔽"></a>对可靠信号的屏蔽</h3><ul>
+<li>对于可靠信号,通过sigprocmask函数设置信号掩码以后,每种被屏蔽信号<br>中的每个信号都会被阻塞,并按先后顺序排队,一旦解除屏蔽,这些信号会被<br>依次递送</li>
+</ul>
+<p><img src="/./images/%E4%BF%A1%E5%8F%B7%E9%9B%86%E5%AF%B9%E5%8F%AF%E9%9D%A0%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%B1%8F%E8%94%BD.png" alt="信号集对可靠信号的屏蔽"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day16/" data-id="cmaqqzjq30009j0vf1tpj2i5a" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day15" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day15/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.972Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="信号处理的继承与恢复"><a href="#信号处理的继承与恢复" class="headerlink" title="信号处理的继承与恢复"></a>信号处理的继承与恢复</h1><ul>
+<li><p>fork函数创建的子进程会继承父进程的信号处理方式。<br>父进程中对某个信号进行捕获,则子进程中对该信号依然捕获<br>父进程中对某个信号进行忽略,则子进程中对该信号依然忽略</p>
+</li>
+<li><p>exec家族函数创建的新进程对信号的处理方式和原进程稍有不同</p>
+<p>原进程中被忽略的信号,在新进程中依然被忽略<br>原进程中被捕获的信号,在新进程中被默认处理</p>
+</li>
+</ul>
+<h1 id="发送信号"><a href="#发送信号" class="headerlink" title="发送信号"></a>发送信号</h1><ul>
+<li><p>用专门的系统命令发送信号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> [-信号] PID</span><br><span class="line"><span class="string">&#x27;若不指明具体信号,缺省发送SIGTERM(15)信号</span></span><br><span class="line"><span class="string">&#x27;</span>若要指明具体信号,可以使用信号编号,也可以使用信号名称,而且信号名称中的“SIG”</span><br><span class="line"><span class="string">&#x27;前缀可以省略不写。例如</span></span><br><span class="line"><span class="string">kill -9 1234 &#x27;</span>可以用信号编号</span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -SIGKILL 1234 5678 <span class="string">&#x27; 可以用信号名称</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">kill -KILL -1  &#x27;</span>把信号开头SIG省略掉也行</span><br><span class="line"><span class="string">&#x27; -1 是给所有进程发送信号</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span>超级用户可以发给任何进程,而普通用户只能发给自己的进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">kill</span><span class="params">(<span class="type">pid_t</span> pid, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">// 功能:向指定的进程发送信号</span></span><br><span class="line"><span class="comment">// 参数:pid 可以如下取值</span></span><br><span class="line"><span class="comment">// 		-1 - 向系统中的所有进程发送信号</span></span><br><span class="line"><span class="comment">// 		&gt;0 - 向特定进程(由pid标识)发送信号</span></span><br><span class="line"><span class="comment">// 		signum:信号编号,取0可用于检查pid进程是否存在,如不存在kill函数会返回-1,</span></span><br><span class="line"><span class="comment">// 		且errno为ESRCH</span></span><br><span class="line"><span class="comment">// 	返回值:成功(至少发出去一个信号)返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="用kill来判断进程是否存在"><a href="#用kill来判断进程是否存在" class="headerlink" title="用kill来判断进程是否存在"></a>用kill来判断进程是否存在</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isexit</span><span class="params">(<span class="type">pid_t</span> pid)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(kill(pid,<span class="number">0</span>) == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(errno == ESRCH) <span class="comment">// kill失败是因为进程Pid 不存在</span></span><br><span class="line">        &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            perror(<span class="string">&quot;kill&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// kill 成功，表示进程pid存在</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子进程死了，不代表它不存在，在收完尸以后才会不存在</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="raise"><a href="#raise" class="headerlink" title="raise"></a>raise</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">raise</span><span class="params">(<span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">//	功能：向调用进程自己发送信号</span></span><br><span class="line"><span class="comment">// 	参数：signum 信号编号</span></span><br><span class="line"><span class="comment">//  返回值：成功返回0，失败返回非0</span></span><br><span class="line"><span class="comment">//  kill(getpid(),signum) 等价于该函数</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="暂停，睡眠与闹钟"><a href="#暂停，睡眠与闹钟" class="headerlink" title="暂停，睡眠与闹钟"></a>暂停，睡眠与闹钟</h1><h2 id="pause"><a href="#pause" class="headerlink" title="pause"></a>pause</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">pause</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="comment">// 功能:无限睡眠</span></span><br><span class="line"><span class="comment">// 返回值:成功阻塞,失败返回-1</span></span><br><span class="line"><span class="comment">// 该函数使调用进(线)程进入无时限的睡眠状态,直到有信号终止了该进程或被其捕获。如果有信号被调用进程捕获,在信号处理函数返回以后,pause函数才会返回,其返回值-1,同时置errno为EINTR,表示阻塞的系统调用被信号打断。pause函数要么不返回,要么返回-1,永远不会返回0。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">sleep</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> seconds)</span>;</span><br><span class="line"><span class="comment">// 功能:有限睡眠</span></span><br><span class="line"><span class="comment">// 参数:seconds 以秒为单位的睡眠时限</span></span><br><span class="line"><span class="comment">// 返回值:返回0或剩余秒数。</span></span><br><span class="line"><span class="comment">// 该函数使调用进程睡眠seconds秒,除非有信号终止了调用进程或被其捕获</span></span><br><span class="line"><span class="comment">// 如果有信号被调用进程捕获,在信号处理函数返回以后,sleep函数才会返回,且返回值</span></span><br><span class="line"><span class="comment">// 为剩余的秒数,否则该函数将返回0,表示睡眠充足</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="usleep"><a href="#usleep" class="headerlink" title="usleep"></a>usleep</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">usleep</span> <span class="params">(<span class="type">useconds_t</span> usec)</span>;</span><br><span class="line"><span class="comment">// 	功能:更精确的有限睡眠</span></span><br><span class="line"><span class="comment">// 	参数:usec 以微秒(1微秒=10-6秒)为单位的睡眠时限</span></span><br><span class="line"><span class="comment">// 		返回值:成功返回0,失败返回-1</span></span><br><span class="line"><span class="comment">// 如果有信号被调用进程捕获,在信号处理函数返回以后,usleep函数才会返回,且返回值为-1,同时置errno为EINTR,表示阻塞的系统调用被信号中断</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="alarm"><a href="#alarm" class="headerlink" title="alarm"></a>alarm</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">alarm</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> seconds)</span>;</span><br><span class="line"><span class="comment">// 	功能:设置闹钟</span></span><br><span class="line"><span class="comment">// 	参数:seconds 以秒为单位的闹钟时间。</span></span><br><span class="line"><span class="comment">// 	返回值:返回0或先前所设闹钟的剩余秒数。</span></span><br><span class="line"><span class="comment">// alarm函数使系统内核在该函数被调用以后seconds秒的时候,向调用进程发送SIGALRM(14)信号</span></span><br><span class="line"><span class="comment">// 若在调用该函数前已设过闹钟且尚未到期,则该函数会重设闹钟,并返回先前所设闹钟的剩余秒数,否则返回0</span></span><br><span class="line"><span class="comment">// 		若seconds取0,则表示取消先前设过且尚未到期的闹钟</span></span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day15/" data-id="cmaqqzjq20005j0vffkyb8dlo" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day14" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day14/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.970Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h1><h2 id="什么是信号"><a href="#什么是信号" class="headerlink" title="什么是信号"></a>什么是信号</h2><ul>
+<li>信号在最早的UNIX系统中即被引入,已有30多年的历史,但只有很小的变化。</li>
+<li>信号是提供异步事件处理机制的软件中断。</li>
+<li>这些异步事件可能来自硬件设备,如用户同时按下了Ctrl键和C键,也可能来自系统内核,如试图访问尚未映射的虚拟内存,又或者来自用户进程,如尝试计算整数除以0的表达式</li>
+<li>进程之间可以相互发送信号,这使信号成为一种进程间通信(Inter-Process<br>Communication,IPC)的基本手段</li>
+<li>信号的异步特性不仅表现为它的产生是异步的,对它的处理同样也是异步的。程序的设计者不可能也不需要精确地预见什么时候触发什么信号,也同样无法预见该信号究竟在什么时候会被处理。一切都在内核的操控下,异步地运行。信号是在软件层面对中断机制的一种模拟</li>
+</ul>
+<h2 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h2><h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><p>​	两个程序互不干预的执行，但是有可能会发生冲突。</p>
+<p>​	信号中断软件时，是异步事件处理机制，也就是这个终止是不可预知的。比如写个程序，并不能预知运行时会来多少个(ctrl + c)。</p>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>​	两个程序有协调性的执行。比如有两个进程，进程1和2，进程1执行到某个时间，需要进程2执行到某个位置，才能继续执行，这样互相干预的执行，叫做同步。</p>
+<h2 id="信号的名称与编号"><a href="#信号的名称与编号" class="headerlink" title="信号的名称与编号"></a>信号的名称与编号</h2><ul>
+<li>信号是很短的消息,本质就是一个整数,用以区分代表不同事件的不同信号</li>
+<li>为了便于记忆,在**&#x2F;usr&#x2F;include&#x2F;bits&#x2F;signum.h**头文件中用一组名字前缀为SIG的宏来标识信号,即为信号的名字。</li>
+<li>通过kill-1命令可以查看信号</li>
+<li>一共有62个信号,其中前31个信号为不可靠的非实时信号,后31个为可靠的实时信号</li>
+</ul>
+<h3 id="常用信号是前31个"><a href="#常用信号是前31个" class="headerlink" title="常用信号是前31个"></a>常用信号是前31个</h3><p><img src="/./images/%E5%B8%B8%E7%94%A8%E4%BF%A1%E5%8F%B71.png" alt="常用信号1"></p>
+<p><img src="/./images/%E5%B8%B8%E7%94%A8%E4%BF%A1%E5%8F%B72.png" alt="常用信号2"></p>
+<p><img src="/./images/%E5%B8%B8%E7%94%A8%E4%BF%A1%E5%8F%B73.png" alt="常用信号3"></p>
+<h2 id="信号的处理"><a href="#信号的处理" class="headerlink" title="信号的处理"></a>信号的处理</h2><ul>
+<li>忽略:什么也不做,SIGKILL(9)和SIGSTOP(19)不能被忽略</li>
+<li>默认:在没有人为设置的情况,系统缺省的处理行为。（用来恢复默认设置）</li>
+<li>捕获:接收到信号的进程会暂停执行,转而执行一段事先编写好的处理代码,执行完毕后再从暂停执行的地方继续运行。</li>
+</ul>
+<h3 id="signal"><a href="#signal" class="headerlink" title="signal"></a>signal</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*<span class="type">sighandler_t</span>)</span><span class="params">(<span class="type">int</span>)</span>;</span><br><span class="line"><span class="comment">// 给函数传的那个int是信号的编号</span></span><br><span class="line"><span class="comment">// 例如这个信号处理函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sigfum</span><span class="params">(<span class="type">int</span> signum)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d进程：捕获到%d号信号\n&quot;</span>,getpid(),signum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">sighandler_t</span> <span class="title function_">signal</span><span class="params">(<span class="type">int</span> signum, <span class="type">sighandler_t</span> handler)</span>;</span><br><span class="line"><span class="comment">// 功能:设置调用进程针对特定信号的处理方式</span></span><br><span class="line"><span class="comment">// 参数:signum 信号编号</span></span><br><span class="line">	<span class="comment">// handler 信号的处理方式,可以如下取值</span></span><br><span class="line">	<span class="comment">// SIG_IGN      - 忽略</span></span><br><span class="line">	<span class="comment">// SIG_DFL      - 默认</span></span><br><span class="line">	<span class="comment">// 信号处理的函数指针  - 捕获</span></span><br><span class="line"><span class="comment">// 返回值:成功返回原信号处理方式,如果之前未处理过则返回NULL,失败返回SIG_ERR.（注意指的是相同的信号）</span></span><br></pre></td></tr></table></figure>
+
+<p>​	signal所谓的捕获就是把信号处理函数sigfum的地址交给内核，内核会在后续调用sigfum函数，与注册退出处理函数原理相似。</p>
+<h2 id="信号处理流程"><a href="#信号处理流程" class="headerlink" title="信号处理流程"></a>信号处理流程</h2><p><img src="/./images/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="信号处理流程"></p>
+<h1 id="太平间信号"><a href="#太平间信号" class="headerlink" title="太平间信号"></a>太平间信号</h1><ul>
+<li><p>如前所述,无论一个进程是正常终止还是异常终止,都会通过系统内核向其<br>父进程发送SIGCHLD(17)信号。父进程完全可以在针对SIGCHLD(17)信号的信号处理函数中,异步地回收子进程的僵尸,简洁而又高效</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">sigchld</span> <span class="params">(<span class="type">int</span> signum)</span> &#123;</span><br><span class="line">    <span class="type">pid_t</span> pid = wait (<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (pid == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror (<span class="string">&quot;wait&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span> (EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d子进程终止\n&quot;</span>,pid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="信号的丢弃"><a href="#信号的丢弃" class="headerlink" title="信号的丢弃"></a>信号的丢弃</h2><ul>
+<li><p>在信号处理函数执行期间,如果有相同的多个信号再次到来,只保留一个,其余统统丢弃</p>
+<p>可以通过非阻塞处理函数和循环来处理目前死掉的进程</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">sigchild</span><span class="params">(<span class="type">int</span> signum)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) <span class="comment">// 在一次信号处理函数中，尽可能多的收尸</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d进程:捕获到%d号信号\n&quot;</span>,</span><br><span class="line">               getpid(),signum);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        其他操作</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="type">pid_t</span> pid = waitpid(<span class="number">-1</span>,<span class="literal">NULL</span>,WNOHANG);</span><br><span class="line">        <span class="keyword">if</span>(pid == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">			<span class="keyword">if</span>(errno == ECHILD)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d进程:没有子进程\n&quot;</span>,getpid());</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">				perror(<span class="string">&quot;wait&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;子进程仍在运行&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d进程成功回收&quot;</span>,pid);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>不同的信号不会丢</p>
+</li>
+</ul>
+<h1 id="转储文件"><a href="#转储文件" class="headerlink" title="转储文件"></a>转储文件</h1><ul>
+<li>发生段错误等并显示（核心已转储）这种请况会将错误转储到一个文件中去，通过gdb corefile xxx , 可以查看详细错误</li>
+<li>若是文件没有生成，原因是系统限制转储文件的大小为0</li>
+</ul>
+<h3 id="系统限制"><a href="#系统限制" class="headerlink" title="系统限制"></a>系统限制</h3><ul>
+<li><p>系统限制的查看</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ulimit</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改系统限制</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改转储文件大小</span></span><br><span class="line"><span class="built_in">ulimit</span> -c 1024</span><br><span class="line"><span class="comment"># 同理若是要修改其他限制，就通过查看命令查看对应的指令就行</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day14/" data-id="cmaqqzjq20004j0vf6ec951mn" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day13/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.969Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="创建新进程"><a href="#创建新进程" class="headerlink" title="创建新进程"></a>创建新进程</h1><ul>
+<li><p>与fork不同,exec函数不是创建调用进程的子进程,而是创建一个新的进程<br>取代调用进程自身。新进程会用自己的全部地址空间。覆盖调用进程的地址空间,但进程的PID保持不变</p>
+<p><img src="/./images/fork%E4%B8%8Eexec.png" alt="fork与exec"></p>
+</li>
+<li><p>exec不是一个函数而是一堆函数(共6个),一般称为exec函数族。它们的功<br>能是一样的,用法也很相近,只是参数的形式和数量略有不同</p>
+</li>
+</ul>
+<p>​			</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="comment">// 创建新进程来取代旧进程</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">execl</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* path, <span class="type">const</span> <span class="type">char</span>* arg, ... )</span>;</span><br><span class="line"><span class="comment">// 第一个参数传递可执行程序的路径</span></span><br><span class="line"><span class="comment">// 如 “/home/tarean/a.out”</span></span><br><span class="line"><span class="comment">// 第二个参数 传递a.out 需要的参数 ，第一个参数为可执行程序的名字</span></span><br><span class="line"><span class="comment">// 输入完所有参数记得，在末尾加上NULL</span></span><br><span class="line"><span class="comment">// execl(&quot;/home/tarena/a.out&quot;,&quot;a.out&quot;,&quot;hello.c&quot;,&quot;123&quot;,NULL);</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">execlp</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* file, <span class="type">const</span> <span class="type">char</span>* arg, ... )</span>;</span><br><span class="line"><span class="comment">// execlp 中的 p代表PATH环境变量</span></span><br><span class="line"><span class="comment">// 即给个文件名，execlp会在PATH中寻找，找不到则报错</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">execle</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* path, <span class="type">const</span> <span class="type">char</span>* arg, ... ,<span class="type">char</span>* <span class="type">const</span> envp[])</span>;</span><br><span class="line"><span class="comment">// envp可以为变身之后的可执行程序，指定环境变量内容</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">execv</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* path, <span class="type">char</span>* <span class="type">const</span> argv[])</span>;</span><br><span class="line"><span class="comment">// v版本与l的区别 v传数组 l一个一个传</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">execvp</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* file, <span class="type">char</span>* <span class="type">const</span> argv[])</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">execve</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* path, <span class="type">char</span>* <span class="type">const</span> argv[],<span class="type">char</span>* <span class="type">const</span> envp[])</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其实6个exec函数中只有execve是真正的系统调用,其它5个函数不过是对<br>  execve函数的简单包装</li>
+</ul>
+<p>  <img src="/./images/6%E4%B8%AAexec%E5%87%BD%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8.png" alt="6个exec函数的本质"></p>
+<ul>
+<li><p>调用exec函数不仅改变调用进程的地址空间和进程映像,调用进程的一些属<br>性也发生了变化</p>
+<blockquote>
+<p>任何处于阻塞状态的信号都会丢失<br>被设置为捕获的信号会还原为默认操作<br>有关线程属性的设置会还原为缺省值<br>有关进程的统计信息会复位<br>与进程内存相关的任何数据都会丢失,包括内存映射文件<br>标准库在用户空间维护的一切数据结构(如通过atexit或on_exit函数注册的退出处理函数)<br>都会丢失</p>
+</blockquote>
+</li>
+<li><p>但也有些属性会被新进程继承下来,比如PID、PPID、实际用户ID和实际组ID、优先级,以及<strong>文件描述符</strong>等</p>
+</li>
+<li><p>注意如果进程创建成功,rexec函数是不会返回的,因为成功的exec调用会以<br>跳转到新进程的入口地址作为结束,而刚刚运行的代码是不会存在于新进程的地址空间中的。但如果进程创建失败,exec函数会返回-1</p>
+</li>
+</ul>
+<h2 id="fork-exec模式"><a href="#fork-exec模式" class="headerlink" title="fork + exec模式"></a>fork + exec模式</h2><ul>
+<li>调用exec函数固然可以创建出新的进程,但是新进程会取代原来的进程。如<br>果既想创建新的进程,同时又希望原来的进程继续存在,则可以考虑<br>fork+exec模式,即在fork产生的子进程里调用exec函数,新进程取代了子进<br>程,但父进程依然存在</li>
+</ul>
+<p>​	<img src="/./images/fork+exec.png" alt="fork+exec"></p>
+<h1 id="system"><a href="#system" class="headerlink" title="system"></a>system</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">system</span> <span class="params">(<span class="type">const</span> <span class="type">char</span>* command)</span>;</span><br><span class="line"><span class="comment">// 功能:执行shell命令</span></span><br><span class="line"><span class="comment">// 参数:command shell命令行字符串</span></span><br><span class="line"><span class="comment">// 返回值:成功返回command进程的终止状态,失败返回-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// system函数执行command参数所表示的命令行,并返回命令进程的终止状态</span></span><br><span class="line"><span class="comment">// 若command参数取NULL,返回非0表示Shell可用,返回0表示Shell不可用</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在system函数内部调用了vfork、exec和waitpid等函数</p>
+<blockquote>
+<p>如果调用vfork或waitpid函数出错,则返回-1<br>如果调用exec函数出错,则在子进程中执行exit(127)<br>如果都成功,则返回command进程的终止状态(由waitpid的status参数获得)</p>
+</blockquote>
+</li>
+<li><p>使用system函数而不用vfork+exec的好处是,system函数针对各种错误和<br>信号都做了必要的处理,而且system是标准库函数,可跨平台使用</p>
+</li>
+</ul>
+<h2 id="fork-vs-vfork"><a href="#fork-vs-vfork" class="headerlink" title="fork vs vfork"></a>fork vs vfork</h2><p>父进程通过vfork创建子进程后，没有数据复制的过程，子进程与父进程共用一份数据，子进程可以修改父进程数据</p>
+<p>由于vfork不用再复制一份父进程的数据，因此一般使用vfork+exec的组合，省去了复制。exec以后，子进程便不会再修改父进程数据</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day13/" data-id="cmaqqzjq10003j0vff2443eg8" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -123,6 +920,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -153,7 +955,23 @@
       <ul>
         
           <li>
-            <a href="/2025/05/16/hello-world/">Hello World</a>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
           </li>
         
       </ul>

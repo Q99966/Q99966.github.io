@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="消息队列 消息队列是一个由系统内核负责存储和管理,并通过消息队列标识符引用的消息链表队列   可以通过msgget函数创建一个新的消息队列或获取一个已有的消息队列。  可以通过msgsnd函数向消息队列的尾端追加消息,所追加的消息除了包含消息数据以外,还包含消息类型和数据长度(以字节为单位)。  可以通过msgrcv函数从消息队列中提取消息,但不一定非按先进先出的顺序提取,也可以按消息的类型提取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day19/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="消息队列 消息队列是一个由系统内核负责存储和管理,并通过消息队列标识符引用的消息链表队列   可以通过msgget函数创建一个新的消息队列或获取一个已有的消息队列。  可以通过msgsnd函数向消息队列的尾端追加消息,所追加的消息除了包含消息数据以外,还包含消息类型和数据长度(以字节为单位)。  可以通过msgrcv函数从消息队列中提取消息,但不一定非按先进先出的顺序提取,也可以按消息的类型提取">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.png">
+<meta property="og:image" content="http://example.com/images/msgsnd.png">
+<meta property="og:image" content="http://example.com/images/msgrcv.png">
+<meta property="og:image" content="http://example.com/images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.978Z">
+<meta property="article:modified_time" content="2025-05-11T04:40:19.475Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day19" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day19/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.978Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ul>
+<li><p>消息队列是一个由系统内核负责存储和管理,并通过消息队列标识符引用的消息链表队列</p>
+<p><img src="/./images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97.png" alt="消息队列"></p>
+</li>
+<li><p>可以通过msgget函数创建一个新的消息队列或获取一个已有的消息队列。</p>
+</li>
+<li><p>可以通过msgsnd函数向消息队列的尾端追加消息,所追加的消息除了包含<br>消息数据以外,还包含消息类型和数据长度(以字节为单位)。</p>
+</li>
+<li><p>可以通过msgrcv函数从消息队列中提取消息,但不一定非按先进先出的顺序提取,也可以按消息的类型提取</p>
+</li>
+</ul>
+<h3 id="相较于其它几种IPC机制-消息队列具有明显的优势"><a href="#相较于其它几种IPC机制-消息队列具有明显的优势" class="headerlink" title="相较于其它几种IPC机制,消息队列具有明显的优势"></a>相较于其它几种IPC机制,消息队列具有明显的优势</h3><ul>
+<li>流量控制:如果系统资源(内存)短缺或者接收消息的进程来不及处理更多的消息,则发送消息的进程会在系统内核的控制下进入睡眠状态,待条件满足后再被内核唤醒,继续之前的发送过程</li>
+<li>面向记录:每个消息都是完整的信息单元,发送端是一个消息一个消息地发,接收端也是。一个消息一个消息地收,而不象管道那样收发两端所面对的都是字节流,彼此间没有结构上的一致性</li>
+</ul>
+<h3 id="系统限制"><a href="#系统限制" class="headerlink" title="系统限制"></a>系统限制</h3><ul>
+<li>可发送消息字节数上限:8192</li>
+<li>单条队列消息总字节数上限:16384(16K)</li>
+<li>全系统总消息队列数上限:16</li>
+<li>全系统消息总字节数上限:262144(256K&#x3D;16x16K)</li>
+</ul>
+<h3 id="msgget"><a href="#msgget" class="headerlink" title="msgget"></a>msgget</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:创建新的或获取已有的消息队列</span></span><br><span class="line"><span class="comment">// 参数:key:键。</span></span><br><span class="line"><span class="comment">// 		msgflg:创建标志,可取以下值:</span></span><br><span class="line"><span class="comment">// 		0 	- 获取,不存在即失败。</span></span><br><span class="line"><span class="comment">// 		IPC_CREAT -创建,不存在即创建,已存在即获取。</span></span><br><span class="line"><span class="comment">//		IPC_EXCL - 排它,不存在即创建,已存在即失败。</span></span><br><span class="line"><span class="comment">// 		通过位或组合读写权限。</span></span><br><span class="line"><span class="comment">// 返回值:成功返回消息队列的ID,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="msgsnd"><a href="#msgsnd" class="headerlink" title="msgsnd"></a>msgsnd</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgsnd</span><span class="params">(<span class="type">int</span> msgid, <span class="type">void</span> <span class="type">const</span>* msgp, <span class="type">size_t</span> msgsz, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:发送消息</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID。</span></span><br><span class="line"><span class="comment">// 		msgp:指向一个包含消息类型和消息数据的内存块。该内存块的前4个字节必须是一个大于0的整数,代表消息类型,其后紧跟消息数据</span></span><br><span class="line"><span class="comment">// 		msgsz:期望发详消息数据(不含消息类型)的字节数</span></span><br><span class="line"><span class="comment">// 		msgflg:发送标志,一般取0即可</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> type;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">128</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意msgsnd函数的msgp参数所指向的内存块中包含消息类型,其值必须大<br>于0,但该函数的msgsz参数所表示的期望发送字节数中却不包含消息类型所占的4个字节消息</li>
+</ul>
+<p>​	<img src="/./images/msgsnd.png" alt="msgsnd"></p>
+<ul>
+<li><p>对于消息类型在32位系统上是4字节，64位系统上是8字节</p>
+</li>
+<li><p>消息队列缺省为阻塞模式,如果调用msgsnd函数发送消息时,超过了系统内<br>核有关消息的上限,该函数会阻塞,直到系统内核允许加入新消息为止。比如有消息因被接收而离开消息队列</p>
+</li>
+<li><p>如果msgflg参数中包含IPC_NOWAIT,则msgsnd函数在系统内核中的消息<br>已达上限的情况下不会阻塞,而是返回-1,同时置errno为EAGAIN。</p>
+</li>
+</ul>
+<h3 id="msgrcv"><a href="#msgrcv" class="headerlink" title="msgrcv"></a>msgrcv</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgrcv</span><span class="params">(<span class="type">int</span> msgid, <span class="type">void</span>* msgp, <span class="type">size_t</span> msgsz, <span class="type">long</span> msgtyp, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"><span class="comment">// 功能:接收消息</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID。</span></span><br><span class="line"><span class="comment">// 		msgp:指向一块包含消息类型(4字节)和消息数据的内存</span></span><br><span class="line"><span class="comment">// 		msgsz: 期望接收消息数据(不含消息类型)的字节数</span></span><br><span class="line"><span class="comment">// 		msgflg:接收标志,一般取0即可	</span></span><br><span class="line"><span class="comment">// 	参数:msgtyp:消息类型,可取以下值</span></span><br><span class="line"><span class="comment">//        0 -提取消息队列的第一条消息</span></span><br><span class="line"><span class="comment">//        0 -若msgflg参数不包含MSG_EXCEPT位,则提取消息队列的第一条类型为msgtyp的消息;若msgflg参数包含MSG_EXCEPT位,则提取消息队列的第一条类型不为msgtyp的消息</span></span><br><span class="line"><span class="comment">//        0 -提取消息队列中类型小于等于msgtyp的绝对值的消息,类型越小的消息越被优先提取</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意msgrcv函数的msgp参数所指向的内存块中包含消息类型,其值由该函<br>数输出,但该函数的msgsz参数所表示的期望接收字节数以及该函数所返回的实际接收字节数中都不包含消息类型所占的4个字节</p>
+<p><img src="/./images/msgrcv.png" alt="msgrcv"></p>
+</li>
+<li><p>若存在与msgtyp参数匹配的消息,但其数据长度大于msgsz参数,且msgflg<br>参数包含MSG_NOERROR位,则只截取该消息数据的前msgsz字节返回,剩<br>余部分直接丢弃;但如果msgflg参数不包含MSG_NOERROR位,则不处理该<br>消息,直接返回-1,并置errno为E2BIG</p>
+</li>
+<li><p>若消息队列中有可接收消息,则msgrcv函数会将消息移出消息队列,并立即返回所接收到的消息数据的字节数,表示接收成功,否则此函数会阻塞,直到<br>消息队列中有可接收消息为止。若msgflg参数中包含IPC_NOWAIT位,则<br>msgrcv函数在消息队列中没有可接收消息的情况下不会阻塞,而是返回-1,同时置errno为ENOMSG。</p>
+</li>
+</ul>
+<h3 id="msgctl"><a href="#msgctl" class="headerlink" title="msgctl"></a>msgctl</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgctl</span><span class="params">(<span class="type">int</span> msgid, IPC_RMID, <span class="literal">NULL</span>)</span>;</span><br><span class="line"><span class="comment">// 功能:销毁消息队列</span></span><br><span class="line"><span class="comment">// 参数:msgid:消息队列的ID</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于消息队列实现进程间通信的编程模型"><a href="#基于消息队列实现进程间通信的编程模型" class="headerlink" title="基于消息队列实现进程间通信的编程模型"></a>基于消息队列实现进程间通信的编程模型</h3><p><img src="/./images/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt="消息队列编程模型"></p>
+<h2 id="ipc命令"><a href="#ipc命令" class="headerlink" title="ipc命令"></a>ipc命令</h2><h3 id="查看系统中的IPC对象"><a href="#查看系统中的IPC对象" class="headerlink" title="查看系统中的IPC对象"></a>查看系统中的IPC对象</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ipcs -m <span class="comment"># (memory,共享内存)</span></span><br><span class="line">ipcs -q <span class="comment"># (message queue,消息队列)</span></span><br><span class="line">ipcs -s <span class="comment"># (semphore,信号量集)</span></span><br><span class="line">ipcs -a <span class="comment"># (all,所有的)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除系统中的IPC对象"><a href="#删除系统中的IPC对象" class="headerlink" title="删除系统中的IPC对象"></a>删除系统中的IPC对象</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ipcrm -m <span class="comment"># 删除共享内存</span></span><br><span class="line">ipcrm -q <span class="comment"># 删除消息对列</span></span><br><span class="line">ipcrm -s <span class="comment"># 删除信号量集</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day19/" data-id="cmaqqzjq30008j0vfhkllhix1" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

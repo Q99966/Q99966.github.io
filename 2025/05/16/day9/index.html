@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="为什么宏之间可以用 “|” 而不用 “||”？​	因为，宏的本质是一个数。 文件锁的内核结构 访问测试access 修改文件大小truncate 保存文件后，会自动给文件尾添加\n 文件的元数据stat stat结构体  stat结构的st_mode成员表示文件的类型和权限,该成员在stat结构中被声明为mode_t类型,其原始类型在32位系统中被定义为unsigned int,即32位无符号整数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为什么宏之间可以用 “|” 而不用 “||”？​	因为，宏的本质是一个数。 文件锁的内核结构 访问测试access 修改文件大小truncate 保存文件后，会自动给文件尾添加\n 文件的元数据stat stat结构体  stat结构的st_mode成员表示文件的类型和权限,该成员在stat结构中被声明为mode_t类型,其原始类型在32位系统中被定义为unsigned int,即32位无符号整数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E9%94%81%E7%9A%84%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://example.com/images/access.png">
+<meta property="og:image" content="http://example.com/images/truncate.png">
+<meta property="og:image" content="http://example.com/images/stat.png">
+<meta property="og:image" content="http://example.com/images/stat%E7%BB%93%E6%9E%84%E4%BD%93.png">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B15-B12.png">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B8-B6.png">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B5-B3.png">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B2-B0.png">
+<meta property="og:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B11-B9.png">
+<meta property="og:image" content="http://example.com/images/%E7%94%A8%E6%88%B7ID%E4%BD%8D%E5%92%8C%E7%B2%98%E6%BB%9E%E4%BD%8D%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.962Z">
+<meta property="article:modified_time" content="2025-03-04T09:09:42.347Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E6%96%87%E4%BB%B6%E9%94%81%E7%9A%84%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day9/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.962Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="为什么宏之间可以用-“-”-而不用-“-”？"><a href="#为什么宏之间可以用-“-”-而不用-“-”？" class="headerlink" title="为什么宏之间可以用 “|” 而不用 “||”？"></a>为什么宏之间可以用 “|” 而不用 “||”？</h1><p>​	因为，宏的本质是一个数。</p>
+<h1 id="文件锁的内核结构"><a href="#文件锁的内核结构" class="headerlink" title="文件锁的内核结构"></a>文件锁的内核结构</h1><p><img src="/./images/%E6%96%87%E4%BB%B6%E9%94%81%E7%9A%84%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84.png" alt="文件锁的内核结构"></p>
+<h1 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h1><h2 id="access"><a href="#access" class="headerlink" title="access"></a>access</h2><p><img src="/./images/access.png" alt="access"></p>
+<h1 id="修改文件大小"><a href="#修改文件大小" class="headerlink" title="修改文件大小"></a>修改文件大小</h1><h2 id="truncate"><a href="#truncate" class="headerlink" title="truncate"></a>truncate</h2><p><img src="/./images/truncate.png" alt="truncate"></p>
+<p>保存文件后，会自动给文件尾添加\n</p>
+<h1 id="文件的元数据"><a href="#文件的元数据" class="headerlink" title="文件的元数据"></a>文件的元数据</h1><h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><p><img src="/./images/stat.png" alt="stat"></p>
+<h3 id="stat结构体"><a href="#stat结构体" class="headerlink" title="stat结构体"></a>stat结构体</h3><p><img src="/./images/stat%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="stat结构体"></p>
+<ul>
+<li><p>stat结构的st_mode成员表示文件的类型和权限,该成员在stat结构中被声<br>明为mode_t类型,其原始类型在32位系统中被定义为unsigned int,即32位<br>无符号整数,但到目前为止,只有其中的低16位有意义</p>
+</li>
+<li><p>用16位二进制数(B15 … B0)表示的文件类型和权限,从高到低可被分为五组</p>
+<blockquote>
+<p>B15-B12:文件类型<br>B11-B9:设置用户ID,设置组ID,粘滞<br>B8-B6:拥有者用户的读、写和执行权限<br>B5-B3:拥有者组的读、写和执行权限<br>B2-BO:其它用户的读、写和执行权限</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="文件元数据结构"><a href="#文件元数据结构" class="headerlink" title="文件元数据结构"></a>文件元数据结构</h2><h3 id="B15-B12"><a href="#B15-B12" class="headerlink" title="B15-B12"></a>B15-B12</h3><p>​	这4个bit表示文件的类型</p>
+<p><img src="/./images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B15-B12.png" alt="文件元数据结构B15-B12"></p>
+<h3 id="B8-B6"><a href="#B8-B6" class="headerlink" title="B8-B6"></a>B8-B6</h3><p> 这3个bit表示拥有者用户的读，写和执行权限</p>
+<p><img src="/./images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B8-B6.png" alt="文件元数据结构B8-B6"></p>
+<h3 id="B5-B3"><a href="#B5-B3" class="headerlink" title="B5-B3"></a>B5-B3</h3><p>​	拥有者组的读，写，执行权限</p>
+<p><img src="/./images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B5-B3.png" alt="文件元数据结构B5-B3"></p>
+<h3 id="B2-B0"><a href="#B2-B0" class="headerlink" title="B2-B0"></a>B2-B0</h3><p> 其他用户的读，写和执行权限</p>
+<p><img src="/./images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B2-B0.png" alt="文件元数据结构B2-B0"></p>
+<h3 id="B11-B9"><a href="#B11-B9" class="headerlink" title="B11-B9"></a>B11-B9</h3><p>​	设置用户ID，设置组ID和粘滞</p>
+<p><img src="/./images/%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84B11-B9.png" alt="文件元数据结构B11-B9"></p>
+<h2 id="文件用户ID"><a href="#文件用户ID" class="headerlink" title="文件用户ID"></a>文件用户ID</h2><p>​	如果设置了用户ID位，则有效用户ID为文件的所有者</p>
+<p>​	如果没有设置用户ID位，则有效用户ID为实际正在使用的用户ID</p>
+<h3 id="有效用户ID"><a href="#有效用户ID" class="headerlink" title="有效用户ID"></a>有效用户ID</h3><p>​	有效用户ID决定了该进程的使用权限，进程的有效用户ID为root，肯动比普通用户所能用到的资源更多。比如有些操作需要以管理员身份运行。</p>
+<ul>
+<li>系统管理员常用这种方法提升普通用户的权限,让他们有能力去完成一些本来只有root用<br>户才能完成的任务。例如,他可以为某个拥有者用户为root的可执行文件添加设置用户<br>ID位,这样一来无论运行这个可执行文件的实际用户是谁,启动起来的进程的有效用户<br>ID都是root,凡是root用户可以访问的资源,该进程都可以访问。当然,具体访问哪些<br>资源,以何种方式访问,还要由这个可执行文件的代码来决定。作为一个安全的操作系统<br>不可能允许一个低权限用户在高权限状态下为所欲为。如通过passwd命令修改口令</li>
+<li>带有设置用户ID位的不可执行文件:没有意义。</li>
+<li>带有设置用户ID位的目录文件:没有意义。</li>
+</ul>
+<h2 id="粘滞位"><a href="#粘滞位" class="headerlink" title="粘滞位"></a>粘滞位</h2><ul>
+<li>带有粘滞位(B9)的可执行文件,在其首次运行并结束后,其代码区被连续地保存在磁盘交换区中,而一般磁盘文件的数据块是离散存放的。因此,下次运行该程序可以获得较快的载入速度</li>
+<li>带有粘滞位(B9)的不可执行文件:没有任何意义</li>
+<li>带有粘滞位(B9)的目录:除root以外的任何用户在该目录下,都只能删除或者更名那些属于自己的文件或子目录,而对于其它用户的文件或子目录,既不能删除也不能改名,如&#x2F;tmp目录</li>
+</ul>
+<h2 id="用户ID位和粘滞位与执行权限"><a href="#用户ID位和粘滞位与执行权限" class="headerlink" title="用户ID位和粘滞位与执行权限"></a>用户ID位和粘滞位与执行权限</h2><p><img src="/./images/%E7%94%A8%E6%88%B7ID%E4%BD%8D%E5%92%8C%E7%B2%98%E6%BB%9E%E4%BD%8D%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90.png" alt="用户ID位和粘滞位与执行权限"></p>
+<ul>
+<li>如果设置了对应的ID位，则对应的x由对应的字母替换，大写字母没有执行权限，小写字母有执行权限。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day9/" data-id="cmaqqzjq6000lj0vfbfsqdtuh" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day10/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

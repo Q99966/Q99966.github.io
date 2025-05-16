@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="文件锁读写冲突 如果两个或两个以上的进程同时向一个文件的某个特定区域写入数据,那么最后写入文件的数据极有可能因为写操作的交错而产生混乱    多个进程同时读一个文件的某个特定区域,不会有任何问题,它们只是各自把文件中的数据拷贝到各自的缓冲区中,并不会改变文件的内容,相互之间也就不会冲突 由此可以得出结论,为了避免在读写同一个文件的同一个区域时发生冲突,进程之间应该遵循以下规则,如果一个进程正在写,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文件锁读写冲突 如果两个或两个以上的进程同时向一个文件的某个特定区域写入数据,那么最后写入文件的数据极有可能因为写操作的交错而产生混乱    多个进程同时读一个文件的某个特定区域,不会有任何问题,它们只是各自把文件中的数据拷贝到各自的缓冲区中,并不会改变文件的内容,相互之间也就不会冲突 由此可以得出结论,为了避免在读写同一个文件的同一个区域时发生冲突,进程之间应该遵循以下规则,如果一个进程正在写,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/%E8%AF%BB%E5%86%99%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://example.com/images/%E6%9C%9F%E6%9C%9B%E5%8A%A0%E9%94%81.png">
+<meta property="og:image" content="http://example.com/images/A%E5%86%99B%E5%86%99.png">
+<meta property="og:image" content="http://example.com/images/A%E5%86%99B%E8%AF%BB.png">
+<meta property="og:image" content="http://example.com/images/A%E8%AF%BBB%E5%86%99.png">
+<meta property="og:image" content="http://example.com/images/A%E8%AF%BBB%E8%AF%BB.png">
+<meta property="og:image" content="http://example.com/images/fcntl.png">
+<meta property="og:image" content="http://example.com/images/flock%E7%BB%93%E6%9E%84%E4%BD%93.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.960Z">
+<meta property="article:modified_time" content="2025-02-27T06:52:43.855Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E8%AF%BB%E5%86%99%E5%86%B2%E7%AA%81.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day8/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.960Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="文件锁"><a href="#文件锁" class="headerlink" title="文件锁"></a>文件锁</h1><h2 id="读写冲突"><a href="#读写冲突" class="headerlink" title="读写冲突"></a>读写冲突</h2><ul>
+<li>如果两个或两个以上的进程同时向一个文件的某个特定区域写入数据,那么最后写入文件的数据极有可能因为写操作的交错而产生混乱</li>
+</ul>
+<p><img src="/./images/%E8%AF%BB%E5%86%99%E5%86%B2%E7%AA%81.png" alt="读写冲突"></p>
+<ul>
+<li>多个进程同时读一个文件的某个特定区域,不会有任何问题,它们只是各自把文件中的数据拷贝到各自的缓冲区中,并不会改变文件的内容,相互之间也就不会冲突</li>
+<li>由此可以得出结论,为了避免在读写同一个文件的<strong>同一个区域时</strong>发生冲突,进程之间应该遵循以下规则,如果一个进程正在写,那么其它进程既不能写也不能读,如果一个进程正。在读,那么其它进程不能写但是可以读</li>
+</ul>
+<h2 id="文件锁-1"><a href="#文件锁-1" class="headerlink" title="文件锁"></a>文件锁</h2><ul>
+<li>为了避免多个进程在读写同一个文件的<strong>同一个区域时</strong>发生冲突,Unix&#x2F;Linux系统引入了文件锁机制,并把文件锁分为读锁和写锁两种,它们的区别在于,对一个文件的特定区域可以加多把读锁,对一个文件的特定区域只能加一把写锁</li>
+<li>基于锁的操作模型是:读&#x2F;写文件中的特定区域之前,先加上读&#x2F;写锁,锁成功了再读&#x2F;写,读&#x2F;写完成以后再解锁</li>
+</ul>
+<p><img src="/./images/%E6%9C%9F%E6%9C%9B%E5%8A%A0%E9%94%81.png" alt="期望加锁"></p>
+<ul>
+<li><p>假设进程A期望访问某文件的A区,同时进程B期望访问该文件的B区,而A区<br>和B区存在部分重叠,分情况讨论</p>
+<p>1.进程A正在写,进程B也想写</p>
+<p><img src="/./images/A%E5%86%99B%E5%86%99.png" alt="A写B写"></p>
+<p>2.进程A正在写，进程B却想读</p>
+<p><img src="/./images/A%E5%86%99B%E8%AF%BB.png" alt="A写B读"></p>
+<p>3.进程A正在读，进程B却想写</p>
+<p><img src="/./images/A%E8%AF%BBB%E5%86%99.png" alt="A读B写"></p>
+<p>4.进程A正在读，进程B也想读</p>
+<p><img src="/./images/A%E8%AF%BBB%E8%AF%BB.png" alt="A读B读"></p>
+</li>
+</ul>
+<h2 id="fcntl"><a href="#fcntl" class="headerlink" title="fcntl"></a>fcntl</h2><p><img src="/./images/fcntl.png" alt="fcntl"></p>
+<h3 id="非阻塞加锁"><a href="#非阻塞加锁" class="headerlink" title="非阻塞加锁"></a>非阻塞加锁</h3><p>​	有两种错误方式，一种<strong>没加上锁</strong>，另一种就是其他错误。最主要要区分出来<strong>没加上锁</strong>这种错误，因为如果没加上锁，在执行后面的写入就会出问题。</p>
+<p>下面代码可以解决上述问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(fcntl(fd,F_SETLK,&amp;lock) == <span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(errno == EACCES || errno == EAGAIN)</span><br><span class="line">    &#123;<span class="comment">// 这两个参数可以判断是不是因为没加上锁，而报的错</span></span><br><span class="line">        <span class="comment">// 加不上锁干点别的事</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;文件被锁定，加不上锁，不等了，干点别的&quot;</span>);</span><br><span class="line">        sleep(<span class="number">1</span>);<span class="comment">// 可以睡觉，当然也可以干点其他的</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="comment">// 其他错误的正常提示</span></span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fcntl&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="flock结构体"><a href="#flock结构体" class="headerlink" title="flock结构体"></a>flock结构体</h3><p><img src="/./images/flock%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="flock结构体"></p>
+<ul>
+<li><pre><code class="language-c">lock.l_len = 0;// 代表一直锁到文件尾
+</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day8/" data-id="cmaqqzjq6000kj0vf3ip65vxv" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

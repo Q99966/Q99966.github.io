@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="虚拟地址空间比如32位操作系统虚拟地址空间范围是4G 那么虚拟地址空间范围有什么用？​	每个进程都会有一张存放虚拟地址与实际物理地址的一张映射表，那么虚拟地址空间的范围也就是则张映射表的范围，现在在32位系统上可能担心这张表不够用。 但在64位上完全不用担心，64位操作系统的虚拟地址空间范围就大的没边了。 先有物理地址再有虚拟的地址的分配​	当进程需要占用物理地址时，内核会为该进程载入内存，并提供">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="虚拟地址空间比如32位操作系统虚拟地址空间范围是4G 那么虚拟地址空间范围有什么用？​	每个进程都会有一张存放虚拟地址与实际物理地址的一张映射表，那么虚拟地址空间的范围也就是则张映射表的范围，现在在32位系统上可能担心这张表不够用。 但在64位上完全不用担心，64位操作系统的虚拟地址空间范围就大的没边了。 先有物理地址再有虚拟的地址的分配​	当进程需要占用物理地址时，内核会为该进程载入内存，并提供">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2025/05/16/day4/images/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E8%8C%83%E5%9B%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E8%8C%83%E5%9B%B4.png">
+<meta property="og:image" content="http://example.com/2025/05/16/day4/images/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%94%A8%E6%88%B7%E7%9A%84%E5%85%B7%E4%BD%93%E5%88%92%E5%88%86.png">
+<meta property="og:image" content="http://example.com/images/%E5%86%85%E5%AD%98%E5%A3%81%E5%9E%92.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.953Z">
+<meta property="article:modified_time" content="2025-02-09T07:29:04.839Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/16/day4/images/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E8%8C%83%E5%9B%B4%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E8%8C%83%E5%9B%B4.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day4/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.953Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="虚拟地址空间"><a href="#虚拟地址空间" class="headerlink" title="虚拟地址空间"></a>虚拟地址空间</h1><p>比如32位操作系统虚拟地址空间范围是4G</p>
+<h3 id="那么虚拟地址空间范围有什么用？"><a href="#那么虚拟地址空间范围有什么用？" class="headerlink" title="那么虚拟地址空间范围有什么用？"></a>那么虚拟地址空间范围有什么用？</h3><p>​	每个进程都会有一张存放虚拟地址与实际物理地址的一张映射表，那么虚拟地址空间的范围也就是则张映射表的范围，现在在32位系统上可能担心这张表不够用。</p>
+<p>但在64位上完全不用担心，64位操作系统的虚拟地址空间范围就大的没边了。</p>
+<h3 id="先有物理地址再有虚拟的地址的分配"><a href="#先有物理地址再有虚拟的地址的分配" class="headerlink" title="先有物理地址再有虚拟的地址的分配"></a>先有物理地址再有虚拟的地址的分配</h3><p>​	当进程需要占用物理地址时，内核会为该进程载入内存，并提供一些虚拟地址。</p>
+<h3 id="那么就无法调用内核了吗？"><a href="#那么就无法调用内核了吗？" class="headerlink" title="那么就无法调用内核了吗？"></a>那么就无法调用内核了吗？</h3><p>​	用户地址空间的代码不能直接访问内核空间的代码和数据，但可以通过系统调用进入内核态，间接与系统内核交互。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li><p>安全，无法直接获取物理地址。当进程调用虚拟地址时，内核会从那张映射表中查询不到就会报错，因此一个进程只能调用当前进程内的虚拟地址。也就达成了一个进程只能调用该进程所占用的物理地址。</p>
+</li>
+<li><p>方便，不需要计算物理地址</p>
+</li>
+</ul>
+<h2 id="虚拟地址空间范围具体划分"><a href="#虚拟地址空间范围具体划分" class="headerlink" title="虚拟地址空间范围具体划分"></a>虚拟地址空间范围具体划分</h2><h3 id="内核与用户的划分"><a href="#内核与用户的划分" class="headerlink" title="内核与用户的划分"></a>内核与用户的划分</h3><p>以32位举例</p>
+<img src=".\images\虚拟地址内核空间范围与用户空间范围.png" alt="虚拟地址内核空间范围与用户空间范围" style="zoom:150%;" />
+
+<p>如这张图上半部分是内核虚拟地址范围，下半部分是用户虚拟地址空间范围。</p>
+<h3 id="用户的具体划分"><a href="#用户的具体划分" class="headerlink" title="用户的具体划分"></a>用户的具体划分</h3><img src=".\images\虚拟地址用户的具体划分.png" alt="虚拟地址用户的具体划分" style="zoom: 67%;" />
+
+<h1 id="内存壁垒"><a href="#内存壁垒" class="headerlink" title="内存壁垒"></a>内存壁垒</h1><p>不同进程，相同虚拟地址物理地址不同。</p>
+<ul>
+<li><p>每个进程的用户空间都是0~3G-1,但它们所对应的物理内存却是各自独立<br>的,系统为每个进程的用户空间维护一张专属于该进程的内存映射表,记录<br>虚拟内存到物理内存的对应关系,因此在不同进程之间交换虚拟内存地址是毫无意义的</p>
+</li>
+<li><p>所有进程的内核空间都是3G~4G-1,它们所对应的物理内存只有一份,系统<br>为所有进程的内核空间维护一张内存映射表init_mm.pgd,记录虚拟内存到<br>物理内存的对应关系,因此不同进程通过系统调用所访问的内核代码和数据是同一份</p>
+</li>
+<li><p>用户空间的内存映射表会随着进程的切换而切换，内核空间的内存映射表则无需随着进程的切换而切换</p>
+<p><img src="/./images/%E5%86%85%E5%AD%98%E5%A3%81%E5%9E%92.png" alt="内存壁垒"></p>
+</li>
+</ul>
+<h1 id="段错误"><a href="#段错误" class="headerlink" title="段错误"></a>段错误</h1><p>一切对虚拟内存的越权访问，都会导致段错误</p>
+<ul>
+<li>试图访问没有映射到物理内存的虚拟内存</li>
+<li>试图以非法方式访问虚拟内存，如对只读内存做写操作等。</li>
+</ul>
+<p>​	这里写操作不是指下面这种</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">i = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	运行这样的在编译阶段就会报错，不会发生段错误</p>
+<p>​	反而通过下面代码可以修改i的值，并且不会报错</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">*(<span class="type">int</span> *)&amp;i = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	这是因为const int 是非静态局部变量，位于栈区，是可以对内存做修改的。以及这里的只读内存是指代码区虚拟内存。</p>
+<p>​	</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">static</span> <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">*(<span class="type">int</span> *)&amp;i = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	运行上面代码则会报段错误，因为const static int 位于代码区</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day4/" data-id="cmaqqzjq5000hj0vfajq64bhw" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

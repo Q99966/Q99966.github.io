@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="内存映射文件mmap​	参看day5 进程 进程：是程序执行时的一个实例  程序是被存储在磁盘上,包含机器指令和数据的文件当这些指令和数据被装载到内存并被CPU所执行,即形成了进程。一个程序可以被同时运行为多个进程在Linux源码中通常将进程称为任务(task)从内核观点看,进程的目的就是担当分配系统资源(CPU时间,内存等)的实体    相关控制进程的命令pstree​	以树状结构显示当前所有进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day10/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="内存映射文件mmap​	参看day5 进程 进程：是程序执行时的一个实例  程序是被存储在磁盘上,包含机器指令和数据的文件当这些指令和数据被装载到内存并被CPU所执行,即形成了进程。一个程序可以被同时运行为多个进程在Linux源码中通常将进程称为任务(task)从内核观点看,进程的目的就是担当分配系统资源(CPU时间,内存等)的实体    相关控制进程的命令pstree​	以树状结构显示当前所有进">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/fork.png">
+<meta property="og:image" content="http://example.com/images/%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.963Z">
+<meta property="article:modified_time" content="2025-03-06T12:37:51.770Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/fork.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day10/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.963Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h1><h2 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h2><p>​	参看<a href="./day5">day5</a></p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><ul>
+<li><p>进程：是程序执行时的一个实例</p>
+<blockquote>
+<p>程序是被存储在磁盘上,包含机器指令和数据的文件<br>当这些指令和数据被装载到内存并被CPU所执行,即形成了进程。<br>一个程序可以被同时运行为多个进程<br>在Linux源码中通常将进程称为任务(task)<br>从内核观点看,进程的目的就是担当分配系统资源(CPU时间,内存等)的实体</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="相关控制进程的命令"><a href="#相关控制进程的命令" class="headerlink" title="相关控制进程的命令"></a>相关控制进程的命令</h2><h3 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h3><p>​	以树状结构显示当前所有进程关系</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>​	以简略方式显示当前用户拥有控制终端的进程信息,也可以配合以下选项</p>
+<blockquote>
+<p>a-显示所有用户拥有控制终端的进程信息<br>x-也包括没有控制终端的进程<br>u-以详尽方式显示<br>w-以更大列宽显示</p>
+</blockquote>
+<h1 id="父子孤尸"><a href="#父子孤尸" class="headerlink" title="父子孤尸"></a>父子孤尸</h1><h2 id="父子进程"><a href="#父子进程" class="headerlink" title="父子进程"></a>父子进程</h2><p>​	父子进程是一个相对概念，谁被创建了是子进程。</p>
+<ul>
+<li>Unix系统中的进程存在父子关系。一个父进程可以创建一到多个子进程,但每个子进程有且仅有一个父进程。整个系统中只有一个根进程,即PID为0的调度进程</li>
+</ul>
+<h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><ul>
+<li>父进程创建子进程以后,子进程在操作系统的调度下与其父进程同时运行如果父进程先于子进程终止,子进程即成为孤儿进程,同时被某个专门的进程收养,即成为该进程的子进程,因此该进程又被称为孤儿院进程</li>
+</ul>
+<h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><ul>
+<li>父进程创建子进程以后,子进程在操作系统的调度下与其父进程同时运行。如果子进程先于父进程终止,但由于某种原因,父进程并没有回收该子进程的终止状态,这时子进程即处于僵尸状态,被称为僵尸进程</li>
+<li>僵尸进程虽然已不再活动,即不会继续消耗处理机资源,但其所携带的进程<br>终止状态会消耗内存资源。因此,作为程序的设计者,无论对子进程的终止状态是否感兴趣,都应该尽可能及时地回收子进程的僵尸。</li>
+</ul>
+<h1 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h1><h2 id="PID和PPID"><a href="#PID和PPID" class="headerlink" title="PID和PPID"></a>PID和PPID</h2><ul>
+<li><p>每个进程都有一个非负整数形式的唯一编号,即PID(Process Identification,<br>进程标识)</p>
+</li>
+<li><p>PID在任何时刻都是唯一的,但是可以重用,当进程终止并被回收以后,其<br>PID就可以为其它进程所用</p>
+</li>
+<li><p>进程的PID由系统内核根据延迟重用算法生成,以确保新进程的PID不同于最近终止进程的PID</p>
+</li>
+<li><p>系统中有些PID是专用的,比如</p>
+<blockquote>
+<p>0号进程,调度进程,亦称交换进程(swapper),系统内核的一部分,所有进程的根进程,磁盘上没有它的可执行程序文件<br>1号进程,init进程,在系统自举过程结束时由调度进程创建,读写与系统有关的初始化文件,引导系统至一个特定状态,以超级用户特权运行的普通进程,永不终止<br>除调度进程以外,系统中的每个进程都有唯一的父进程,对任何一个子进程而言,其父进程的PID即是它的PPID</p>
+</blockquote>
+</li>
+<li><p>相关函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">pid_t</span> <span class="title function_">getpid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的PID</span></span><br><span class="line"><span class="type">pid_t</span> <span class="title function_">getppid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的父进程的PID</span></span><br><span class="line"><span class="type">uid_t</span> <span class="title function_">getuid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的实际用户ID</span></span><br><span class="line"><span class="type">gid_t</span> <span class="title function_">getgid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的实际组ID</span></span><br><span class="line"><span class="type">uid_t</span> <span class="title function_">geteuid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的有效用户ID</span></span><br><span class="line"><span class="type">gid_t</span> <span class="title function_">getegid</span><span class="params">(<span class="type">void</span>)</span>;<span class="comment">//返回调用进程的有效组ID</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="创建子进程"><a href="#创建子进程" class="headerlink" title="创建子进程"></a>创建子进程</h1><h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2><p><img src="/./images/fork.png" alt="fork"></p>
+<ul>
+<li>fork创建之后父进程的内容，父子进程会各执行一遍</li>
+<li>由fork产生的子进程是其父进程的不完全副本,子进程在内存中的映像除了<br>代码区与父进程共享同一块物理内存,其它各区映射到独立的物理内存,但其内容从父进程拷贝。</li>
+<li>fork函数返回后,系统内核会将父进程维护的文件描述符表也复制到子进程<br>的进程表项中,但并<strong>不复制文件表象</strong>。(因此父进程打开文件，子进程也能用，并且读写位置也共享，因为他们公用<strong>文件表项</strong>)</li>
+</ul>
+<h2 id="创建子进程-1"><a href="#创建子进程-1" class="headerlink" title="创建子进程"></a>创建子进程</h2><p><img src="/./images/%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B.png" alt="创建子进程"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day10/" data-id="cmaqqzjq10002j0vf6nodaqb4" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day11/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

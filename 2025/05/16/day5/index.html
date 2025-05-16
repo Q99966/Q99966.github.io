@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="内存管理 从底层硬件到上层应用，各层都提供了各自的内存管理接口，身处不同的开发层次，会使用不同层次的功能函数。   内存映射的建立与解除mmap  按页圆整 一页为4096byte  传多个参数​	如读和写  PROT_READ | PROT_WRITE  munmap 虚拟内存的分配与释放sbrk 队尾指针超出可用空间不会段错误，会调用mmap来申请一个页 brk brk VS sbrk 事实上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="内存管理 从底层硬件到上层应用，各层都提供了各自的内存管理接口，身处不同的开发层次，会使用不同层次的功能函数。   内存映射的建立与解除mmap  按页圆整 一页为4096byte  传多个参数​	如读和写  PROT_READ | PROT_WRITE  munmap 虚拟内存的分配与释放sbrk 队尾指针超出可用空间不会段错误，会调用mmap来申请一个页 brk brk VS sbrk 事实上">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/%E5%90%84%E7%A7%8D%E5%B1%82%E9%9D%A2%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/mmap.png">
+<meta property="og:image" content="http://example.com/images/mmap1.png">
+<meta property="og:image" content="http://example.com/images/munmap.png">
+<meta property="og:image" content="http://example.com/images/sbrk.png">
+<meta property="og:image" content="http://example.com/images/brk.png">
+<meta property="article:published_time" content="2025-05-16T12:00:59.955Z">
+<meta property="article:modified_time" content="2025-02-18T07:41:05.895Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E5%90%84%E7%A7%8D%E5%B1%82%E9%9D%A2%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%9B%BE.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day5/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.955Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><ul>
+<li>从底层硬件到上层应用，各层都提供了各自的内存管理接口，身处不同的开发层次，会使用不同层次的功能函数。</li>
+</ul>
+<p><img src="/./images/%E5%90%84%E7%A7%8D%E5%B1%82%E9%9D%A2%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%9B%BE.png" alt="各种层面的接口图"></p>
+<h1 id="内存映射的建立与解除"><a href="#内存映射的建立与解除" class="headerlink" title="内存映射的建立与解除"></a>内存映射的建立与解除</h1><h2 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h2><p><img src="/./images/mmap.png" alt="mmap"></p>
+<p><img src="/./images/mmap1.png" alt="mmap1"></p>
+<h3 id="按页圆整"><a href="#按页圆整" class="headerlink" title="按页圆整"></a>按页圆整</h3><ul>
+<li>一页为4096byte</li>
+</ul>
+<h3 id="传多个参数"><a href="#传多个参数" class="headerlink" title="传多个参数"></a>传多个参数</h3><p>​	如读和写</p>
+<ul>
+<li>PROT_READ | PROT_WRITE</li>
+</ul>
+<h2 id="munmap"><a href="#munmap" class="headerlink" title="munmap"></a>munmap</h2><p><img src="/./images/munmap.png" alt="munmap"></p>
+<h1 id="虚拟内存的分配与释放"><a href="#虚拟内存的分配与释放" class="headerlink" title="虚拟内存的分配与释放"></a>虚拟内存的分配与释放</h1><h2 id="sbrk"><a href="#sbrk" class="headerlink" title="sbrk"></a>sbrk</h2><p><img src="/./images/sbrk.png" alt="sbrk"></p>
+<p>队尾指针超出可用空间不会段错误，会调用mmap来申请一个页</p>
+<h2 id="brk"><a href="#brk" class="headerlink" title="brk"></a>brk</h2><p><img src="/./images/brk.png" alt="brk"></p>
+<h2 id="brk-VS-sbrk"><a href="#brk-VS-sbrk" class="headerlink" title="brk VS sbrk"></a>brk VS sbrk</h2><ul>
+<li>事实上,sbrk和brk不过是移动堆尾指针的两种不同方法,移动过程中还要<br>兼顾虚拟内存和物理内存之间映射关系的建立和解除(以页为单位)</li>
+<li>用sbrk分配内存比较方便,用多少内存就传多少增量参数,同时返回指向新<br>分配内存区域的指针,但用sbrk做一次性内存释放比较麻烦,因为必须将所<br>有的既往增量进行累加</li>
+<li>用brk释放内存比较方便,只需将堆尾指针设回到一开始的位置即可一次性<br>释放掉之前分多次分配的内存,但用brk分配内存比较麻烦,因为必须根据所<br>需要的内存大小计算出堆尾指针的绝对位置</li>
+<li>用sbrk分多次分配适量内存,最后用brk一次性整体释放</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>mmap&#x2F;munmap底层不维护任何东西,只是返回一个首地址,所分配内<br>存位于堆中</li>
+<li>brk&#x2F;sbrk底层维护一个指针,记录所分配的内存结尾,所分配内存位于堆<br>中,底层调用mmap&#x2F;munmap</li>
+<li>malloc底层维护一个线性链表和必要的控制信息,不可越界访问,所分配内<br>存位于堆中,底层调用brk&#x2F;sbrk</li>
+<li>每个进程都有4G的虚拟内存空间,虚拟内存地址只是一个数字,在与实际<br>物理内存建立映射之前是不能访问的</li>
+<li>所谓内存分配与释放,其本质就是建立或解除从虚拟内存到物理内存的映<br>射,并在底层维护不同形式的数据结构,以把虚拟内存的占用与空闲情况记录下来</li>
+</ul>
+<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><ul>
+<li>Unix&#x2F;Linux系统的大部分功能都是通过系统调用实现的,如open、close等</li>
+<li>Unix&#x2F;Linux的系统调用已被封装成C函数的形式,但它们并不是C语言标准<br>库的一部分</li>
+<li>标准库函数大部分时间运行在用户态,但部分函数偶尔也会调用系统调用,<br>进入内核态,如malloc、free等</li>
+<li>程序员自己编写的代码也可以跳过标准库,直接使用系统调用,如brk、<br>sbrk、mmap和munmap等,与操作系统内核交互,进入内核态</li>
+<li>系统调用在内核中实现,其外部接口定义在C库中,该接口的实现借助软中<br>断进入内核</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day5/" data-id="cmaqqzjq5000gj0vfdeqbgl0b" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

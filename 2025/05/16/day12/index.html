@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="为什么要回收子进程●清除僵尸进程,避免消耗系统资源。● 父进程需要等待子进程的终止,以继续后续工作。● 父进程需要知道子进程终止的原因  如果是正常终止,那么进程的退出码是多少?如果是异常终止,那么进程是被那个信号所终  wait12345#include&lt;sys&#x2F;wait.h&gt;pid_t wait(int* status);	&#x2F;&#x2F; 功能：等待并回收任意子进程	&#x2F;&#x2F; 参数：status">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/05/16/day12/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为什么要回收子进程●清除僵尸进程,避免消耗系统资源。● 父进程需要等待子进程的终止,以继续后续工作。● 父进程需要知道子进程终止的原因  如果是正常终止,那么进程的退出码是多少?如果是异常终止,那么进程是被那个信号所终  wait12345#include&lt;sys&#x2F;wait.h&gt;pid_t wait(int* status);	&#x2F;&#x2F; 功能：等待并回收任意子进程	&#x2F;&#x2F; 参数：status">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-16T12:00:59.967Z">
+<meta property="article:modified_time" content="2025-03-17T13:09:56.143Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day12" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/05/16/day12/" class="article-date">
+  <time class="dt-published" datetime="2025-05-16T12:00:59.967Z" itemprop="datePublished">2025-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="为什么要回收子进程"><a href="#为什么要回收子进程" class="headerlink" title="为什么要回收子进程"></a>为什么要回收子进程</h1><p>●清除僵尸进程,避免消耗系统资源。<br>● 父进程需要等待子进程的终止,以继续后续工作。<br>● 父进程需要知道子进程终止的原因</p>
+<blockquote>
+<p>如果是正常终止,那么进程的退出码是多少?<br>如果是异常终止,那么进程是被那个信号所终</p>
+</blockquote>
+<h1 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="type">pid_t</span> <span class="title function_">wait</span><span class="params">(<span class="type">int</span>* status)</span>;</span><br><span class="line">	<span class="comment">// 功能：等待并回收任意子进程</span></span><br><span class="line">	<span class="comment">// 参数：status 用于输出子进程的终止状态</span></span><br><span class="line">	<span class="comment">// 返回值：成功返回所回收的子进程的PID，失败返回-1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>父进程在创建若干子进程以后调用wait函数:</p>
+<blockquote>
+<p>A.若所有子进程都在运行,则阻塞,直到有子进程终止才返回;<br>B.若有一个子进程已终止,则返回该子进程的PID并通过status参数输出其终止状态;<br>C.若没有任何可被等待并回收的子进程,则返回-1,置errno为ECHILD。</p>
+</blockquote>
+</li>
+<li><p>在任何一个子进程终止前,wait函数只能阻塞调用进程,如果有一个子进程在wait函数被调用之前,已经终止并处于僵尸状态,wait函数会立即返回,并取得该子进程的终止状态,同时子进程僵尸消失。由此可见wait函数主要完成三个任务</p>
+<blockquote>
+<p>1.阻塞父进程的运行,直到子进程终止再继续,停等同步<br>2.获取子进程的PID和终止状态,令父进程得知谁因何而死<br>3.为子进程收尸,防止大量僵尸进程耗费系统资源</p>
+</blockquote>
+</li>
+<li><p>以上三个任务中,即使前两个与具体需求无关,仅仅第三个也足以凸显wait函数的重要性,尤其是对那些多进程服务器型的应用而言</p>
+</li>
+<li><p>子进程的终止状态通过wait函数的status参数输出给该函数调用者。&lt;sys&#x2F;wait.h以文件提供了几个辅助分析进程终止状态的工具宏</p>
+</li>
+<li><p>WIFEXITED(status)</p>
+<blockquote>
+<p>真:正常终止 WEXITSTATUS(status)-&gt;进程退出码<br>假:异常终止 WTERMSIG(status)-&gt;终止进程的信号</p>
+</blockquote>
+</li>
+<li><p>WIFSIGNALED(status)</p>
+<blockquote>
+<p>真:异常终止 WTERMSIG(status)-&gt;终止进程的信号<br>假:正常终止 WEXITSTATUS(status)-&gt;进程退出码</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="waitpid"><a href="#waitpid" class="headerlink" title="waitpid"></a><strong><code>waitpid</code></strong></h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">pid_t</span> <span class="title function_">waitpid</span><span class="params">(<span class="type">pid_t</span> pid, <span class="type">int</span>* status, <span class="type">int</span> options)</span>;</span><br><span class="line"><span class="comment">// 功能:等待并回收任意或特定子进程</span></span><br><span class="line"><span class="comment">// pid 可以以下取值</span></span><br><span class="line"><span class="comment">// -1 等待并回收任意子进程,相当于wait函数</span></span><br><span class="line"><span class="comment">// &gt;0等待并回收特定子进程</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// status 用于输出子进程的终止状态,可置NULL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数:options 可以如下取值</span></span><br><span class="line">			<span class="comment">// 0 阻塞模式,若所等子进程仍在运行,则阻塞直至其终止。</span></span><br><span class="line">			<span class="comment">// WNOHANG 非阻塞模式,若所等子进程仍在运行,则返回0.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值:成功返回所回收子进程的PID或者0,失败返回-1。</span></span><br><span class="line"><span class="comment">// 非阻塞方式，会返回零</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// waitpid(-1,&amp;status,0)等价于 wait(&amp;status);</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="gcc使用问题"><a href="#gcc使用问题" class="headerlink" title="gcc使用问题"></a>gcc使用问题</h1><p>如果误使用gcc xxx -o xxx.c</p>
+<p>则会把源文件覆盖</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/05/16/day12/" data-id="cmaqqzjq20006j0vf2zse7sf4" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/05/16/day13/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/16/day11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/05/16/day22/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day21/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day20/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day19/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/16/day18/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
