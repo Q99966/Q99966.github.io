@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>网络基础、IP地址、套接字、相关函数、字节序转换 | 笔记分享</title><meta name="keywords" content="C/C++"><meta name="author" content="陈桑"><meta name="copyright" content="陈桑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="网络基础、IP地址、套接字、相关函数、字节序转换"><meta name="application-name" content="网络基础、IP地址、套接字、相关函数、字节序转换"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="网络基础、IP地址、套接字、相关函数、字节序转换"><meta property="og:url" content="http://example.com/2025/05/26/uc/day20/index.html"><meta property="og:site_name" content="笔记分享"><meta property="og:description" content="网络基础什么是计算机网络​		计算机网络,是指将地理位置不同的具有独立功能的多台计算机及其外部设备,通过通信线路连接起来,在网络操作系统、网络管理软件及网络通信协议的管理和协调下,实现资源共享和信息传递的计算机系统。 什么是网络协议​		网络协议是一种特殊的软件,是计算机网络实现其功能的最基本的机制"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=7c45f1fc-4d07-5113-d3b6-7e149cd58692"><meta property="article:author" content="陈桑"><meta property="article:tag" content="C/C++"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=7c45f1fc-4d07-5113-d3b6-7e149cd58692"><meta name="description" content="网络基础什么是计算机网络​		计算机网络,是指将地理位置不同的具有独立功能的多台计算机及其外部设备,通过通信线路连接起来,在网络操作系统、网络管理软件及网络通信协议的管理和协调下,实现资源共享和信息传递的计算机系统。 什么是网络协议​		网络协议是一种特殊的软件,是计算机网络实现其功能的最基本的机制"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2025/05/26/uc/day20/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '笔记分享',
+  title: '网络基础、IP地址、套接字、相关函数、字节序转换',
+  postAI: '',
+  pageFillDescription: '网络基础, 什么是计算机网络, 什么是网络协议, 什么是协议栈, TCPx2FIP与ISOx2FOSI模型, 消息包与消息流, TCP包首部, IP包文格式, RFC894以太网帧, IP地址, 什么是IP地址?, IP地址如何表示?, 什么是IP地址分级?, 借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址, 关于ipv4不够用的问题, 套接字, 什么是套接字?, 套接字的绑定和连接, 套接字相关函数, socket, connect, bind, 网络地址结构, 字节序转换, 转换函数网络基础什么是计算机网络计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备通过通信线路连接起来在网络操作系统网络管理软件及网络通信协议的管理和协调下实现资源共享和信息传递的计算机系统什么是网络协议网络协议是一种特殊的软件是计算机网络实现其功能的最基本的机制网络协议的本质就是规则即各种硬件和软件必须遵循的共同守则网络协议并不是一套单独的软件它融合于其它所有的软件甚至硬件系统中因此可以说协议在网络中无所不在什么是协议栈为了减少网络设计的复杂性绝大多数网络采用分层设计的方法所谓分层设计就是按照信息的流动过程将网络的整体功能分解为一个个的功能层不同机器上的同等功能层之间采用相同的协议同一机器上的相邻功能层之间通过接口进行信息传递各层的协议和接口统称为协议栈描述计算机网络各协议层的一般方法是采用国际标准化组的计算机通信开放系统互连模型简称网络协议模型不是个单一的网络协议而是由一组具有层次关系的网络协议组成的协议家族简称协议族传输控制协议面向连接可靠的全双工的字节流用户数据报协议无连接不如可靠但速度快网际控制消息协议处理路由器和主机间的错误和控制消息网际组管理协议用于多播网际协议版本使用位地址为和提供递送分组服务网际协议版本使用位地址为和提供递送分组服务地址解析协议把地址映射到硬件地址逆地址解析协议把硬件地址映射到地址网际控制消息协议版本综合了和的功能分组过滤器为应用程序提供访问数据链路层的接口由源自的系统内核提供数据链路提供者接口为应用程序提供访问数据链路层的接口由源自的系统内核提供与模型在网络协议模型的基础上协议做了部分合并和简化同时将网络编程的接口设定在传输层与会话层之间这样做的理由有二上三层与应用程序的业务逻辑如数据包的组织与解析收发的时机与次序等密切相关而与具体的通信细节如收发分组等待确认分组排序计算验证校验和丢包重传等关系不大下四层主要处理通信细节而与具体应用的业务逻辑无关上三层通常构成用户进程而下四层通常是系统内核的一部分消息包与消息流应用程序负责组织的通常都是与业务相关的数据内容而要想把这些数据内容通过网络发送出去就要将其自上向下地压入协议栈每经历一个协议层就会对数据做一层封包每一层输出的封包都是下一层输入的内容消息包沿着协议栈的运动形成了消息流当从网络上接收数据时过程刚好相反消息包自下向上地流经协议栈每经历一个协议层就会对输入的数据解一层封包经过层层解包以后应用程序最终得到的将只是与业务相关的数据内容包首部包文格式以太网帧包格式可以从详解上面看地址什么是地址地址全称网际协议地址是协议提供的一种统一的地址格式为互联网上的每个网络和每台主机分配一个逻辑地址借以消除物理地址差异性所带来的影响地址如何表示在计算机内部地址用一个位无符号整数表示如人们更习惯使用点分十进制字符串表示如字符串形式的从左到右对应整数形式的从高字节到低字节注意这里所说的高低指的是数位高低而非地址高低什么是地址分级级地址以为首的位网络地址位本地地址级地址以为首的位网络地址位本地地址级地址以为首的位网络地址为本地地址级地址以为首的位多播地址例如某台计算机的地址写成整数形式级地址网络地址本地地址借助子网掩码可以快速帮助我们区定地址的网络地址和本地地址以地址子网掩码为例网络地址地址子网掩码本地地址地址子网掩码有些大佬习惯用来表示斜杠后面的代表子网掩码前面有个即级地址的子网掩码关于不够用的问题由于现在全球使用网络设备的人太多不够给每个设备配一个地址所以就出现了多个私网公用一个公网现在也推出了套接字什么是套接字套接字的本意是指电源插座这里将其引申为一个基于协议可实现基本网络通信功能的逻辑对象机器与机器的通信或者进程与进程的通信在这里都可以被抽象地看作是套接字与套接字的通信应用程序编写者无需了解网络协议的任何细节更无需知晓系统内核和网络设备的运作机制只要把想发送的数据写入套接字或从套接字中读取想接收的数据即可从这个意义上讲套接字就相当于一个文件描述符而网络就是一种特殊的文件面向网络的编程与面向文件的编程已没有分别而这恰恰是系统一切皆文件思想的又一例证套接字是对网络协议模型中传输层及其以下诸层的逻辑抽象是对网络通信协议的高级封装因此无论所依赖的是什么硬件所运行的什么操作系统所使用的是什么编程语言只要是基于套接字构建的应用程序只要是在互联网环境中通信就不会存在任何障碍套接字的绑定和连接如前所述套接字是一个提供给程序员使用的逻辑对象它表示对网络协议模型中传输层及其以下诸层的抽象但真正发送和接收数据的毕竟是那些实实在在的物理设备这就需要在物理设备和逻辑对象之间建立一种关联使后续所有针对这个逻辑对象的操作最终都能够反映到实际的物理设备上建立这种关联关系的过程就叫做绑定套接字相关函数功能创建套接字参数通信域协议族可取以下值本地套接字进程间通信基于的网络通信基于的网络通信基于底层包的网络通信参数套接字类型可取以下值流式套接字基于协议数据报套接字基于协议原始套接字工作在传输层以下即所有的都能接但是需要完成传输层的操作特殊协议对于流式和数据报套接字而言只能取返回值成功返回表示套接字对象的文件描述符失败返回如前所述通过地址可以定位网络上的一台主机但一台主机上可能同时有多个网络应用在运行究竟想跟哪个网络应用通信呢这就需要靠所谓的端口号来区分因为不同的网络应用会使用不同的端口号用地址定位主机再用端口号定位运行在这台主机上一个具体的网络应用这样一种对通信主体的描述才是唯一确定的套接字接口库中的端口号被定义为一个位的无符号整数其值介于到其中到已被系统和一些网络服务占据比如端口用于服务端口用于服务端口用于服务等因此一般应用程序最好选择以上的端口号以避免和这些服务冲突功能将套接字和对方的地址结构连接在一起参数套接字描述符对方的地址结构地址结构的字节数返回值成功返回失败返回功能将套接字和本机的地址结构绑定在一起参数套接字描述符自己的地址结构地址结构的字节数返回值成功返回失败返回网络地址结构本地地址结构用于域的本地通信地址族本地套接字文件的路径网络地址结构用于域的网络通信地址族端口号地址网络地址结构用于域的网络通信接受任意地址到来的数据表示接收对应的并且需要转字节序无符号位整数无符号位整数字节序转换网络应用与单机应用不同经常需要在具有不同硬件架构和操作系统的计算机之间交换数据因此编程语言里一些多字节数据类型的字节序问题就需要特别予以关注套接字接口库规定在网络传输过程中采用网络字节序也就是大端字节序而本机数据可能是小短字节序小端字节序数据的低位存放在低地址大端字节序数据的低位存放在高地址以字节为单位存如存成而不是转换函数长整形主机字节序到网络字节序长整形网络字节序到主机字节序短整形主机字节序到网络字节序短整形网络字节序到主机字节序点分十进制字符串地址网络字节序形式整数地址点分十进制字符串地址网络字节序形式整数地址网络字节序形式整数地址点分十进制字符串地址',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-18 14:13:43',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">笔记分享</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">36</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/uc/" itemprop="url">uc</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">网络基础、IP地址、套接字、相关函数、字节序转换</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-05-26T09:58:22.134Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-05-18T06:13:43.601Z" title="更新于 2025-05-18 14:13:43">2025-05-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为河南"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>河南</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=7c45f1fc-4d07-5113-d3b6-7e149cd58692"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2025/05/26/uc/day20/"><header><a class="post-meta-categories" href="/categories/uc/" itemprop="url">uc</a><h1 id="CrawlerTitle" itemprop="name headline">网络基础、IP地址、套接字、相关函数、字节序转换</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">陈桑</span><time itemprop="dateCreated datePublished" datetime="2025-05-26T09:58:22.134Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time><time itemprop="dateCreated datePublished" datetime="2025-05-18T06:13:43.601Z" title="更新于 2025-05-18 14:13:43">2025-05-18</time></header><h1 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h1><h3 id="什么是计算机网络"><a href="#什么是计算机网络" class="headerlink" title="什么是计算机网络"></a>什么是计算机网络</h3><p>​		计算机网络,是指将地理位置不同的具有独立功能的多台计算机及其外部设备,通过通信线路连接起来,在网络操作系统、网络管理软件及网络通信协议的管理和协调下,实现资源共享和信息传递的计算机系统。</p>
+<h3 id="什么是网络协议"><a href="#什么是网络协议" class="headerlink" title="什么是网络协议"></a>什么是网络协议</h3><p>​		网络协议是一种特殊的软件,是计算机网络实现其功能的最基本的机制。网络协议的本质就是规则,即各种硬件和软件必须遵循的共同守则。网络协议并不是一套单独的软件,它融合于其它所有的软件甚至硬件系统中,因此可以说协议在网络中无所不在。</p>
+<h3 id="什么是协议栈"><a href="#什么是协议栈" class="headerlink" title="什么是协议栈"></a>什么是协议栈</h3><p>​		为了减少网络设计的复杂性,绝大多数网络采用分层设计的方法。所谓分层设计,就是按照信息的流动过程将网络的整体功能分解为一个个的功能层,不同机器上的同等功能层之间采用相同的协议,同一机器上的相邻功能层之间通过接口进行信息传递。各层的协议和接口统称为协议栈。</p>
+<p>​		描述计算机网络各协议层的一般方法是采用国际标准化组(International Standardization Organization,ISO)的计算机通信开放系统互连(Open System Interconnection,OSI)模型,简称ISO&#x2F;OSI网络协议模型。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/%E5%8D%8F%E8%AE%AE%E6%A0%88.png" alt="协议栈"></p>
+<ul>
+<li>TCP&#x2F;IP不是个单一的网络协议，而是由一组具有层次关系的网络协议组成的协议家族,简称TCP&#x2F;IP协议族。</li>
+</ul>
+<blockquote>
+<p>TCP:传输控制协议,面向连接,可靠的全双工的字节流<br>UDP:用户数据报协议,无连接,不如TCP可靠但速度快<br>ICMP:网际控制消息协议,处理路由器和主机间的错误和控制消息<br>IGMP:网际组管理协议,用于多播<br>IPv4:网际协议版本4,使用32位地址,为TCP、UDP、ICMP和IGMP提供递送分组服务<br>IPv6:网际协议版本6,使用128位地址,为TCP、UDP和ICMPv6提供递送分组服务<br>ARP:地址解析协议,把IPv4地址映射到硬件地址<br>RARP:逆地址解析协议,把硬件地址映射到IPv4地址<br>ICMPv6:网际控制消息协议版本6,综合了ICMP、IGMP和ARP的功能<br>BPF:BSD分组过滤器,为应用程序提供访问数据链路层的接口,由源自BSD的系统内核提供<br>DLPI:数据链路提供者接口,为应用程序提供访问数据链路层的接口,由源自SVR4的系统内核提供</p>
+</blockquote>
+<h3 id="TCP-IP与ISO-OSI模型"><a href="#TCP-IP与ISO-OSI模型" class="headerlink" title="TCP&#x2F;IP与ISO&#x2F;OSI模型"></a>TCP&#x2F;IP与ISO&#x2F;OSI模型</h3><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/TCP_IP%E4%B8%8EISO_OSI%E6%A8%A1%E5%9E%8B.png" alt="TCP/IP与ISO/OSI模型" style="zoom: 67%;" />
+
+<p>​		在ISO&#x2F;OSI网络协议模型的基础上,TCP&#x2F;IP协议做了部分合并和简化,同时将网络编程的接口设定在传输层与会话层之间,这样做的理由有二。</p>
+<ul>
+<li>上三层与应用程序的业务逻辑(如数据包的组织与解析、收发的时机与次序等)密切相关,而与具体的通信细节<br>(如收发分组、等待确认、分组排序、计算验证校验和、丢包重传等)关系不大;下四层主要处理通信细节而与具体应用的业务逻辑无关</li>
+<li>上三层通常构成用户进程,而下四层通常是系统内核的一部分</li>
+</ul>
+<h3 id="消息包与消息流"><a href="#消息包与消息流" class="headerlink" title="消息包与消息流"></a>消息包与消息流</h3><p>​		应用程序负责组织的通常都是与业务相关的数据内容,而要想把这些数据内容通过网络发送出去,就要将其自上向下地压入协议栈,每经历一个协议层,就会对数据做一层封包,每一层输出的封包都是下一层输入的内容,消息包沿着协议栈的运动形成了消息流。</p>
+<p>​		当从网络上接收数据时,过程刚好相反,消息包自下向上地流经协议栈,每经历一个协议层,就会对输入的数据解一层封包,经过层层解包以后,应用程序最终得到的将只是与业务相关的数据内容。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/TCP_IP%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B.png" alt="TCP&#x2F;IP传输过程"></p>
+<h4 id="TCP包首部"><a href="#TCP包首部" class="headerlink" title="TCP包首部"></a>TCP包首部</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/TCP%E5%8C%85%E9%A6%96%E9%83%A8.png" alt="TCP包首部"></p>
+<h4 id="IP包文格式"><a href="#IP包文格式" class="headerlink" title="IP包文格式"></a>IP包文格式</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/IP%E5%8C%85%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt="IP包文格式"></p>
+<h4 id="RFC894以太网帧"><a href="#RFC894以太网帧" class="headerlink" title="RFC894以太网帧"></a>RFC894以太网帧</h4><p>​	包格式可以从TCP&#x2F;IP详解上面看</p>
+<h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><h3 id="什么是IP地址"><a href="#什么是IP地址" class="headerlink" title="什么是IP地址?"></a>什么是IP地址?</h3><p>​		IP地址,全称网际协议地址(Internet Protocol Address),是IP协议提供的一种统一的地址格式,为互联网上的每个网络和每台主机分配一个逻辑地址,借以消除物理地址差异性所带来的影响。</p>
+<h3 id="IP地址如何表示"><a href="#IP地址如何表示" class="headerlink" title="IP地址如何表示?"></a>IP地址如何表示?</h3><ul>
+<li>在计算机内部,IP地址用一个32位无符号整数表示,如:0x01020304。</li>
+<li>人们更习惯使用点分十进制字符串表示,如:1.2.3.4。字符串形式的从左到右,对应整数形式的从高字节到低字节。注意这里所说的高低指的是数位高低而非地址高低</li>
+</ul>
+<h3 id="什么是IP地址分级"><a href="#什么是IP地址分级" class="headerlink" title="什么是IP地址分级?"></a>什么是IP地址分级?</h3><ul>
+<li>A级地址:以0为首的8位网络地址+24位本地地址</li>
+<li>B级地址:以10为首的16位网络地址+16位本地地址</li>
+<li>C级地址:以110为首的24位网络地址+8为本地地址</li>
+<li>D级地址:以1110为首的32位多播地址</li>
+<li>例如:某台计算机的IP地址:192.168.182.48,写成整数形式:11000000 10101000 10110110 00110000,C级地址,网络地址:192.168.182.0,本地地址:48</li>
+</ul>
+<h3 id="借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址"><a href="#借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址" class="headerlink" title="借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址"></a>借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址</h3><ul>
+<li><p>以IP地址:192.168.182.48,子网掩码:255.255.255.0为例</p>
+</li>
+<li><p>网络地址&#x3D;IP地址&amp;子网掩码</p>
+<p>​                    192.168.182.48 &amp; 255.255.255.0 &#x3D; 192.168.182.0</p>
+</li>
+<li><p>本地地址&#x3D;IP地址&amp;~子网掩码</p>
+</li>
+</ul>
+<p>  ​					192.168.182.48 &amp; 0.0.0.255 &#x3D; 0.0.0.48</p>
+<ul>
+<li>有些大佬习惯用192.168.188.48&#x2F;24 来表示，斜杠后面的24代表子网掩码前面有24个1，即c级地址的子网掩码</li>
+</ul>
+<h3 id="关于ipv4不够用的问题"><a href="#关于ipv4不够用的问题" class="headerlink" title="关于ipv4不够用的问题"></a>关于ipv4不够用的问题</h3><p>​		由于现在全球使用网络设备的人太多，不够给每个设备配一个ipv4地址，所以就出现了多个私网IP公用一个公网IP，现在也推出了ipv6。</p>
+<h1 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h1><h3 id="什么是套接字"><a href="#什么是套接字" class="headerlink" title="什么是套接字?"></a>什么是套接字?</h3><ul>
+<li>套接字(socket)的本意是指电源插座,这里将其引申为一个基于TCP&#x2F;IP协议可实现基本网络通信功能的逻辑对象.</li>
+<li>机器与机器的通信,或者进程与进程的通信,在这里都可以被抽象地看作是套接字与套接字的通信。</li>
+<li>应用程序编写者无需了解网络协议的任何细节,更无需知晓系统内核和网络设备的运作机制,只要把想发送的数据写入套接字,或从套接字中读取想接收的数据即可。</li>
+</ul>
+<p>​	<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/%E5%A5%97%E6%8E%A5%E5%AD%97.png" alt="套接字"></p>
+<ul>
+<li>从这个意义上讲,套接字就相当于一个<strong>文件描述符</strong>,而网络就是一种<strong>特殊的文件</strong>,面向网络的编程与面向文件的编程已没有分别,而这恰恰是Unix系统一切皆文件思想的又一例证</li>
+<li>套接字是对ISO&#x2F;OSI网络协议模型中传输层及其以下诸层的逻辑抽象,是对TCP&#x2F;IP网络通信协议的高级封装,因此无论所依赖的是什么硬件,所运行的什么操作系统,所使用的是什么编程语言,只要是基于套接字构建的应用程序,只要是在互联网环境中通信,就不会存在任何障碍。</li>
+</ul>
+<h2 id="套接字的绑定和连接"><a href="#套接字的绑定和连接" class="headerlink" title="套接字的绑定和连接"></a>套接字的绑定和连接</h2><p>​		如前所述,套接字是一个提供给程序员使用的逻辑对象,它表示对ISO&#x2F;OSI<br>网络协议模型中传输层及其以下诸层的抽象。但真正发送和接收数据的毕竟<br>是那些实实在在的物理设备。这就需要在<strong>物理设备和逻辑对象</strong>之间建立一种<br>关联,使后续所有针对这个逻辑对象的操作,最终都能够反映到实际的物理设备上。建立这种关联关系的过程就叫做<strong>绑定</strong>。</p>
+<h2 id="套接字相关函数"><a href="#套接字相关函数" class="headerlink" title="套接字相关函数"></a>套接字相关函数</h2><h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br><span class="line"><span class="comment">// 功能:创建套接字</span></span><br><span class="line"><span class="comment">// 参数:domain:通信域,协议族,可取以下值:</span></span><br><span class="line"><span class="comment">// 		PF_LOCAL/PF_UNIX	- 本地套接字,进程间通信</span></span><br><span class="line"><span class="comment">// 		PF_INET				- 基于IPv4的网络通信</span></span><br><span class="line"><span class="comment">// 		PF_INET6			- 基于IPv6的网络通信</span></span><br><span class="line"><span class="comment">// 		PF_PACKET			- 基于底层包的网络通信</span></span><br><span class="line"><span class="comment">// 参数:type:套接字类型,可取以下值:</span></span><br><span class="line"><span class="comment">// 		SOCK_STREAM 		- 流式套接字,基于TCP协议</span></span><br><span class="line"><span class="comment">//		SOCK_DGRAM 			- 数据报套接字,基于UDP协议</span></span><br><span class="line"><span class="comment">//		SOCK_RAW 			- 原始套接字,工作在传输层以下(即所有的都能接，但是需要完成传输层的操作)</span></span><br><span class="line"><span class="comment">// 		protocol:特殊协议,对于流式和数据报套接字而言,只能取0</span></span><br><span class="line"><span class="comment">// 返回值:成功返回表示套接字对象的文件描述符,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如前所述,通过IP地址可以定位网络上的一台主机,但一台主机上可能同时有多个网络应用在运行,究竟想跟哪个网络应用通信呢?这就需要靠所谓的端口号来区分,因为不同的网络应用会使用不同的端口号。用IP地址定位主机,再用端口号定位运行在这台主机上一个具体的网络应用,这样一种对通信主体的描述才是唯一确定的。</li>
+<li>套接字接口库中的端口号被定义为一个16位的无符号整数,其值介于0到65535,其中0到1024已被系统和一些网络服务占据,比如21端口用于ftp服务、23端口用于telnet服务、80端口用于www服务等,因此一般应用程序最好选择1024以上的端口号,以避免和这些服务冲突。</li>
+</ul>
+<h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">connect</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr <span class="type">const</span>* addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br><span class="line"><span class="comment">// 功能:将套接字和对方的地址结构连接在一起</span></span><br><span class="line"><span class="comment">// 参数:sockfd:套接字描述符。</span></span><br><span class="line"><span class="comment">// 		addr:对方的地址结构。</span></span><br><span class="line"><span class="comment">// 		addrlen:地址结构的字节数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bind</span><span class="params">(<span class="type">int</span> sockfd, <span class="keyword">struct</span> sockaddr <span class="type">const</span>* addr, <span class="type">socklen_t</span> addrlen)</span>; </span><br><span class="line"><span class="comment">// 功能:将套接字和本机的地址结构绑定在一起</span></span><br><span class="line"><span class="comment">// 参数:sockfd:套接字描述符。</span></span><br><span class="line"><span class="comment">// 		addr:自己的地址结构。</span></span><br><span class="line"><span class="comment">//		addrlen:地址结构的字节数</span></span><br><span class="line"><span class="comment">// 返回值:成功返回0,失败返回-1。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="网络地址结构"><a href="#网络地址结构" class="headerlink" title="网络地址结构"></a>网络地址结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地地址结构,用于AF_LOCAL/AF_UNIX域的本地通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> &#123;</span></span><br><span class="line">	<span class="type">sa_family_t</span> sun_family; <span class="comment">// 地址族(AF_LOCAL/AF_UNIX)</span></span><br><span class="line">	<span class="type">char</span> sun_path[];<span class="comment">//本地套接字文件的路径</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网络地址结构,用于AF_INET域的IPv4网络通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> &#123;</span></span><br><span class="line">    <span class="type">sa_family_t</span> sin_family;<span class="comment">//地址族(AF_INET)</span></span><br><span class="line">    <span class="type">in_port_t</span> sin_port; <span class="comment">//端口号(0~65535)-unsigned short</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addrt</span> // <span class="title">IP</span>地址</span></span><br><span class="line"><span class="class">&#125;;</span></span><br><span class="line"><span class="comment">// 网络地址结构,用于AF_INET域的IPv4网络通信</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> &#123;</span></span><br><span class="line">	<span class="type">in_addr_t</span> s_addr;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    s_addr = INADDR_ANY; // 接受任意IP地址到来的数据</span></span><br><span class="line"><span class="comment">    s_addr = inet_addr(&quot;192.168.222.128&quot;);</span></span><br><span class="line"><span class="comment">    表示接收对应的IP,并且需要inet_addr转字节序</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint16_t</span> <span class="type">in_port_t</span>;<span class="comment">//无符号16位整数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">uint32_t</span> <span class="type">in_addr_t</span>;<span class="comment">//无符号32位整数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="字节序转换"><a href="#字节序转换" class="headerlink" title="字节序转换"></a>字节序转换</h1><p>​		网络应用与单机应用不同,经常需要在具有不同硬件架构和操作系统的计算机之间交换数据,因此编程语言里一些多字节数据类型的字节序问题就需要特别予以关注。</p>
+<p>​		套接字接口库规定在网络传输过程中采用网络字节序,也就是大端字节序,<br>而本机数据可能是小短字节序。</p>
+<ul>
+<li><p>小端字节序:数据的低位存放在低地址</p>
+</li>
+<li><p>大端字节序:数据的低位存放在高地址</p>
+</li>
+<li><p>以字节为单位存</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如</span></span><br><span class="line"><span class="comment">	0x12345678</span></span><br><span class="line"><span class="comment">存成   78563412</span></span><br><span class="line"><span class="comment">而不是  87654321</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint32_t</span> <span class="title function_">htonl</span><span class="params">(<span class="type">uint32_t</span> hostlong)</span>;<span class="comment">//长整形主机字节序到网络字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">ntohl</span><span class="params">(<span class="type">uint32_t</span> netllong)</span>;<span class="comment">//长整形网络字节序到主机字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">htons</span><span class="params">(<span class="type">uint16_t</span> hostshort)</span>;<span class="comment">//短整形主机字节序到网络字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">ntohs</span><span class="params">(<span class="type">uint16_t</span> netshort)</span>;<span class="comment">//短整形网络字节序到主机字节序</span></span><br><span class="line"></span><br><span class="line"><span class="type">in_addr_t</span> <span class="title function_">inet_addr</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* ip)</span>;</span><br><span class="line"><span class="comment">// 		点分十进制字符串地址 -- 》网络字节序形式整数地址</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">inet_aton</span><span class="params">(<span class="type">char</span> <span class="type">const</span>* ip, <span class="keyword">struct</span> in_addr* nip)</span>;</span><br><span class="line"><span class="comment">//		点分十进制字符串地址 -- 》网络字节序形式整数地址</span></span><br><span class="line"><span class="type">char</span>* <span class="title function_">inet_ntoa</span><span class="params">(<span class="keyword">struct</span> in_addr nip)</span>;</span><br><span class="line"><span class="comment">//		网络字节序形式整数地址 -- 》点分十进制字符串地址</span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">陈桑</div><div class="post-copyright__author_desc">路漫漫其修远兮</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2025/05/26/uc/day20/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2025/05/26/uc/day20/')">网络基础、IP地址、套接字、相关函数、字节序转换</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2025/05/26/uc/day20/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=网络基础、IP地址、套接字、相关函数、字节序转换&amp;url=http://example.com/2025/05/26/uc/day20/&amp;pic=https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=7c45f1fc-4d07-5113-d3b6-7e149cd58692" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">笔记分享</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/05/26/uc/day2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=01f938e6-1369-4726-d283-88c163e90fb3" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">什么是库文件、静态库、动态库、静态库和动态库比较</div></div></a></div><div class="next-post pull-right"><a href="/2025/05/26/uc/day21/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=7b925a05-661b-d75d-8b2a-4bae62bd5630" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TCP协议、常用函数、编程模型</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">C语言从入门到入土</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.1.</span> <span class="toc-text">什么是计算机网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.2.</span> <span class="toc-text">什么是网络协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.0.3.</span> <span class="toc-text">什么是协议栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP%E4%B8%8EISO-OSI%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.0.4.</span> <span class="toc-text">TCP&#x2F;IP与ISO&#x2F;OSI模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%8C%85%E4%B8%8E%E6%B6%88%E6%81%AF%E6%B5%81"><span class="toc-number">1.0.5.</span> <span class="toc-text">消息包与消息流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E5%8C%85%E9%A6%96%E9%83%A8"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">TCP包首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%8C%85%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">IP包文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RFC894%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">RFC894以太网帧</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-number">2.</span> <span class="toc-text">IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFIP%E5%9C%B0%E5%9D%80"><span class="toc-number">2.0.1.</span> <span class="toc-text">什么是IP地址?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.0.2.</span> <span class="toc-text">IP地址如何表示?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFIP%E5%9C%B0%E5%9D%80%E5%88%86%E7%BA%A7"><span class="toc-number">2.0.3.</span> <span class="toc-text">什么是IP地址分级?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%9F%E5%8A%A9%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E5%B8%AE%E5%8A%A9%E6%88%91%E4%BB%AC%E5%8C%BA%E5%AE%9AIP%E5%9C%B0%E5%9D%80%E7%9A%84%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80"><span class="toc-number">2.0.4.</span> <span class="toc-text">借助子网掩码可以快速帮助我们区定IP地址的网络地址和本地地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Eipv4%E4%B8%8D%E5%A4%9F%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.0.5.</span> <span class="toc-text">关于ipv4不够用的问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">套接字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%97%E6%8E%A5%E5%AD%97"><span class="toc-number">3.0.1.</span> <span class="toc-text">什么是套接字?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E7%BB%91%E5%AE%9A%E5%92%8C%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.1.</span> <span class="toc-text">套接字的绑定和连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">套接字相关函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#socket"><span class="toc-number">3.2.1.</span> <span class="toc-text">socket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#connect"><span class="toc-number">3.2.2.</span> <span class="toc-text">connect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind"><span class="toc-number">3.2.3.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84"><span class="toc-number">3.2.4.</span> <span class="toc-text">网络地址结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">字节序转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">转换函数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E9%AB%98%E7%B2%BE%E5%BA%A6/" title="高精度"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="高精度"/></a><div class="content"><a class="title" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E9%AB%98%E7%B2%BE%E5%BA%A6/" title="高精度">高精度</a><time datetime="2025-05-26T09:58:22.158Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E9%93%BE%E8%A1%A8/" title="链表"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="链表"/></a><div class="content"><a class="title" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E9%93%BE%E8%A1%A8/" title="链表">链表</a><time datetime="2025-05-26T09:58:22.157Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%A0%86/" title="堆"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="堆"/></a><div class="content"><a class="title" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%A0%86/" title="堆">堆</a><time datetime="2025-05-26T09:58:22.156Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%8D%95%E8%B0%83%E6%A0%88/" title="单调栈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="单调栈"/></a><div class="content"><a class="title" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%8D%95%E8%B0%83%E6%A0%88/" title="单调栈">单调栈</a><time datetime="2025-05-26T09:58:22.155Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" title="前缀和与差分"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/1299677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前缀和与差分"/></a><div class="content"><a class="title" href="/2025/05/26/%E7%AE%97%E6%B3%95/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" title="前缀和与差分">前缀和与差分</a><time datetime="2025-05-26T09:58:22.154Z" title="发表于 2025-05-26 17:58:22">2025-05-26</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/18/2025 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2025 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 陈桑 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

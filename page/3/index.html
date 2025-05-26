@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>笔记分享 - 路漫漫其修远兮</title><meta name="keywords" content="C/C++"><meta name="author" content="陈桑"><meta name="copyright" content="陈桑"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="笔记分享"><meta name="application-name" content="笔记分享"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="website"><meta property="og:title" content="笔记分享"><meta property="og:url" content="http://example.com/page/3/index.html"><meta property="og:site_name" content="笔记分享"><meta property="og:description" content="C语言从入门到入土"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"><meta property="article:author" content="陈桑"><meta property="article:tag" content="C/C++"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"><meta name="description" content="C语言从入门到入土"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/page/3/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '笔记分享',
+  title: '笔记分享',
+  postAI: '',
+  pageFillDescription: '语言从入门到入土',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-05-26 18:08:16',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">笔记分享</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">36</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div id="categoryBar"><div class="category-bar" id="category-bar"><div id="catalog-bar"><div id="catalog-list"><div class="catalog-list-item" id="首页"><a href="/">首页</a></div>
+    <div class="catalog-list-item" id="/categories/Linux/">
+      <a href="/categories/Linux/">
+        Linux
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/python/">
+      <a href="/categories/python/">
+        python
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/uc/">
+      <a href="/categories/uc/">
+        uc
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/算法/">
+      <a href="/categories/算法/">
+        算法
+      </a>
+    </div>
+    
+    <div class="catalog-list-item" id="/categories/大学考试/">
+      <a href="/categories/大学考试/">
+        大学考试
+      </a>
+    </div>
+    </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/2025/05/26/uc/day19/')"><div class="post_cover left"><a href="/2025/05/26/uc/day19/" title="消息队列、IPC命令" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=84d6466d-d770-1c7b-1e0f-2408e3241d34" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="消息队列、IPC命令" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day19/" title="消息队列、IPC命令">未读</a></div><a class="article-title" href="/2025/05/26/uc/day19/" title="消息队列、IPC命令">消息队列、IPC命令</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.132Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:40.498Z" title="更新于 2025-05-18 14:13:40" time="2025-05-18 14:13:40">2025-05-18</time></span></div><div class="content">消息队列
+消息队列是一个由系统内核负责存储和管理,并通过消息队列标识符引用的消息链表队列
+
+
+可以通过msgget函数创建一个新的消息队列或获取一个已有的消息队列。
+
+可以通过msgsnd函数向消息队列的尾端追加消息,所追加的消息除了包含消息数据以外,还包含消息类型和数据长度(以字节为单位)。
+
+可以通过msgrcv函数从消息队列中提取消息,但不一定非按先进先出的顺序提取,也可以按消息的类型提取
+
+
+相较于其它几种IPC机制,消息队列具有明显的优势
+流量控制:如果系统资源(内存)短缺或者接收消息的进程来不及处理更多的消息,则发送消息的进程会在系统内核的控制下进入睡眠状态,待条件满足后再被内核唤醒,继续之前的发送过程
+面向记录:每个消息都是完整的信息单元,发送端是一个消息一个消息地发,接收端也是。一个消息一个消息地收,而不象管道那样收发两端所面对的都是字节流,彼此间没有结构上的一致性
+
+系统限制
+可发送消息字节数上限:8192
+单条队列消息总字节数上限:16384(16K)
+全系统总消息队列数上限:16
+全系统消息总字节数上限:262144(256K&#x3D;16x16K)
+
+msgg ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day18/')"><div class="post_cover left"><a href="/2025/05/26/uc/day18/" title="IPC对象、共享内存" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=ff8535d9-8b43-c5a9-d0c3-e1310646f024" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IPC对象、共享内存" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day18/" title="IPC对象、共享内存">未读</a></div><a class="article-title" href="/2025/05/26/uc/day18/" title="IPC对象、共享内存">IPC对象、共享内存</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.131Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:37.614Z" title="更新于 2025-05-18 14:13:37" time="2025-05-18 14:13:37">2025-05-18</time></span></div><div class="content">IPC对象IPC对象的标识符和键
+共享内存、消息队列和信号量,这三种IPC一般被合称为XSI IPC,它们之间有很多相似之处
+
+为了实现进程之间的数据交换,系统内核会为参与通信的诸方维护一个内核对象(类似一个结构体变量),记录和通信有关的各种配置参数和运行时信息,谓之IPC对象
+
+系统中的每个IPC对象都有唯一的,非负整数形式的标识符,所有与IPC相关的操作,都需要提供IPC对象标识符
+
+与文件描述符不同,IPC对象标识符不是最小整数。当一个IPC对象被创建,以后又被销毁时,与该类型对象相关的标识符会持续加1,直至达到一个整型数的最大正值,然后又回转到0
+
+标识符是IPC对象的内部名。为了使多个合作进程能够在同一个IPC对象上会合,需要提供一个外部名方案。为此使用了键,每个IPC对象都与一个键相关联,于是键就被作为该对象的外部名
+
+无论何时,创建或者获取一个IPC对象都必须指定一个键。键的数据类型为key_t,在&lt;sys&#x2F;types.h&gt;头文件中被定义为int。系统内核负责维护键与标识符的对应关系
+
+
+ftok1234567#include &lt;sys/ipc ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day17/')"><div class="post_cover left"><a href="/2025/05/26/uc/day17/" title="进程间通信、有名管道、无名管道、管道使用的特殊情况" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=80647c19-e243-3388-65fd-93d5e5af9cc1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程间通信、有名管道、无名管道、管道使用的特殊情况" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day17/" title="进程间通信、有名管道、无名管道、管道使用的特殊情况">未读</a></div><a class="article-title" href="/2025/05/26/uc/day17/" title="进程间通信、有名管道、无名管道、管道使用的特殊情况">进程间通信、有名管道、无名管道、管道使用的特殊情况</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.130Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:34.785Z" title="更新于 2025-05-18 14:13:34" time="2025-05-18 14:13:34">2025-05-18</time></span></div><div class="content">进程间通信
+正如前文所述,Unix&#x2F;Linux系统中的每个进程都拥有4G字节大小专属于自己的虚拟内存空间,除去内核空间的1G以外,每个进程都有一张独立的内存映射表(又名内存分页表)记录着虚拟内存页和物理内存页之间的映射关系
+同一个虚拟内存地址,在不同的进程中,会被映射到完全不同的物理内存区  域,因此在多个进程之间以交换虚拟内存地址的方式交换数据是不可能的
+鉴于进程之间天然存在的内存壁垒,要想实现多个进程间的数据交换,就必须提供一种专门的机制,这就是所谓的进程间通信(InterProcessCommunication, IPC)
+
+进程通信的种类命令行参数
+在通过exec函数创建新进程时,可以为其指定命令行参数,借助命令行参数可以将创建者进程的某些数据传入新进程
+execl (“login”, “login”, “username”, “password”, NULL);
+
+环境变量
+类似地,也可以在调用exec函数时为新进程提供环境变量
+
+sprintf (envp[0], “USERNAME&#x3D;%s”, username);
+
+sprintf (envp[1],  ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day16/')"><div class="post_cover left"><a href="/2025/05/26/uc/day16/" title="信号集、信号屏蔽" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=6821c01d-da32-8fe4-e716-8f92a2186f8d" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信号集、信号屏蔽" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day16/" title="信号集、信号屏蔽">未读</a></div><a class="article-title" href="/2025/05/26/uc/day16/" title="信号集、信号屏蔽">信号集、信号屏蔽</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.129Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:31.654Z" title="更新于 2025-05-18 14:13:31" time="2025-05-18 14:13:31">2025-05-18</time></span></div><div class="content">信号集​	多个信号组成的信号集合谓之信号集
+系统内核用sigset_t类型表示信号集123456// 在&lt;signal.h&gt;中又被定义为typedef// 在&lt;sigset.h&gt;中有如下类型定义#define SIGSET_NWORDS (1024 / (8 * sizeof (unsigned long int)))typedef struct &#123;unsigned long int_val[_SIGSET_NWORDS];&#125;__sigset_t;
+
+
+sigset_t类型是一个结构体,但该结构体中只有一个成员,是一个包含32个元素的整数数组(针对32位系统而言)
+
+可以把sigset_t类型看成一个由1024个二进制位组成的大整数
+
+其中的每一位对应一个信号,其实目前远没有那么多信号某位为1就表示信号集中有此信号,反之为0就是无此信号当需要同时操作多个信号时,常以sigset_t作为函数的参数或返回值的类型
+
+
+
+
+sigfillset12345#include &lt;signal.h&gt;int sigfillset (sigset_ ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day15/')"><div class="post_cover left"><a href="/2025/05/26/uc/day15/" title="信号处理的继承与恢复、发送信号、暂停、睡眠与闹钟" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=faa7144c-9dc6-6a60-63b7-04b8b3f84b6c" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信号处理的继承与恢复、发送信号、暂停、睡眠与闹钟" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day15/" title="信号处理的继承与恢复、发送信号、暂停、睡眠与闹钟">未读</a></div><a class="article-title" href="/2025/05/26/uc/day15/" title="信号处理的继承与恢复、发送信号、暂停、睡眠与闹钟">信号处理的继承与恢复、发送信号、暂停、睡眠与闹钟</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.128Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:28.606Z" title="更新于 2025-05-18 14:13:28" time="2025-05-18 14:13:28">2025-05-18</time></span></div><div class="content">信号处理的继承与恢复
+fork函数创建的子进程会继承父进程的信号处理方式。父进程中对某个信号进行捕获,则子进程中对该信号依然捕获父进程中对某个信号进行忽略,则子进程中对该信号依然忽略
+
+exec家族函数创建的新进程对信号的处理方式和原进程稍有不同
+原进程中被忽略的信号,在新进程中依然被忽略原进程中被捕获的信号,在新进程中被默认处理
+
+
+发送信号
+用专门的系统命令发送信号
+123456789101112kill [-信号] PID&#x27;若不指明具体信号,缺省发送SIGTERM(15)信号&#x27;若要指明具体信号,可以使用信号编号,也可以使用信号名称,而且信号名称中的“SIG”&#x27;前缀可以省略不写。例如kill -9 1234 &#x27;可以用信号编号kill -SIGKILL 1234 5678 &#x27; 可以用信号名称kill -KILL -1  &#x27;把信号开头SIG省略掉也行&#x27; -1 是给所有进程发送信号&#x27;超级用户可以发给任何进程,而普通用户只能发给自己的进程
+
+kill123456789#include &lt;signal.h& ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day14/')"><div class="post_cover left"><a href="/2025/05/26/uc/day14/" title="信号基础、信号处理、太平间信号" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=c5120a16-a4f3-32c3-82ee-fec63b8a98c3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信号基础、信号处理、太平间信号" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day14/" title="信号基础、信号处理、太平间信号">未读</a></div><a class="article-title" href="/2025/05/26/uc/day14/" title="信号基础、信号处理、太平间信号">信号基础、信号处理、太平间信号</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.127Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:25.788Z" title="更新于 2025-05-18 14:13:25" time="2025-05-18 14:13:25">2025-05-18</time></span></div><div class="content">信号处理什么是信号
+信号在最早的UNIX系统中即被引入,已有30多年的历史,但只有很小的变化。
+信号是提供异步事件处理机制的软件中断。
+这些异步事件可能来自硬件设备,如用户同时按下了Ctrl键和C键,也可能来自系统内核,如试图访问尚未映射的虚拟内存,又或者来自用户进程,如尝试计算整数除以0的表达式
+进程之间可以相互发送信号,这使信号成为一种进程间通信(Inter-ProcessCommunication,IPC)的基本手段
+信号的异步特性不仅表现为它的产生是异步的,对它的处理同样也是异步的。程序的设计者不可能也不需要精确地预见什么时候触发什么信号,也同样无法预见该信号究竟在什么时候会被处理。一切都在内核的操控下,异步地运行。信号是在软件层面对中断机制的一种模拟
+
+异步与同步异步​	两个程序互不干预的执行，但是有可能会发生冲突。
+​	信号中断软件时，是异步事件处理机制，也就是这个终止是不可预知的。比如写个程序，并不能预知运行时会来多少个(ctrl + c)。
+同步​	两个程序有协调性的执行。比如有两个进程，进程1和2，进程1执行到某个时间，需要进程2执行到某个位置，才能继续执行，这样互相 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day13/')"><div class="post_cover left"><a href="/2025/05/26/uc/day13/" title="创建新进程、system" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=e32cc638-a190-ca17-5f6d-536f12a51175" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="创建新进程、system" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day13/" title="创建新进程、system">未读</a></div><a class="article-title" href="/2025/05/26/uc/day13/" title="创建新进程、system">创建新进程、system</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.126Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:22.643Z" title="更新于 2025-05-18 14:13:22" time="2025-05-18 14:13:22">2025-05-18</time></span></div><div class="content">创建新进程
+与fork不同,exec函数不是创建调用进程的子进程,而是创建一个新的进程取代调用进程自身。新进程会用自己的全部地址空间。覆盖调用进程的地址空间,但进程的PID保持不变
+
+
+exec不是一个函数而是一堆函数(共6个),一般称为exec函数族。它们的功能是一样的,用法也很相近,只是参数的形式和数量略有不同
+
+
+​			
+12345678910111213141516171819#include &lt;unistd.h&gt;// 创建新进程来取代旧进程int execl (const char* path, const char* arg, ... );// 第一个参数传递可执行程序的路径// 如 “/home/tarean/a.out”// 第二个参数 传递a.out 需要的参数 ，第一个参数为可执行程序的名字// 输入完所有参数记得，在末尾加上NULL// execl(&quot;/home/tarena/a.out&quot;,&quot;a.out&quot;,&quot;hello.c&quot;,&quot;123&quot;,NULL);int execlp  ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day12/')"><div class="post_cover left"><a href="/2025/05/26/uc/day12/" title="回收子进程、wait、waitpid" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=17db3b81-83f0-c98a-a9b5-5a619392602b" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回收子进程、wait、waitpid" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day12/" title="回收子进程、wait、waitpid">未读</a></div><a class="article-title" href="/2025/05/26/uc/day12/" title="回收子进程、wait、waitpid">回收子进程、wait、waitpid</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.125Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:19.560Z" title="更新于 2025-05-18 14:13:19" time="2025-05-18 14:13:19">2025-05-18</time></span></div><div class="content">为什么要回收子进程●清除僵尸进程,避免消耗系统资源。● 父进程需要等待子进程的终止,以继续后续工作。● 父进程需要知道子进程终止的原因
+
+如果是正常终止,那么进程的退出码是多少?如果是异常终止,那么进程是被那个信号所终
+
+wait12345#include&lt;sys/wait.h&gt;pid_t wait(int* status);	// 功能：等待并回收任意子进程	// 参数：status 用于输出子进程的终止状态	// 返回值：成功返回所回收的子进程的PID，失败返回-1
+
+
+父进程在创建若干子进程以后调用wait函数:
+
+A.若所有子进程都在运行,则阻塞,直到有子进程终止才返回;B.若有一个子进程已终止,则返回该子进程的PID并通过status参数输出其终止状态;C.若没有任何可被等待并回收的子进程,则返回-1,置errno为ECHILD。
+
+
+在任何一个子进程终止前,wait函数只能阻塞调用进程,如果有一个子进程在wait函数被调用之前,已经终止并处于僵尸状态,wait函数会立即返回,并取得该子进程的终止状态,同时子进程僵尸消失。由此可见wait函数主要完成三个任务
+
+1 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day11/')"><div class="post_cover left"><a href="/2025/05/26/uc/day11/" title="创建子进程（续）、进程的终止" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=958ba1e3-89dc-a3a7-0bc2-7a70ba0562ec" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="创建子进程（续）、进程的终止" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day11/" title="创建子进程（续）、进程的终止">未读</a></div><a class="article-title" href="/2025/05/26/uc/day11/" title="创建子进程（续）、进程的终止">创建子进程（续）、进程的终止</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.124Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:16.557Z" title="更新于 2025-05-18 14:13:16" time="2025-05-18 14:13:16">2025-05-18</time></span></div><div class="content">进程的终止正常终止1.从main函数中返回可令进程终止
+进程是内存中的代码和数据,线程则是执行代码的过程。每个进程可以包含一个多个线程,但至少要有一个主线程。每个线程都可以被看做是在一个独立的执行过程中调用了一个特殊的函数,谓之线程过程函数。线程开始,线程过程函数即被调用,线程过程函数一旦返回,线程即告终止。因此main函数也可以被看做是进程的主线程的线程过程函数。main函数一旦返回,主线程即终止,进程即终止,进程一旦终止,进程中的所有线程统统终止。这就是main函数的返回与其它函数的返回在本质上的区别。
+
+main函数的返回值即进程的退出码,父进程可以在回收子进程的同时获得该退出码,以了解导致其终止的具体原因。
+
+
+2.调用exit函数令进程终止12345#include&lt;stdlib.h&gt;void exit(int status);	// 功能：令进程终止	// 参数：status 进程退出码，相当于main函数的返回值	// 该函数不返回
+
+
+虽然exit函数的参数和main函数的返回值都是int类型,但只有其中最低数位的字节可被其父进程回收,高三个字节会被忽略,因 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/2025/05/26/uc/day10/')"><div class="post_cover left"><a href="/2025/05/26/uc/day10/" title="进程的概念、相关命令、父子孤尸、进程标识、创建子进程" style="display: flex;height: 100%;"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/103907445_p0.jpg?_r_=bf56b526-4791-e0d0-7a82-407d180dc62d" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程的概念、相关命令、父子孤尸、进程标识、创建子进程" style="pointer-events: none"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">uc</div><a class="unvisited-post" href="/2025/05/26/uc/day10/" title="进程的概念、相关命令、父子孤尸、进程标识、创建子进程">未读</a></div><a class="article-title" href="/2025/05/26/uc/day10/" title="进程的概念、相关命令、父子孤尸、进程标识、创建子进程">进程的概念、相关命令、父子孤尸、进程标识、创建子进程</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; display:none"></i><span class="article-meta-label">发表于</span><time datetime="2025-05-26T09:58:22.123Z" title="发表于 2025-05-26 17:58:22" time="2025-05-26 17:58:22">2025-05-26</time><time class="time_hidden" datetime="2025-05-18T06:13:12.409Z" title="更新于 2025-05-18 14:13:12" time="2025-05-18 14:13:12">2025-05-18</time></span></div><div class="content">内存映射文件mmap​	参看day5
+进程
+进程：是程序执行时的一个实例
+
+程序是被存储在磁盘上,包含机器指令和数据的文件当这些指令和数据被装载到内存并被CPU所执行,即形成了进程。一个程序可以被同时运行为多个进程在Linux源码中通常将进程称为任务(task)从内核观点看,进程的目的就是担当分配系统资源(CPU时间,内存等)的实体
+
+
+
+相关控制进程的命令pstree​	以树状结构显示当前所有进程关系
+ps​	以简略方式显示当前用户拥有控制终端的进程信息,也可以配合以下选项
+
+a-显示所有用户拥有控制终端的进程信息x-也包括没有控制终端的进程u-以详尽方式显示w-以更大列宽显示
+
+父子孤尸父子进程​	父子进程是一个相对概念，谁被创建了是子进程。
+
+Unix系统中的进程存在父子关系。一个父进程可以创建一到多个子进程,但每个子进程有且仅有一个父进程。整个系统中只有一个根进程,即PID为0的调度进程
+
+孤儿进程
+父进程创建子进程以后,子进程在操作系统的调度下与其父进程同时运行如果父进程先于子进程终止,子进程即成为孤儿进程,同时被某个专门的进程收养,即成为该进程的子进程,因此该进程又被称为孤 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="anzhiyufont anzhiyu-icon-chevron-left fa-fw" style="font-weight: inherit; font-size: 1rem;"></i><div class="pagination_tips_prev">上页</div></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><div class="pagination_tips_next">下页</div><i style="font-weight: inherit; font-size: 1rem;" class="anzhiyufont anzhiyu-icon-chevron-right fa-fw"></i></a><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" onkeyup="this.value=this.value.replace(/[^u4e00-u9fa5w]/g,'')" aria-label="toPage"><a id="toPageButton" onclick="anzhiyu.toPage()"><i class="anzhiyufont anzhiyu-icon-angles-right" style="font-weight: inherit; font-size: 1rem;"></i></a></div></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/Q99966/imgHosting@main/img/4db96df0ca6fdff40335f35fc7058639c1740902_raw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">C语言从入门到入土</div></div></div><div class="sticky_layout"><div class="card-widget"><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">36</span><span>篇</span></div></a></li></ul></div><hr/><div class="card-webinfo"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="anzhiyufont anzhiyu-icon-file-lines"></i><div class="item-name">文章总数 :</div></div><div class="item-count">36</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="anzhiyufont anzhiyu-icon-stopwatch"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow" data-publishDate="2025-05-17T16:00:00.000Z"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></div></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><span class="sidebar-menu-item-title">标签</span></div></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/18/2025 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2025 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 陈桑 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><script>if (typeof gsap === "object") {
+  getScript("/js/anzhiyu/people.js", {defer:true})
+} else {
+  getScript("https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/gsap/gsap.min.js").then(()=>{
+    getScript("/js/anzhiyu/people.js", {defer:true})
+  });
+}</script><input type="hidden" name="page-type" id="page-type" value="anzhiyu"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
